@@ -1,0 +1,407 @@
+"use client";
+
+import Image from "next/image";
+import { useState } from 'react';
+import Modal from "@/components/Modal";
+import CountUp from 'react-countup';
+import { useInView } from 'react-intersection-observer';
+import { FaTachometerAlt ,FaClipboardCheck ,FaLock ,FaLightbulb ,FaCheckCircle ,FaMapMarkerAlt,FaExclamationCircle
+  ,FaBriefcase ,FaHandshake,FaGlobe,FaSyncAlt
+ } from "react-icons/fa";
+
+
+export default function AboutPage() {
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 1 });
+
+  const cards = [
+    {
+      id: 1,
+      title: 'Des prestations de qualité',
+      image: '/Lifesavers - Onlin.jpg',
+    },
+    { 
+      id: 2,
+      title: 'Des solutions sur mesure​ pour développer la compétitivité de votre entreprise!',
+      image: '/Thinking face-bro.jpg',
+    },
+    {
+      id: 3,
+      title: 'Des conseils pour réussir vos projets',
+      
+      image: '/Project Stages-bro.jpg',
+    },
+  ];
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+  return (
+    <section className="py-24 relative">
+      <div className="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto">
+        <div className="w-full justify-start items-center gap-12 grid lg:grid-cols-2 grid-cols-1">
+          <div className="w-full justify-center items-start gap-6 grid sm:grid-cols-2 grid-cols-1 lg:order-first order-last">
+            <div className="pt-24 lg:justify-center sm:justify-end justify-start items-start gap-2.5 flex">
+              <Image
+                className="rounded-xl border-8 object-cover"
+                src="/datafc.png"
+                alt="about Us image"
+                width={500} 
+                height={500}
+              />
+            </div>
+            <Image
+              className="sm:ml-0 ml-auto rounded-xl object-cover border-8"
+              src="/data.png"
+              alt="about Us image"
+              width={500} 
+              height={500}
+            />
+          </div>
+          <div className="w-full flex-col justify-center lg:items-start items-center gap-10 inline-flex">
+            <div className="w-full flex-col justify-center items-start gap-8 flex">
+              <div className="w-full flex-col justify-start lg:items-start items-center gap-3 flex">
+                <h2 className="text-gray-900 text-4xl font-bold font-manrope leading-normal lg:text-start text-center">
+                QUI SOMMES-NOUS ?
+                </h2>
+                <div className="text-gray-500 font-normal leading-relaxed lg:text-start text-center">
+                Nous sommes un cabinet de conseil, de formation et d’accompagnement, engagé dans la réussite de vos projets de développement.
+
+À travers cette présentation, nous vous offrons un aperçu de nos prestations et vous invitons à devenir notre partenaire, afin de vous aider à vous adapter à un monde en constante mutation et à vous sécuriser face à une réglementation en évolution permanente.
+
+Nous mettons à votre disposition :
+      <ul className='list-disc ml-8 text-black font-bold'>
+        <li> Des prestations de qualité.</li>
+        <li>Un encadrement professionnel.</li>  
+        <li>Des solutions sur mesure pour renforcer la compétitivité de votre entreprise.</li>
+        <li>Des conseils ciblés pour réussir vos projets et créer de la valeur ajoutée.</li>
+      </ul>
+
+Ensemble, construisons votre avenir avec efficacité et sérénité.
+                </div>
+              </div>
+              
+              <div
+      ref={ref}
+      className="w-full lg:justify-start justify-center items-center sm:gap-10 gap-5 inline-flex"
+    >
+      <div className="flex-col justify-start items-start inline-flex">
+        <h3 className="text-gray-900 text-4xl font-bold font-manrope leading-normal">
+          <CountUp end={inView ? 10 : 0}>
+            {({ countUpRef, start }) => {
+              if (inView) start();
+              return <span ref={countUpRef} />;
+            }}
+          </CountUp>
+          +
+        </h3>
+        <h6 className="text-gray-500 text-base font-normal leading-relaxed">Années expérience</h6>
+      </div>
+
+      <div className="flex-col justify-start items-start inline-flex">
+        <h4 className="text-gray-900 text-4xl font-bold font-manrope leading-normal">
+          <CountUp end={inView ? 100 : 0}>
+            {({ countUpRef, start }) => {
+              if (inView) start();
+              return <span ref={countUpRef} />;
+            }}
+          </CountUp>
+          +
+        </h4>
+        <h6 className="text-gray-500 text-base font-normal leading-relaxed">Projets réussis</h6>
+      </div>
+
+      <div className="flex-col justify-start items-start inline-flex">
+        <h4 className="text-gray-900 text-4xl font-bold font-manrope leading-normal">
+          <CountUp end={inView ? 52 : 0}>
+            {({ countUpRef, start }) => {
+              if (inView) start();
+              return <span ref={countUpRef} />;
+            }}
+          </CountUp>
+          +
+        </h4>
+        <h6 className="text-gray-500 text-base font-normal leading-relaxed">Clients satisfaits</h6>
+      </div>
+    </div>
+
+
+            </div>
+            <button onClick={openModal} className="sm:w-fit w-full px-3.5 py-2 bg-teal-700 hover:bg-teal-400 transition-all duration-700 ease-in-out rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] justify-center items-center flex animate-bounce">
+              <span className="px-1.5 flex text-white text-sm font-medium leading-6 cursor-pointer">afficher l emplacement<FaMapMarkerAlt className='justify-center relative left-1 'size={22}/></span>
+            </button>
+
+
+
+<Modal isOpen={isModalOpen} onClose={closeModal}>
+<div className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+  <div className="relative p-2.5 h-80 overflow-hidden rounded-xl bg-clip-border">
+  <iframe
+  className='mx-auto h-full w-full object-cover rounded-md'
+  src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3047.6390233313264!2d-9.234552489219864!3d32.29563887375947!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzLCsDE3JzQ0LjMiTiA5wrAxMyc1NS4xIlc!5e1!3m2!1sen!2sma!4v1745425181349!5m2!1sen!2sma"  width="350"  // <-- خفض العرض
+  height="400" // <-- خفض الارتفاع
+  style={{ border: 0 }}
+  allowFullScreen={true}
+  loading="lazy"
+  referrerPolicy="no-referrer-when-downgrade"
+/>
+</div>
+<div className="p-4">
+    <div className="mb-2 flex items-center justify-between">
+      <p className="text-slate-800 text-xl font-semibold">
+        DATA FC
+      </p>
+      <p className="text-cyan-600 text-xl font-semibold">
+      <a href="">datafc2019@gmail.com</a>
+      </p>
+    </div>
+    <p className="text-slate-600 leading-normal font-light">
+    Centre d’affaires Plateau, 4ème étage, N°12, Ville Nouvelle, Safi​
+    </p>
+    <button onClick={closeModal}  className="rounded-md w-full mt-6 bg-teal-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-teal-700 focus:shadow-none active:bg-cyan-700 hover:bg-teal-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+      Fermer
+    </button>
+  </div>
+</div>
+</Modal>
+          </div>
+        </div>
+      </div>
+      <div className="flex mt-10 flex-wrap justify-center gap-6 p-4">
+  {cards.map((card) => (
+    <div
+      key={card.id}
+      className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 
+                 transition-transform duration-300 ease-in-out hover:scale-105"
+    >
+      <a href="#">
+        <Image
+          className="rounded-t-lg w-full h-48 object-cover"
+          src={card.image}
+          alt={card.title}
+          height={2000}
+          width={3000}
+        />
+      </a>
+      <div className="p-5">
+        <a href="#">
+          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            {card.title}
+          </h5>
+        </a>
+        <a
+          href="#"
+          className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-teal-700 rounded-lg hover:bg-emerald-400 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          En savoir plus
+          <svg
+            className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 14 10"
+          >
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M1 5h12m0 0L9 1m4 4L9 9"
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+  ))}
+</div>
+<div className="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
+<h1 className="mb-10 text-center  font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white">Nous<mark className="px-2 ml-1 text-white bg-teal-600 rounded-sm dark:bg-teal-500">Focalisons</mark></h1>
+<div className="flex lg:flex-row flex-col lg:gap-8 sm:gap-10 gap-12">
+                <div className="w-full lg:w-6/12">
+                <p className="font-normal text-2xl leading-6 text-gray-500 mt-6">le marché des ressources humaines et des services aux entreprises et ce par:​</p>
+                <ul className="space-y-4 font-bold mt-8 text-2xl text-gray-700 list-none dark:text-gray-400">
+  {[
+    "L’ingénierie de formation, la formation continue et l’assistance conseil en recrutement.",
+    "L’exercice de l’activité d’intérim pour l’entreprise.",
+    "La pratique de l’externalisation des ressources humaines.",
+    "La mise à disposition des ressources humaines au profit des entreprises clientes.",
+    "La Domiciliation des entreprises.",
+  ].map((text, i) => (
+    <li key={i} className="flex items-center gap-x-2">
+      <FaExclamationCircle  className="text-teal-600 shrink-0" />
+      <span>{text}</span>
+    </li>
+  ))}
+</ul>
+                </div>
+                <div className="w-full lg:w-6/12 mt-20">
+                    < Image className="lg:block hidden w-full" src="https://i.ibb.co/RjNH7QB/Rectangle-122-1.png" alt="people discussing on board" height={3000} width={2000}/>
+                    <Image className="lg:hidden sm:block hidden w-full" src="https://i.ibb.co/16fPqrg/Rectangle-122-2.png" alt="people discussing on board" height={3000} width={2000}/>
+                    <Image className="sm:hidden block w-full" src="https://i.ibb.co/Jxhpxh6/Rectangle-122.png" alt="people discussing on board" height={3000} width={2000}/>
+                </div>
+            </div>
+            <h1 className="mb-8 mt-12 text-center  font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white">Nos<mark className="px-2 ml-1 text-white bg-teal-600 rounded-sm dark:bg-teal-500">Valeurs</mark></h1>
+            <p className="font-normal text-2xl leading-6 text-gray-500 mt-10">Nos  activités professionnelles  reposent sur un équilibre de cinq piliers :</p>
+            <div className="relative mt-14 z-10">
+                <div className="grid sm:grid-cols-3 grid-cols-2 sm:gap-8 gap-4">
+                   <div className="z-20 w-12 h-12 text-white bg-gray-800 rounded-full flex justify-center items-center">
+                    <FaLightbulb  className="animate-bounce"/>
+                    </div>
+
+                    <div className="z-20 w-12 h-12 text-white bg-gray-800 rounded-full flex justify-center items-center">
+                    <FaLock   className="animate-bounce"/>
+                    </div>
+
+                    <div className="z-20 w-12 h-12 text-white bg-gray-800 rounded-full flex justify-center items-center">
+                    <FaClipboardCheck   className="animate-bounce"/>
+                    </div>
+                </div>
+                <hr className="z-10 absolute top-2/4 w-full h-1 bg-gray-300 rounded-2xl" /> 
+            </div>
+
+            <div className="grid sm:grid-cols-3 grid-cols-2 sm:gap-8 gap-4">
+                <div>
+                    <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-gray-800 mt-6">L’innovation​</p>
+                </div>
+                <div>
+                    <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-gray-800 mt-6">La confidentialité et l’honnêteté ​</p>
+                </div>
+                <div className="sm:block hidden">
+                    <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-gray-800 mt-6">La responsabilité</p>
+                </div>
+            </div>
+          
+
+            <div className="relative mt-24 z-10">
+                <div className="grid sm:grid-cols-3 grid-cols-2 sm:gap-8 gap-4">
+                    <div className="z-20 w-12 h-12 text-white bg-gray-800 rounded-full flex justify-center items-center ">
+                    <FaHandshake  className="animate-bounce"/>
+                    </div>
+
+                    <div className="z-20 w-12 h-12 text-white bg-gray-800 rounded-full flex justify-center items-center">
+                    <FaTachometerAlt className="animate-bounce"/>
+                    </div>
+                </div>
+                <hr className="z-10 absolute top-2/4 w-8/12 h-1 bg-gray-300 rounded-2xl" />
+            </div>
+
+            <div className="grid sm:grid-cols-3 grid-cols-2 sm:gap-8 gap-4">
+                <div>
+                    <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-gray-800 mt-6">​Le respect </p>
+                </div>
+                <div>
+                    <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-gray-800 mt-6">​La performance​</p>
+                </div>
+            </div>
+            <h1 className="mb-14 mt-18 text-center  font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white">Notre<mark className="px-2 ml-1 text-white bg-teal-600 rounded-sm dark:bg-teal-500">Mission</mark></h1>
+            <div className="flex lg:flex-row flex-col md:gap-4 gap-6 justify-between lg:mt-6">
+            <div className="relative mr-8 flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg w-[900px] transition-transform duration-300 ease-in-out hover:scale-105">
+  {/* Texte plus grand */}
+  <div className="p-8 ">
+    <p className="text-gray-700 text-2xl italic font-semibold leading-relaxed">
+      Aider l’entreprise, grâce à nos prestations, à faire face aux changements fréquents
+      pour assurer sa croissance et sa pérennité, suivre continuellement l’évolution
+      technologique et préserver une place privilégiée sur le marché concurrentiel.
+    </p>
+  </div>
+
+  {/* Image plus petite */}
+  <div className="relative m-2.5 overflow-hidden text-white rounded-md h-[180px]">
+    <Image
+      src="/mission.jpg"
+      alt="card-image"
+      layout="fill"
+      objectFit="cover"
+      className="rounded-md"
+    />
+  </div>
+</div>
+
+                <div className="w-full lg:w-7/12">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 lg:gap-12 gap-10 text-center">
+                        {/* <!-- Team Card --> */}
+                        <div className="flex p-4 shadow-md bg-teal-600 rounded-2xl  transition-transform duration-300 ease-in-out hover:scale-105">
+                            <div className="mr-6">
+                               <FaBriefcase />
+                            </div>
+                            <div className=''>
+                                <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-white">Entreprise & Stratégie</p>
+                            </div>
+                        </div>
+
+                        {/* <!-- Board Card --> */}
+                        <div className="flex p-4 shadow-md bg-teal-600 rounded-2xl  transition-transform duration-300 ease-in-out hover:scale-105">
+                            <div className="mr-6">
+                             <FaHandshake />
+                            </div>
+                            <div className="">
+                                <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-white">Prestations & Services
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* <!-- Press Card --> */}
+                        <div className="flex p-4 shadow-md bg-teal-600 rounded-2xl  transition-transform duration-300 ease-in-out hover:scale-105">
+                            <div className="mr-6">
+                                <FaSyncAlt />
+                            </div>
+                            <div className="">
+                                <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-white">Changements & Transformation</p>
+                            </div>
+                        </div>
+
+                        <div className="flex p-4 shadow-md bg-teal-600 rounded-2xl transition-transform duration-300 ease-in-out hover:scale-105">
+                            <div className="mr-6">
+                            <FaLightbulb />
+                            </div>
+                            <div className="">
+                                <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-white"> Technologie & Innovation</p>
+                            </div>
+                        </div>
+                        <div className="flex p-4 shadow-md bg-teal-600 rounded-2xl transition-transform duration-300 ease-in-out hover:scale-105">
+                            <div className="mr-6">
+                                <FaGlobe />
+                            </div>
+                            <div className="">
+                                <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-white">Marché & Concurrence</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+
+<h1 className="mb-13  font-extrabold text-center leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white">Notre<mark className="px-2 ml-1 text-white bg-teal-600 rounded-sm dark:bg-teal-500">vision</mark></h1>
+<blockquote className="p-4 my-4 border-s-4 border-teal-600 bg-gray-50 dark:border-gray-500 dark:bg-gray-800 transition-transform duration-300 ease-in-out hover:scale-105">
+    <p className="text-xl italic font-medium leading-relaxed text-gray-900 dark:text-white">Nous voulons faire de DATA FC l’opérateur le plus performant dans l’accompagnement des entreprises et le meilleur créateur de la valeur pour nos clients,  en mettant notre expertise à leur service.​</p>
+</blockquote>
+
+
+            
+
+            <div className="lg:mt-16 sm:mt-12 mt-16 flex lg:flex-row justify-between flex-col lg:gap-8 gap-12">
+                <div className="w-full">
+                <h1 className="mb-13 mt-8   font-extrabold text-center leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white">Nos<mark className="px-2 ml-1 text-white bg-teal-600 rounded-sm dark:bg-teal-500">Engagements</mark></h1>
+                <ul className="space-y-4 italic font-semibold mt-8 text-xl text-gray-700 list-none dark:text-gray-400">
+  {[
+    "Garantir des prestations de qualité répondant aux exigences de nos clients.",
+    "Être un partenaire d’excellence de nos clients.",
+    "Fournir des solutions innovantes et sur mesure pour chaque entreprise cliente.",
+    "Satisfaire nos clients dans le but de maintenir une relation confirmée et durable.",
+    "Mettre en place des solutions en ressources humaines adaptées aux structures et aux enjeux de chaque entreprise cliente.",
+    "Assurer une déontologie de travail dans toutes nos interventions.",
+    "Viser l’excellence et la perfection dans la réalisation de toutes nos prestations.",
+    "Adopter des pratiques responsables et un comportement éthique avec nos clients."
+  ].map((text, i) => (
+    <li key={i} className="flex items-center gap-x-2">
+      <FaCheckCircle className="text-teal-600 shrink-0" />
+      <span>{text}</span>
+    </li>
+  ))}
+</ul>
+                </div>
+            </div>
+    </section>
+  );
+}
