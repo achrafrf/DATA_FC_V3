@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { submitContactForm } from '@/services/contact';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -20,28 +19,11 @@ export const ContactForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [submissionStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [showAlert, setShowAlert] = useState<boolean>(false); // حالة لإظهار/إخفاء التنبيه
   const [selectedService, setSelectedService] = useState('');
 
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmissionStatus('submitting');
-
-    try {
-      await submitContactForm({ name, email, message });
-      setSubmissionStatus('success');
-      setShowAlert(true); // عرض التنبيه عند النجاح
-      setName('');
-      setEmail('');
-      setMessage('');
-    } catch (error) {
-      console.error("Form submission failed:", error);
-      setSubmissionStatus('error');
-      setShowAlert(true); // عرض التنبيه عند الفشل
-    }
-  };
 
   // إخفاء التنبيه بعد مدة معينة (مثلاً 5 ثواني)
   useEffect(() => {
@@ -80,7 +62,7 @@ export const ContactForm = () => {
         <CardDescription>We d love to hear from you!</CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="grid gap-4">
+        <form className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="name">Name</Label>
             <Input
