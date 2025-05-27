@@ -5,8 +5,7 @@ import { useState } from 'react';
 import Modal from "@/components/Modal";
 import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
-import { FaTachometerAlt ,FaClipboardCheck ,FaLock ,FaLightbulb ,FaCheckCircle ,FaMapMarkerAlt,FaExclamationCircle
-  ,FaBriefcase ,FaHandshake,FaGlobe,FaSyncAlt
+import {FaMapMarkerAlt,FaExclamationCircle
  } from "react-icons/fa";
 
 
@@ -38,7 +37,7 @@ export default function AboutPage() {
   const closeModal = () => setIsModalOpen(false);
   return (
     <section className="py-24 relative">
-      <div className="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto">
+      <div className="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto mt-7">
         <div className="w-full justify-start items-center gap-12 grid lg:grid-cols-2 grid-cols-1">
           <div className="w-full justify-center items-start gap-6 grid sm:grid-cols-2 grid-cols-1 lg:order-first order-last">
             <div className="pt-24 lg:justify-center sm:justify-end justify-start items-start gap-2.5 flex">
@@ -240,168 +239,8 @@ Ensemble, construisons votre avenir avec efficacité et sérénité.
                     <Image className="sm:hidden block w-full" src="https://i.ibb.co/Jxhpxh6/Rectangle-122.png" alt="people discussing on board" height={3000} width={2000}/>
                 </div>
             </div>
-            <h1 className="mb-8 mt-12 text-center  font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white">Nos<mark className="px-2 ml-1 text-white bg-teal-600 rounded-sm dark:bg-teal-500">Valeurs</mark></h1>
-            <p className="font-normal text-2xl leading-6 text-gray-500 mt-10">Nos  activités professionnelles  reposent sur un équilibre de cinq piliers :</p>
-            <div className="relative mt-14 z-10">
-                <div className="grid sm:grid-cols-3 grid-cols-2 sm:gap-8 gap-4">
-                   <div className="z-20 w-12 h-12 text-white bg-gray-800 rounded-full flex justify-center items-center">
-                    <FaLightbulb  className="animate-bounce"/>
-                    </div>
 
-                    <div className="z-20 w-12 h-12 text-white bg-gray-800 rounded-full flex justify-center items-center">
-                    <FaLock   className="animate-bounce"/>
-                    </div>
-
-                    <div className="z-20 w-12 h-12 text-white bg-gray-800 rounded-full flex justify-center items-center">
-                    <FaClipboardCheck   className="animate-bounce"/>
-                    </div>
-                </div>
-                <hr className="z-10 absolute top-2/4 w-full h-1 bg-gray-300 rounded-2xl" /> 
-            </div>
-
-            <div className="grid sm:grid-cols-3 grid-cols-2 sm:gap-8 gap-4">
-                <div>
-                    <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-gray-800 mt-6">L’innovation​</p>
-                </div>
-                <div>
-                    <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-gray-800 mt-6">La confidentialité et l’honnêteté ​</p>
-                </div>
-                <div className="sm:block hidden">
-                    <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-gray-800 mt-6">La responsabilité</p>
-                </div>
-            </div>
-          
-
-            <div className="relative mt-24 z-10">
-                <div className="grid sm:grid-cols-3 grid-cols-2 sm:gap-8 gap-4">
-                    <div className="z-20 w-12 h-12 text-white bg-gray-800 rounded-full flex justify-center items-center ">
-                    <FaHandshake  className="animate-bounce"/>
-                    </div>
-
-                    <div className="z-20 w-12 h-12 text-white bg-gray-800 rounded-full flex justify-center items-center">
-                    <FaTachometerAlt className="animate-bounce"/>
-                    </div>
-                </div>
-                <hr className="z-10 absolute top-2/4 w-8/12 h-1 bg-gray-300 rounded-2xl" />
-            </div>
-
-            <div className="grid sm:grid-cols-3 grid-cols-2 sm:gap-8 gap-4">
-                <div>
-                    <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-gray-800 mt-6">​Le respect </p>
-                </div>
-                <div>
-                    <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-gray-800 mt-6">​La performance​</p>
-                </div>
-            </div>
-            <h1 className="mb-14 mt-18 text-center  font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white">Notre<mark className="px-2 ml-1 text-white bg-teal-600 rounded-sm dark:bg-teal-500">Mission</mark></h1>
-            <div className="flex lg:flex-row flex-col md:gap-4 gap-6 justify-between lg:mt-6">
-            <div className="relative mr-8 flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg w-[900px] transition-transform duration-300 ease-in-out hover:scale-105">
-  {/* Texte plus grand */}
-  <div className="p-8 ">
-    <p className="text-gray-700 text-2xl italic font-semibold leading-relaxed">
-      Aider l’entreprise, grâce à nos prestations, à faire face aux changements fréquents
-      pour assurer sa croissance et sa pérennité, suivre continuellement l’évolution
-      technologique et préserver une place privilégiée sur le marché concurrentiel.
-    </p>
-  </div>
-
-  {/* Image plus petite */}
-  <div className="relative m-2.5 overflow-hidden text-white rounded-md h-[180px]">
-    <Image
-      src="/mission.jpg"
-      alt="card-image"
-      layout="fill"
-      objectFit="cover"
-      className="rounded-md"
-    />
-  </div>
-</div>
-
-                <div className="w-full lg:w-7/12">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 lg:gap-12 gap-10 text-center">
-                        {/* <!-- Team Card --> */}
-                        <div className="flex p-4 shadow-md bg-teal-600 rounded-2xl  transition-transform duration-300 ease-in-out hover:scale-105">
-                            <div className="mr-6">
-                               <FaBriefcase />
-                            </div>
-                            <div className=''>
-                                <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-white">Entreprise & Stratégie</p>
-                            </div>
-                        </div>
-
-                        {/* <!-- Board Card --> */}
-                        <div className="flex p-4 shadow-md bg-teal-600 rounded-2xl  transition-transform duration-300 ease-in-out hover:scale-105">
-                            <div className="mr-6">
-                             <FaHandshake />
-                            </div>
-                            <div className="">
-                                <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-white">Prestations & Services
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* <!-- Press Card --> */}
-                        <div className="flex p-4 shadow-md bg-teal-600 rounded-2xl  transition-transform duration-300 ease-in-out hover:scale-105">
-                            <div className="mr-6">
-                                <FaSyncAlt />
-                            </div>
-                            <div className="">
-                                <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-white">Changements & Transformation</p>
-                            </div>
-                        </div>
-
-                        <div className="flex p-4 shadow-md bg-teal-600 rounded-2xl transition-transform duration-300 ease-in-out hover:scale-105">
-                            <div className="mr-6">
-                            <FaLightbulb />
-                            </div>
-                            <div className="">
-                                <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-white"> Technologie & Innovation</p>
-                            </div>
-                        </div>
-                        <div className="flex p-4 shadow-md bg-teal-600 rounded-2xl transition-transform duration-300 ease-in-out hover:scale-105">
-                            <div className="mr-6">
-                                <FaGlobe />
-                            </div>
-                            <div className="">
-                                <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-white">Marché & Concurrence</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-       
-
-<h1 className="mb-13  font-extrabold text-center leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white">Notre<mark className="px-2 ml-1 text-white bg-teal-600 rounded-sm dark:bg-teal-500">vision</mark></h1>
-<blockquote className="p-4 my-4 border-s-4 border-teal-600 bg-gray-50 dark:border-gray-500 dark:bg-gray-800 transition-transform duration-300 ease-in-out hover:scale-105">
-    <p className="text-xl italic font-medium leading-relaxed text-gray-900 dark:text-white">Nous voulons faire de DATA FC l’opérateur le plus performant dans l’accompagnement des entreprises et le meilleur créateur de la valeur pour nos clients,  en mettant notre expertise à leur service.​</p>
-</blockquote>
-
-
-            
-
-            <div className="lg:mt-16 sm:mt-12 mt-16 flex lg:flex-row justify-between flex-col lg:gap-8 gap-12">
-                <div className="w-full">
-                <h1 className="mb-13 mt-8   font-extrabold text-center leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white">Nos<mark className="px-2 ml-1 text-white bg-teal-600 rounded-sm dark:bg-teal-500">Engagements</mark></h1>
-                <ul className="space-y-4 italic font-semibold mt-8 text-xl text-gray-700 list-none dark:text-gray-400">
-  {[
-    "Garantir des prestations de qualité répondant aux exigences de nos clients.",
-    "Être un partenaire d’excellence de nos clients.",
-    "Fournir des solutions innovantes et sur mesure pour chaque entreprise cliente.",
-    "Satisfaire nos clients dans le but de maintenir une relation confirmée et durable.",
-    "Mettre en place des solutions en ressources humaines adaptées aux structures et aux enjeux de chaque entreprise cliente.",
-    "Assurer une déontologie de travail dans toutes nos interventions.",
-    "Viser l’excellence et la perfection dans la réalisation de toutes nos prestations.",
-    "Adopter des pratiques responsables et un comportement éthique avec nos clients."
-  ].map((text, i) => (
-    <li key={i} className="flex items-center gap-x-2">
-      <FaCheckCircle className="text-teal-600 shrink-0" />
-      <span>{text}</span>
-    </li>
-  ))}
-</ul>
-                </div>
-            </div>
+              </div>
     </section>
   );
 }
