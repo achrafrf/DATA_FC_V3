@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Users, Clock, Book } from 'lucide-react'
 
 const formationQualiteISO = {
-  titre: "LES FONDAMENTAUX DE LA QUALITÉ ET DE L’ISO 9001",
+  titre: "DFC 32 : LES FONDAMENTAUX DE LA QUALITÉ ET DE L’ISO 9001",
   objectifs: "Connaître les enjeux et les principes de la qualité et de l’ISO 9001.",
   populationCible: "Toute personne désirant comprendre les enjeux et principes d’une démarche qualité.",
   duree: "2 jours",

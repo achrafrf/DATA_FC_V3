@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Users, Clock, Book } from 'lucide-react'
 
 const formationFinanceAnalyse = {
-  titre: "PRATIQUER L’ANALYSE FINANCIÈRE",
+  titre: "DFC 44 : PRATIQUER L’ANALYSE FINANCIÈRE",
   objectifs: "Maîtriser les outils d'analyse financière.",
   populationCible: "Responsable financier, chef comptable, contrôleur de gestion",
   duree: "2 jours",

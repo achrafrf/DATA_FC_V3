@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Users, Clock, Book } from 'lucide-react'
 
 const formationOperationsCourantes = {
-  titre: "COMPTABILITÉ GÉNÉRALE : Les opérations courantes",
+  titre: "DFC 42 : COMPTABILITÉ GÉNÉRALE : Les opérations courantes",
   objectifs: "Savoir comptabiliser les opérations courantes d'achats, de ventes, d'investissement, de trésorerie et de personnel.",
   populationCible: "Débutants en comptabilité",
   duree: "3 jours",

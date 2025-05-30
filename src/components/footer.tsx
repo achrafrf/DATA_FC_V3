@@ -1,5 +1,6 @@
 "use client";
 import { FaMapMarkerAlt, FaEnvelope, FaPhone } from 'react-icons/fa';
+import Image from 'next/image';
 
 export const Footer = () => {
   return (
@@ -70,24 +71,25 @@ export const Footer = () => {
 
   <div className="mx-6 py-10 text-center md:text-left">
     <div className="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-      <div className="">
-        <h6
-          className="mb-4 flex items-center justify-center font-semibold uppercase md:justify-start">
-          <span className="me-3 [&>svg]:h-4 [&>svg]:w-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor">
-              <path
-                d="M12.378 1.602a.75.75 0 00-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03zM21.75 7.93l-9 5.25v9l8.628-5.032a.75.75 0 00.372-.648V7.93zM11.25 22.18v-9l-9-5.25v8.57a.75.75 0 00.372.648l8.628 5.033z" />
-            </svg>
-          </span>
+     <div>
+      <h3
+        className="
+          mb-4 flex items-center justify-center 
+          font-bold uppercase md:justify-start 
+          text-3xl      /* تكبير النص */
+        ">
+        <span className="me-3 h-12 w-24 flex">
+          <Image src="/favicon.ico" alt="Logo" height={3000} width={3000} />
+        </span>
+        {/* نضع DATA FC داخل عنصر له كلاس التدرّج والتكبير */}
+        <span className="text-gradient animate-pop">
           DATA FC
-        </h6>
-        <p>
-        Cabinet de conseil,de formation et d’accompagnement pour la réalisation de vos projets de développement!!
-        </p>
-      </div>
+        </span>
+      </h3>
+      <p>
+        Cabinet de conseil, de formation et d’accompagnement pour la réalisation de vos projets de développement !!
+      </p>
+    </div>
       <div>
         <h6
           className="mb-4 flex justify-center font-semibold uppercase md:justify-start">

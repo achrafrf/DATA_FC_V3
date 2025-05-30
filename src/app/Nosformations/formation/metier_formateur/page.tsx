@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Users, Clock, Book } from 'lucide-react'
 
 const formationFormateur = {
-  titre: "SE FORMER AU MÉTIER DE FORMATEUR",
+  titre: "DFC 21 : SE FORMER AU MÉTIER DE FORMATEUR",
   objectifs: "Acquérir les méthodes et les techniques nécessaires pour exercer le métier de formateur dans l’entreprise.",
   populationCible: "Personne désirant exercer le métier de formateur",
   duree: "2 jours",

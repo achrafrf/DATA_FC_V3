@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Users, Clock, Book } from 'lucide-react'
 
 const formationSSE = {
-  titre: "MANAGEMENT DE LA SANTÉ/SÉCURITÉ ET ENVIRONNEMENT DANS L’ENTREPRISE",
+  titre: "DFC 35 : MANAGEMENT DE LA SANTÉ/SÉCURITÉ ET ENVIRONNEMENT DANS L’ENTREPRISE",
   objectifs: "Maîtriser les principes de management SSE pour améliorer la performance SST de l'entreprise.",
   populationCible: "Responsables Santé/Sécurité-Environnement",
   duree: "2 jours",

@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Users, Clock, Book } from 'lucide-react'
 
 const formationRemuneration = {
-  titre: "GRH : La rémunération",
+  titre: "DFC : 17 GRH La rémunération",
   objectifs: "Maîtriser la gestion du système de rémunération.",
   populationCible: "DRH, RRH prenant leurs fonctions ; cadres ou managers opérationnels nommés RRH",
   duree: "2 jours",

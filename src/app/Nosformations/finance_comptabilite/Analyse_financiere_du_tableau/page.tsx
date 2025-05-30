@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Users, Clock, Book } from 'lucide-react'
 
 const formationFinance = {
-  titre: "ANALYSE FINANCIÈRE DU TABLEAU DE FLUX DE TRÉSORERIE",
+  titre: "DFC 45 : ANALYSE FINANCIÈRE DU TABLEAU DE FLUX DE TRÉSORERIE",
   objectifs: "Être capable d’analyser le tableau de flux de trésorerie.",
   populationCible: "Responsable financier, chef comptable, contrôleur de gestion",
   duree: "2 jours",

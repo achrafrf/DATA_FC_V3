@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Users, Clock, Book } from 'lucide-react'
 
 const formationHACCP = {
-  titre: "NORMES HACCP",
+  titre: "DFC 33 : NORMES HACCP",
   objectifs: "Savoir appliquer le système de gestion de qualité HACCP.",
   populationCible: "Responsables qualité, Chefs d’atelier, Chefs de chaîne, Responsables de production",
   duree: "2 jours",

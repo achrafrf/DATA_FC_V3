@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Users, Clock, Book } from 'lucide-react'
 
 const formationSST = {
-  titre: "HYGIÈNE ET SÉCURITÉ : Sensibilisation à la santé et sécurité au travail",
+  titre: "DFC 34 : HYGIÈNE ET SÉCURITÉ : Sensibilisation à la santé et sécurité au travail",
   objectifs: "Sensibiliser les participants sur la sécurité au travail.",
   populationCible: "Responsables, managers référents/animateurs Santé-Sécurité, personnes gérant la protection/prévention des risques professionnels.",
   duree: "2 jours",

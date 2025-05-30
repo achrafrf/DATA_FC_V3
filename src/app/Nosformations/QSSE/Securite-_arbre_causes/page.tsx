@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Users, Clock, Book } from 'lucide-react'
 
 const formationArbreCauses = {
-  titre: "SANTÉ/SÉCURITÉ : Arbre des causes",
+  titre: "DFC 36 :  SANTÉ/SÉCURITÉ : Arbre des causes",
   objectifs: "Maîtriser les techniques d’élaboration de l’arbre des causes pour déduire les mesures correctives et préventives contre les accidents.",
   populationCible: "Responsables Santé-Sécurité, qualité et/ou environnement, membres du CSE",
   duree: "2 jours",

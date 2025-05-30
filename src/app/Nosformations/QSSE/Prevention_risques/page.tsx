@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Users, Clock, Book } from 'lucide-react'
 
 const formationPrevention = {
-  titre: "SANTÉ/SÉCURITÉ : Prévention des risques",
+  titre: "DFC 37 : SANTÉ/SÉCURITÉ : Prévention des risques",
   objectifs: "Savoir élaborer et mettre en œuvre un plan de prévention pour maîtriser les risques liés aux entreprises extérieures.",
   populationCible: "Responsables Santé-Sécurité, qualité et/ou environnement, membres du CSE",
   duree: "2 jours",

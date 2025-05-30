@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Users, Clock, Book } from 'lucide-react'
 
 const formationMobiliteTalents = {
-  titre: "FONCTION RH : Évaluation mobilité et gestion des talents",
+  titre: "DFC 16 : FONCTION RH : Évaluation mobilité et gestion des talents",
   objectifs: "Maîtriser les méthodes et techniques de gestion de la mobilité et des talents.",
   populationCible: "DRH, RRH prenant leurs fonctions ; cadres ou managers opérationnels nommés RRH",
   duree: "2 jours",

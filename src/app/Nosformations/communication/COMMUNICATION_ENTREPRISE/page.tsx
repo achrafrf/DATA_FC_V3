@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Users, Clock, Book } from 'lucide-react'
 
 const formationDFC12 = {
-  titre: "LA COMMUNICATION EN ENTREPRISE",
+  titre: "DFC 52 : LA COMMUNICATION EN ENTREPRISE",
   objectifs: "Sensibiliser les participants sur l’importance de la communication et son impact sur la RH.",
   populationCible: "Managers – responsables de communication",
   duree: "2 jours",

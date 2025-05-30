@@ -45,7 +45,7 @@ const StrategieCommunication: React.FC = () => {
         <div className="absolute inset-0 bg-black/25" />
         <header className="relative flex items-center justify-center h-full">
           <h1 className="text-3xl md:text-4xl font-extrabold text-white drop-shadow-lg">
-            {formationStrat.code} – {formationStrat.titre}
+            {formationStrat.code} : {formationStrat.titre}
           </h1>
         </header>
       </div>

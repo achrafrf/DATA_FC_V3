@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Users, Clock, Book } from 'lucide-react'
 
 const formationRRH = {
-  titre: "GRH : Missions du RRH et recrutement",
+  titre: "DFC 13 : GRH Missions du RRH et recrutement",
   objectifs: "Identifier et comprendre les enjeux de la fonction RH.",
   populationCible: "DRH, RRH prenant leurs fonctions ; cadres ou managers opérationnels nommés RRH",
   duree: "2 jours",

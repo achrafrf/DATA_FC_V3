@@ -133,36 +133,47 @@ Ensemble, construisons votre avenir avec efficacité et sérénité.
 
 
 <Modal isOpen={isModalOpen} onClose={closeModal}>
-<div className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
-  <div className="relative p-2.5 h-80 overflow-hidden rounded-xl bg-clip-border">
-  <iframe
-  className='mx-auto h-full w-full object-cover rounded-md'
-  src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3047.6390233313264!2d-9.234552489219864!3d32.29563887375947!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzLCsDE3JzQ0LjMiTiA5wrAxMyc1NS4xIlc!5e1!3m2!1sen!2sma!4v1745425181349!5m2!1sen!2sma"  width="350"  // <-- خفض العرض
-  height="400" // <-- خفض الارتفاع
-  style={{ border: 0 }}
-  allowFullScreen={true}
-  loading="lazy"
-  referrerPolicy="no-referrer-when-downgrade"
-/>
-</div>
-<div className="p-4">
-    <div className="mb-2 flex items-center justify-between">
-      <p className="text-slate-800 text-xl font-semibold">
-        DATA FC
-      </p>
-      <p className="text-cyan-600 text-xl font-semibold">
-      <a href="">datafc2019@gmail.com</a>
-      </p>
+  <div className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+    <div className="relative p-2.5 h-80 overflow-hidden rounded-xl bg-clip-border">
+      {/* الـ iframe بالخلف */}
+      <iframe
+        className="absolute inset-0 w-full h-full object-cover rounded-md"
+        src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3047.6390233313264!2d-9.234552489219864!3d32.29563887375947!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzLCsDE3JzQ0LjMiTiA5wrAxMyc1NS4xIlc!5e1!3m2!1sen!2sma!4v1745425181349!5m2!1sen!2sma"
+        style={{ border: 0 }}
+        allowFullScreen
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+      />
+      {/* طبقة الرابط الشفّافة */}
+      <a
+        href="https://www.google.com/maps/place/32%C2%B017'44.3%22N+9%C2%B013'55.1%22W/@32.2956407,-9.2345402,700m/data=!3m2!1e3!4b1!4m4!3m3!8m2!3d32.2956407!4d-9.2319653?hl=en&entry=ttu&g_ep=EgoyMDI1MDUyMS4wIKXMDSoASAFQAw%3D%3D" // ضع هنا رابط Google Maps الموجّه مباشرة
+        target="_blank"
+        rel="noopener noreferrer"
+        className="absolute inset-0 z-10"
+        aria-label="Open in Google Maps"
+      />
     </div>
-    <p className="text-slate-600 leading-normal font-light">
-    Centre d’affaires Plateau, 4ème étage, N°12, Ville Nouvelle, Safi​
-    </p>
-    <button onClick={closeModal}  className="rounded-md w-full mt-6 bg-teal-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-teal-700 focus:shadow-none active:bg-cyan-700 hover:bg-teal-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
-      Fermer
-    </button>
+    <div className="p-4">
+      <div className="mb-2 flex items-center justify-between">
+        <p className="text-slate-800 text-xl font-semibold">DATA FC</p>
+        <p className="text-cyan-600 text-xl font-semibold">
+          <a href="mailto:datafc2019@gmail.com">datafc2019@gmail.com</a>
+        </p>
+      </div>
+      <p className="text-slate-600 leading-normal font-light">
+        Centre d’affaires Plateau, 4ème étage, N°12, Ville Nouvelle, Safi​
+      </p>
+      <button
+        onClick={closeModal}
+        className="rounded-md w-full mt-6 bg-teal-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-teal-700 focus:shadow-none active:bg-cyan-700 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+        type="button"
+      >
+        Fermer
+      </button>
+    </div>
   </div>
-</div>
 </Modal>
+
           </div>
         </div>
       </div>
@@ -183,31 +194,10 @@ Ensemble, construisons votre avenir avec efficacité et sérénité.
         />
       </a>
       <div className="p-5">
-        <a href="#">
+        <a href="">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             {card.title}
           </h5>
-        </a>
-        <a
-          href="#"
-          className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-teal-700 rounded-lg hover:bg-emerald-400 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          En savoir plus
-          <svg
-            className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 14 10"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M1 5h12m0 0L9 1m4 4L9 9"
-            />
-          </svg>
         </a>
       </div>
     </div>

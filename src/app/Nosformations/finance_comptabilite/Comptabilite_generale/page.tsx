@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Users, Clock, Book } from 'lucide-react'
 
 const formationComptaGenerale = {
-  titre: "COMPTABILITÉ GÉNÉRALE : Logique et plan comptable",
+  titre: "DFC 41 : COMPTABILITÉ GÉNÉRALE : Logique et plan comptable",
   objectifs: "Connaitre la logique comptable et savoir utiliser le plan comptable.",
   populationCible: "Débutants en comptabilité",
   duree: "3 jours",

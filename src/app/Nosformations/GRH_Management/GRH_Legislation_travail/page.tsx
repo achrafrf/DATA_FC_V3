@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Users, Clock, Book } from 'lucide-react'
 
 const formationLegislation = {
-  titre: "GRH : Législation du travail",
+  titre: "DFC 18 : GRH Législation du travail",
   objectifs: "Sécuriser ses pratiques RH par la législation du travail.",
   populationCible: "DRH, RRH prenant leurs fonctions ; cadres ou managers opérationnels nommés RRH",
   duree: "2 jours",

@@ -321,3 +321,25 @@
           opacity: 0;
           animation: fadeIn 0.8s ease forwards;
         }
+
+.text-gradient {
+  background: linear-gradient(90deg, #139469, #ffffff);
+  background-size: 200% 200%;
+
+  background-clip: text;           
+  -webkit-background-clip: text;    
+  
+ 
+  color: transparent;               
+  -webkit-text-fill-color: transparent;
+
+  animation: gradientSlide 3s ease-in-out infinite;
+}
+
+@keyframes gradientSlide {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+
+

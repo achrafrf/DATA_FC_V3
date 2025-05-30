@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Users, Clock, Book } from 'lucide-react'
 
 const formationEquipeProjet = {
-  titre: "MANAGEMENT D’ÉQUIPE-PROJET",
+  titre: "DFC 11 : MANAGEMENT D’ÉQUIPE-PROJET",
   objectifs: "Connaître les techniques adaptées pour rendre efficace son équipe projet.",
   populationCible: "Responsables RH, managers, chefs de production et chefs d’équipes",
   duree: "2 jours",

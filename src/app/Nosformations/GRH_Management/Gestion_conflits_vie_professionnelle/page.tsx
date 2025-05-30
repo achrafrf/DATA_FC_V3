@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Users, Clock, Book } from 'lucide-react'
 
 const formationConflits = {
-  titre: "GESTION DES CONFLITS DANS LA VIE PROFESSIONNELLE",
+  titre: "DFC 12 : GESTION DES CONFLITS DANS LA VIE PROFESSIONNELLE",
   objectifs: "Maîtriser la gestion efficace des conflits spécifiques au management.",
   populationCible: "Managers, hiérarchique ou transversal, chefs de projet",
   duree: "2 jours",

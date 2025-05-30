@@ -3,6 +3,7 @@ import './globals.css';
 import { ThemeProvider } from 'next-themes';
 import { Footer } from '@/components/footer';
 import { HeroHeader } from '@/components/hero8-header';
+import { BackToTopButton } from '@/components/BackToTopButton';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -42,6 +43,7 @@ export default function RootLayout({
             {children}
           </main>
           {modal}
+          <BackToTopButton />
           <Footer />
         </ThemeProvider>
       </body>

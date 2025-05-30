@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Users, Clock, Book } from 'lucide-react'
 
 const formationReussirAction = {
-  titre: "RÉUSSIR UNE ACTION DE FORMATION",
+  titre: "DFC 22 : RÉUSSIR UNE ACTION DE FORMATION",
   objectifs: "Acquérir les méthodes pédagogiques et les techniques d’animation pour réussir une action de formation.",
   populationCible: "Formateur confirmé désirant faire le point sur sa pratique et innover",
   duree: "2 jours",

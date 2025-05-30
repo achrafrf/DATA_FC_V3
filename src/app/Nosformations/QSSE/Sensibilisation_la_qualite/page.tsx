@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Users, Clock, Book } from 'lucide-react'
 
 const formationQualite = {
-  titre: "SENSIBILISATION À LA QUALITÉ",
+  titre: "DFC 31 : SENSIBILISATION À LA QUALITÉ",
   objectifs: "Sensibiliser les participants sur les enjeux d’une démarche qualité.",
   populationCible: "Toute personne désirant comprendre les enjeux et principes d’une démarche qualité.",
   duree: "2 jours",

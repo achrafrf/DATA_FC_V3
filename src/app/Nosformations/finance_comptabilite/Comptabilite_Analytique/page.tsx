@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Users, Clock, Book } from 'lucide-react'
 
 const formationComptabilite = {
-  titre: "COMPTABILITÉ ANALYTIQUE",
+  titre: "DFC 43 : COMPTABILITÉ ANALYTIQUE",
   objectifs: [
     "Calculer les charges et traiter de la CAE",
     "Établir le tableau de répartition des charges indirectes",

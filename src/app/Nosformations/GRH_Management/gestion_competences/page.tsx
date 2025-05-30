@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Users, Clock, Book } from 'lucide-react'
 
 const formationGPEC = {
-  titre: "GRH : La gestion des compétences",
+  titre: "DFC 14 : GRH La gestion des compétences",
   objectifs: "Savoir mettre en place une GPEC et élaborer son référentiel de compétences.",
   populationCible: "DRH, RRH prenant leurs fonctions ; cadres ou managers opérationnels nommés RRH",
   duree: "2 jours",

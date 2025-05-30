@@ -3,7 +3,7 @@ import React from 'react'
 import { Target, Book, Clock, Users } from 'lucide-react'
 
 const formationDFC11 = {
-  titre: "Communication en interne",
+  titre: "DFC 51 : Communication en interne",
   objectifs: "S’approprier des fondamentaux de la communication interne.",
   populationCible: "Personne ayant en charge de la communication interne au sein de son organisation.",
   duree: "2 jours",
