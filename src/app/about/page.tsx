@@ -36,7 +36,7 @@ export default function AboutPage() {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   return (
-    <section className="py-24 relative">
+    <section className="py-24 relative dark:bg-gray-900">
       <div className="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto mt-7">
         <div className="w-full justify-start items-center gap-12 grid lg:grid-cols-2 grid-cols-1">
           <div className="w-full justify-center items-start gap-6 grid sm:grid-cols-2 grid-cols-1 lg:order-first order-last">
@@ -60,16 +60,16 @@ export default function AboutPage() {
           <div className="w-full flex-col justify-center lg:items-start items-center gap-10 inline-flex">
             <div className="w-full flex-col justify-center items-start gap-8 flex">
               <div className="w-full flex-col justify-start lg:items-start items-center gap-3 flex">
-                <h2 className="text-gray-900 text-4xl font-bold font-manrope leading-normal lg:text-start text-center">
+                <h2 className="text-gray-900 text-4xl font-bold font-manrope leading-normal lg:text-start text-center dark:text-gray-100	">
                 QUI SOMMES-NOUS ?
                 </h2>
-                <div className="text-gray-500 font-normal leading-relaxed lg:text-start text-center">
+                <div className="text-gray-500 font-normal leading-relaxed lg:text-start text-center dark:text-white">
                 Nous sommes un cabinet de conseil, de formation et d’accompagnement, engagé dans la réussite de vos projets de développement.
 
 À travers cette présentation, nous vous offrons un aperçu de nos prestations et vous invitons à devenir notre partenaire, afin de vous aider à vous adapter à un monde en constante mutation et à vous sécuriser face à une réglementation en évolution permanente.
 
 Nous mettons à votre disposition :
-      <ul className='list-disc ml-8 text-black font-bold'>
+      <ul className='list-disc ml-8 text-black font-bold dark:text-white'>
         <li> Des prestations de qualité.</li>
         <li>Un encadrement professionnel.</li>  
         <li>Des solutions sur mesure pour renforcer la compétitivité de votre entreprise.</li>
@@ -85,7 +85,7 @@ Ensemble, construisons votre avenir avec efficacité et sérénité.
       className="w-full lg:justify-start justify-center items-center sm:gap-10 gap-5 inline-flex"
     >
       <div className="flex-col justify-start items-start inline-flex">
-        <h3 className="text-gray-900 text-4xl font-bold font-manrope leading-normal">
+        <h3 className="text-gray-900 text-4xl font-bold font-manrope leading-normal dark:text-white">
           <CountUp end={inView ? 10 : 0}>
             {({ countUpRef, start }) => {
               if (inView) start();
@@ -94,11 +94,11 @@ Ensemble, construisons votre avenir avec efficacité et sérénité.
           </CountUp>
           +
         </h3>
-        <h6 className="text-gray-500 text-base font-normal leading-relaxed">Années expérience</h6>
+        <h6 className="text-gray-500 text-base font-normal leading-relaxed dark:text-white">Années expérience</h6>
       </div>
 
       <div className="flex-col justify-start items-start inline-flex">
-        <h4 className="text-gray-900 text-4xl font-bold font-manrope leading-normal">
+        <h4 className="text-gray-900 text-4xl font-bold font-manrope leading-normal dark:text-white">
           <CountUp end={inView ? 100 : 0}>
             {({ countUpRef, start }) => {
               if (inView) start();
@@ -107,11 +107,11 @@ Ensemble, construisons votre avenir avec efficacité et sérénité.
           </CountUp>
           +
         </h4>
-        <h6 className="text-gray-500 text-base font-normal leading-relaxed">Projets réussis</h6>
+        <h6 className="text-gray-500 text-base font-normal leading-relaxed dark:text-white">Projets réussis</h6>
       </div>
 
       <div className="flex-col justify-start items-start inline-flex">
-        <h4 className="text-gray-900 text-4xl font-bold font-manrope leading-normal">
+        <h4 className="text-gray-900 text-4xl font-bold font-manrope leading-normal dark:text-white">
           <CountUp end={inView ? 52 : 0}>
             {({ countUpRef, start }) => {
               if (inView) start();
@@ -120,7 +120,7 @@ Ensemble, construisons votre avenir avec efficacité et sérénité.
           </CountUp>
           +
         </h4>
-        <h6 className="text-gray-500 text-base font-normal leading-relaxed">Clients satisfaits</h6>
+        <h6 className="text-gray-500 text-base font-normal leading-relaxed dark:text-white">Clients satisfaits</h6>
       </div>
     </div>
 
@@ -207,8 +207,8 @@ Ensemble, construisons votre avenir avec efficacité et sérénité.
 <h1 className="mb-10 text-center  font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white">Nous<mark className="px-2 ml-1 text-white bg-teal-600 rounded-sm dark:bg-teal-500">Focalisons</mark></h1>
 <div className="flex lg:flex-row flex-col lg:gap-8 sm:gap-10 gap-12">
                 <div className="w-full lg:w-6/12">
-                <p className="font-normal text-2xl leading-6 text-gray-500 mt-6">le marché des ressources humaines et des services aux entreprises et ce par:​</p>
-                <ul className="space-y-4 font-bold mt-8 text-2xl text-gray-700 list-none dark:text-gray-400">
+                <p className="font-normal text-2xl leading-6 text-gray-500 mt-6 dark:text-zinc-50">le marché des ressources humaines et des services aux entreprises et ce par:​</p>
+                <ul className="space-y-4 font-bold mt-8 text-2xl text-gray-700 list-none dark:text-white">
   {[
     "L’ingénierie de formation, la formation continue et l’assistance conseil en recrutement.",
     "L’exercice de l’activité d’intérim pour l’entreprise.",

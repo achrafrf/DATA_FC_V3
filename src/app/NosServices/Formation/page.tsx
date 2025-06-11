@@ -25,7 +25,7 @@ const renderList = (items: string[]) => (
         {idx % 2 === 0 && (
           <span className="absolute left-0 top-1 w-3 h-3 bg-green-800 rounded-full" />
         )}
-        <span className={idx % 2 === 0 ? 'text-teal-600 font-bold' : 'text-black'}>
+        <span className={idx % 2 === 0 ? 'text-teal-600 font-bold' : 'text-black dark:text-white'}>
           {text}
         </span>
       </li>

@@ -3,8 +3,8 @@ import { FaPhone,FaCalendarAlt } from 'react-icons/fa'
 const Header = () => {
   return (
     <header>
-       <div className="w-full bg-teal-600 p-0.5 md:flex md:items-center md:justify-between">
-          <div className="flex justify-center ml-4">
+      <div className="w-full bg-teal-600 p-0.5 flex flex-col items-center md:flex-row md:items-center md:justify-between h-12">
+        <div className="flex flex-wrap justify-center md:justify-start ml-4 mb-2 md:mb-0">
         <a href="#!" className="me-6 [&>svg]:h-4 [&>svg]:w-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -60,24 +60,24 @@ const Header = () => {
           </svg>
         </a>
       </div>
-      <ul className="flex relative top-2 right-3 flex-wrap mr-3 font-bold text-sm text-white sm:mt-0">
-          <li className='mr-4'>
-              <p className="mb-4 flex items-center justify-center md:justify-start">
-            <span className="me-3 [&>svg]:h-5 [&>svg]:w-5">
-            <FaPhone className="h-6 w-6 text-teal-100" />
-            </span>
-            06 75 34 37 30 
-          </p>
+       <ul className="flex flex-col sm:flex-row items-center text-center font-bold text-sm text-white mr-3 mt-2 md:mt-0">
+          <li className="mr-0 sm:mr-4">
+            <p className="mb-2 flex items-center justify-center md:justify-start">
+              <span className="me-3 [&>svg]:h-5 [&>svg]:w-5">
+                <FaPhone className="h-6 w-6 text-teal-100" />
+              </span>
+              06 75 34 37 30
+            </p>
           </li>
           <li>
-          <p className="mb-4 flex items-center justify-center md:justify-start">
-            <span className="me-3 [&>svg]:h-5 [&>svg]:w-5">
-            <FaCalendarAlt className="h-6 w-6 text-teal-100" />
-            </span>
-            Prendre un RDV
-          </p>
+            <p className="mb-2 flex items-center justify-center md:justify-start">
+              <span className="me-3 [&>svg]:h-5 [&>svg]:w-5">
+                <FaCalendarAlt className="h-6 w-6 text-teal-100" />
+              </span>
+              Prendre un RDV
+            </p>
           </li>
-      </ul>
+        </ul>
       </div>
     </header>
   )

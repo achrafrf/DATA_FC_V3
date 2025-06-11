@@ -33,7 +33,7 @@ const renderList = (items: string[]) => (
 
 const ManagementEquipeProjet: React.FC = () => {
   return (
-    <div>
+    <div className='dark:bg-gray-900'>
       {/* Banner */}
       <div
         className="relative h-80 md:h-96 bg-cover bg-center"

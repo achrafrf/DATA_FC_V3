@@ -1,11 +1,62 @@
 "use client";
 import { FaMapMarkerAlt, FaEnvelope, FaPhone } from 'react-icons/fa';
 import Image from 'next/image';
+import Link from "next/link";
+
+const services = [
+  {
+    name: "Ingénierie de formation",
+    path: "/NosServices/Ingenierie_formation",
+  },
+  {
+    name: "Formation",
+    path: "/NosServices/Formation",
+  },
+  {
+    name: "Assistance conseil en recrutement",
+    path: "/NosServices/conseil_recrutement",
+  },
+  {
+    name: "Placement / externalisation RH",
+    path: "/NosServices/EXTERNALISATION",
+  },
+  {
+    name: "Fourniture de personnel intérimaire",
+    path: "/NosServices/interim_entreprise",
+  },
+  {
+    name: "Prestations informatiques",
+    path: "/services/prestations-informatiques",
+  },
+  {
+    name: "Domiciliation des entreprises",
+    path: "/NosServices/Domiciliation_entreprises",
+  },
+];
+
+const propos = [
+  {
+    name: "Qui sommes nous ?",
+    path: "/about",
+  },
+  {
+    name: "Notre mission",
+     path: "/#notre-mission",
+  },
+  {
+    name: "Nos domaines de formation",
+    path: "/Nosdomaines",
+  },
+  {
+    name: "Nous contacter",
+    path: "/NosServices/EXTERNALISATION",
+  },
+];
 
 export const Footer = () => {
   return (
 <footer  
-  className="bg-zinc-100 text-center text-surface/75 dark:bg-neutral-700 dark:text-white/75 lg:text-left">
+  className="bg-zinc-100 text-center text-surface/75 dark:bg-gray-800  dark:text-white/75 lg:text-left">
   <div
     className="flex items-cen ter justify-center border-b-2 border-neutral-200 p-6 dark:border-white/10 lg:justify-between">
     <div className="me-12 hidden lg:block">
@@ -90,48 +141,68 @@ export const Footer = () => {
         Cabinet de conseil, de formation et d’accompagnement pour la réalisation de vos projets de développement !!
       </p>
     </div>
+     <div>
+  <h6 className="mb-4 flex justify-center font-semibold uppercase md:justify-start">
+    Nos Services
+  </h6>
+  <ul className="flex flex-col gap-3 md:gap-2">
+        {services.map((svc) => (
+          <li key={svc.path} className="flex items-center">
+            {/* Triangle teal-600 */}
+            <span
+              className="
+                w-0 h-0
+                border-t-[6px] border-t-transparent
+                border-b-[6px] border-b-transparent
+                border-l-[8px] border-l-teal-600
+                mr-3 flex-shrink-0
+              "
+            />
+            <Link
+              href={svc.path}
+              className="text-base font-medium text-gray-800  dark:text-white hover:text-teal-600 transition"
+            >
+              {svc.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+</div>
+
       <div>
         <h6
           className="mb-4 flex justify-center font-semibold uppercase md:justify-start">
-          Nos Service
+          À propos de Data Fc
         </h6>
-        <p className="mb-4">
-          <a href="#!"></a>
-        </p>
-        <p className="mb-4">
-          <a href="#!"></a>
-        </p>
-        <p className="mb-4">
-          <a href="#!"></a>
-        </p>
-        <p>
-          <a href="#!"></a>
-        </p>
-      </div>
-      <div>
-        <h6
-          className="mb-4 flex justify-center font-semibold uppercase md:justify-start">
-          Nos Formations
-        </h6>
-        <p className="mb-4">
-          <a href="#!"></a>
-        </p>
-        <p className="mb-4">
-          <a href="#!"></a>
-        </p>
-        <p className="mb-4">
-          <a href="#!"></a>
-        </p>
-        <p>
-          <a href="#!"></a>
-        </p>
+       <ul className="flex flex-col gap-3 md:gap-2">
+        {propos.map((svc) => (
+          <li key={svc.path} className="flex items-center">
+            {/* Triangle teal-600 */}
+            <span
+              className="
+                w-0 h-0
+                border-t-[6px] border-t-transparent
+                border-b-[6px] border-b-transparent
+                border-l-[8px] border-l-teal-600
+                mr-3 flex-shrink-0
+              "
+            />
+            <Link
+              href={svc.path}
+              className="text-base font-medium text-gray-800  dark:text-white hover:text-teal-600 transition"
+            >
+              {svc.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
       </div>
       <div>
         <h6
           className="mb-4 flex justify-center font-semibold uppercase md:justify-start">
           Contact
         </h6>
-        <ul className="list-none space-y-3 text-gray-800 text-base">
+        <ul className="list-none space-y-3 font-bold text-gray-800 text-base  dark:text-white">
       <li className="flex items-start gap-2">
         <FaMapMarkerAlt className="text-emerald-700 mt-1" />
         <span>
@@ -144,11 +215,7 @@ export const Footer = () => {
       </li>
       <li className="flex items-start gap-2">
         <FaPhone className="text-emerald-700 mt-1" />
-        <span>0664198892</span>
-      </li>
-      <li className="flex items-start gap-2">
-        <FaPhone className="text-emerald-700 mt-1" />
-        <span>0675343730</span>
+        <span>0664198892 & 0675343730</span>
       </li>
     </ul>
       </div>

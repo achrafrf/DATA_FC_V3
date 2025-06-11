@@ -18,7 +18,7 @@ const Nosengagement = () => {
           "Viser l’excellence et la perfection dans la réalisation de toutes nos prestations.",
           "Adopter des pratiques responsables et un comportement éthique avec nos clients."
         ].map((text, i) => (
-          <li key={i} className="flex items-center gap-x-2">
+          <li key={i} className="flex items-center gap-x-2 dark:text-white">
             <FaCheckCircle className="text-teal-600 shrink-0" />
             <span>{text}</span>
           </li>

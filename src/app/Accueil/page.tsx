@@ -2,8 +2,6 @@ import React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
-import { InfiniteSlider } from '@/components/ui/infinite-slider'
-import { ProgressiveBlur } from '@/components/ui/progressive-blur'
 import NotreMission from '@/components/notreMission'
 import Nosengagement from '@/components/nosengagement'
 import NosValeurs from '@/components/nosValeurs'
@@ -11,17 +9,20 @@ import Notrevesion from '@/components/notrevesion'
 const page = () => {
   return (
     <>
-      <main className="overflow-x-hidden">
+      <main className="overflow-x-hidden ">
                 <section>
                     <div className="pb-24 pt-12 md:pb-32 lg:pb-56 lg:pt-44">
                         <div className="relative mx-auto flex max-w-6xl flex-col px-6 lg:block">
                             <div className="mx-auto max-w-lg text-center lg:ml-0 lg:w-1/2 lg:text-left">
-                            <h1 className="mt-8 max-w-2xl text-balance text-5xl font-medium md:text-6xl lg:mt-16 xl:text-7xl">
-  <span className="typing-effect text-teal-600 block overflow-hidden border-r-4 border-teal-400 whitespace-nowrap">
-DATA FC 
+          <h1 className="mt-8 max-w-2xl text-balance text-5xl font-medium md:text-6xl lg:mt-16 xl:text-7xl">
+  <span className="typing-data-fc block text-teal-600">
+    DATA FC
   </span>
-  Formation & Consulting  
+  <span className="block mt-2">
+    Formation &amp; Consulting
+  </span>
 </h1>
+
 
                                 <p className="mt-8 max-w-2xl text-pretty text-lg">Cabinet de conseil, de formation et d’accompagnement pour la réalisation de vos projets de développement continu.</p>
 
@@ -58,16 +59,16 @@ DATA FC
                         </div>
                     </div>
                 </section>
-                <section className="bg-background pb-16 md:pb-32">
-                    <div className="group relative m-auto max-w-6xl px-6">
+<div
+  className="pb-16 md:pb-32">                    
+             <div className="group relative m-auto max-w-6xl px-6">
                         <div className="flex flex-col items-center md:flex-row">
                             <div className="md:max-w-44 md:border-r md:pr-6">
                                 <p className="text-end text-lg font-bold text-teal-700">Ils nous ont fait confiance</p>
                             </div>
                             <div className="relative py-6 md:w-[calc(100%-11rem)]">
-                            <InfiniteSlider speedOnHover={20} speed={40} gap={112}>
   <div className="flex">
-    <Image
+    <Image 
       className="mx-auto h-14 w-fit dark:invert"
       src="/Marsa-Maroc.webp"
       alt="Nvidia Logo"
@@ -129,24 +130,13 @@ DATA FC
       height={28}
     />
   </div>
-</InfiniteSlider>
-
                                 <div className="bg-linear-to-r from-background absolute inset-y-0 left-0 w-20"></div>
                                 <div className="bg-linear-to-l from-background absolute inset-y-0 right-0 w-20"></div>
-                                <ProgressiveBlur
-                                    className="pointer-events-none absolute left-0 top-0 h-full w-20"
-                                    direction="left"
-                                    blurIntensity={1}
-                                />
-                                <ProgressiveBlur
-                                    className="pointer-events-none absolute right-0 top-0 h-full w-20"
-                                    direction="right"
-                                    blurIntensity={1}
-                                />
+                               
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
                 <div className='container m-auto'>
                           
      {/*Notre mISSION*/}

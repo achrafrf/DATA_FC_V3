@@ -34,8 +34,8 @@ export default function RootLayout({
 }>) {
   return (
     <html suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ThemeProvider attribute="class">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-gray-900`}>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <div className="fixed top-0 left-0 w-full h-16 z-50">
             <HeroHeader />
           </div>

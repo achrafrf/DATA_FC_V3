@@ -62,7 +62,7 @@ DATA FC
 
 
 
-               <div className="bg-white py-12 px-4">
+               <div className="bg-white py-12 px-4 dark:bg-gray-800">
   <div className="mx-auto max-w-6xl lg:px-10">
     <div className="flex flex-col lg:flex-row lg:justify-between gap-y-8 lg:gap-x-12">
       
@@ -71,7 +71,7 @@ DATA FC
         <p className="text-4xl font-semibold leading-tight text-teal-600 mb-4">
           Ils nous ont fait confiance
         </p>
-        <p className="text-lg text-gray-800">
+        <p className="text-lg text-gray-800 dark:text-gray-100"> 
           Nous sommes convaincus que nous pouvons trouver le processus qui vous aidera à atteindre vos objectifs.
         </p>
       </div>
@@ -156,7 +156,7 @@ DATA FC
 
   <div className="w-full min-h-screen mx-auto px-4 lg:px-8">
   {/* Notre MISSION */}
-  <section className="py-16">
+  <section className="py-16" id="notre-mission">
     <NotreMission />
   </section>
 

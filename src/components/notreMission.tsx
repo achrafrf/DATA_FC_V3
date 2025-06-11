@@ -7,14 +7,14 @@ import {  FaLightbulb
 
 const NotreMission = () => {
   return (
-    <div className='mb-9'>
+    <div className='mb-9 '>
        {/*Notre Mission*/}
                                       <h1 className="mb-14 mt-18 text-center  font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white">Notre<mark className="px-2 ml-1 text-white bg-teal-600 rounded-sm dark:bg-teal-500">Mission</mark></h1>
                                       <div className="flex lg:flex-row flex-col md:gap-4 gap-6 justify-between lg:mt-6">
-                                      <div className="relative mr-8 flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg w-[900px] transition-transform duration-300 ease-in-out hover:scale-105">
+                                      <div className="relative mr-8 flex flex-col bg-white dark:bg-gray-900 shadow-sm border border-slate-200 rounded-lg w-[900px] transition-transform duration-300 ease-in-out hover:scale-105">
                             {/* Texte plus grand */}
                             <div className="p-8 ">
-                              <p className="text-gray-700 text-2xl italic font-semibold leading-relaxed">
+                              <p className="text-gray-700 text-2xl italic font-semibold leading-relaxed dark:text-white">
                                 Aider l’entreprise, grâce à nos prestations, à faire face aux changements fréquents
                                 pour assurer sa croissance et sa pérennité, suivre continuellement l’évolution
                                 technologique et préserver une place privilégiée sur le marché concurrentiel.
