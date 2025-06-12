@@ -29,7 +29,7 @@ export default function Page() {
         />
         <input
           type="text"
-          placeholder="ICE"
+          placeholder="CIN"
           className="w-full border border-gray-300 rounded-md px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-teal-300"
         />
 
@@ -41,7 +41,7 @@ export default function Page() {
         />
         <input
           type="url"
-          placeholder="Site web"
+          placeholder="Formation"
           className="w-full border border-gray-300 rounded-md px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-teal-300"
         />
 
@@ -88,24 +88,7 @@ export default function Page() {
           className="w-full border border-gray-300 rounded-md px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-teal-300"
         />
 
-        {/* Thématique */}
-        <div className="col-span-full flex items-center gap-4 flex-wrap">
-          <span className="font-medium text-gray-700">
-            Quel thématique vous intéresse ? *
-          </span>
-          {['Pilates', 'Training', 'Nutrition'].map((theme) => (
-            <label key={theme} className="flex items-center space-x-1">
-              <input
-                type="radio"
-                name="theme"
-                value={theme}
-                className="accent-teal-500"
-                defaultChecked={theme === 'Pilates'}
-              />
-              <span className="text-gray-700">{theme}</span>
-            </label>
-          ))}
-        </div>
+      
 
         {/* Bouton d'envoi */}
         <button

@@ -51,38 +51,38 @@ export default function ContactPage() {
 
       <main className="min-h-screen mt-3 mb-3 bg-white flex flex-col md:flex-row max-w-6xl mx-auto px-4 md:px-8">
         {/* LEFT PANEL */}
-        <aside className="md:w-1/3 bg-gray-900 text-white p-8 flex flex-col justify-center space-y-12">
+        <aside className="md:w-1/3 bg-teal-900 text-white p-8 flex flex-col justify-center space-y-12">
           <ul className="space-y-8">
             <li className="flex items-center space-x-4">
-              <FaPhone className="text-teal-600 w-8 h-8" />
+              <FaPhone className="text-teal-400 w-8 h-8" />
               <div>
                 <p className="text-lg font-semibold">Téléphone</p>
-                <p className="text-teal-600">+212 (0) 808 522 452</p>
+                <p className="text-teal-400">+212 664-198892</p>
               </div>
             </li>
             <li className="flex items-center space-x-4">
-              <FaWhatsapp className="text-teal-600 w-8 h-8" />
+              <FaWhatsapp className="text-teal-400 w-8 h-8" />
               <div>
                 <p className="text-lg font-semibold">Whatsapp</p>
-                <p className="text-teal-600">+212 (0) 616 132 491</p>
+                <p className="text-teal-400">+212 664-198892</p>
               </div>
             </li>
             <li className="flex items-center space-x-4">
-              <FaEnvelope className="text-teal-600 w-8 h-8" />
+              <FaEnvelope className="text-teal-400 w-8 h-8" />
               <div>
                 <p className="text-lg font-semibold">Email</p>
-                <p className="text-teal-600">contact@cimacef.com</p>
+                <p className="text-teal-400">datafc2019@gmail.com</p>
               </div>
             </li>
             <li className="flex items-start space-x-4">
-              <FaMapMarkerAlt className="text-teal-600 w-8 h-8 mt-1" />
+              <FaMapMarkerAlt className="text-teal-400 w-8 h-8 mt-1" />
               <div>
                 <p className="text-lg font-semibold">Adresse</p>
-                <p className="text-teal-600 leading-snug">
-                  Avenue Moulay Ismail,<br />
-                  Résidence Assalam I,<br />
-                  Immeuble 3, Étage 5, N°72,<br />
-                  Tanger – Maroc
+                <p className="text-teal-400 leading-snug">
+                  Centre d’affaires Plateau,<br />
+                   4ème étage<br />
+                   N°12<br />
+                  Ville Nouvelle, Safi
                 </p>
               </div>
             </li>
