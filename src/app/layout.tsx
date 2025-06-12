@@ -34,6 +34,9 @@ export default function RootLayout({
 }>) {
   return (
     <html suppressHydrationWarning>
+      <head>
+        <meta name="google-site-verification" content="-YYBkhMJOacVUc_FUP2i9lQzqbvfs5Mt03YKT9YdZ6I" />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-gray-900`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <div className="fixed top-0 left-0 w-full h-16 z-50">

@@ -71,8 +71,8 @@ Que ce soit pour maîtriser les nouvelles technologies, optimiser vos processus 
                 <th className="border border-gray-300 px-4 py-2">Mois</th>
                 <th className="border border-gray-300 px-4 py-2">Formation</th>
                 <th className="border border-gray-300 px-4 py-2">Durée</th>
-                <th className="border border-gray-300 px-4 py-2">Prix (DH/jour)</th>
-                <th className="border border-gray-300 px-4 py-2">Prix Total (DH)</th>
+                <th className="border border-gray-300 px-4 py-2">Prix (DH/jour/persone)</th>
+                <th className="border border-gray-300 px-4 py-2">Prix Total (DH/persone)</th>
               </tr>
             </thead>
             <tbody>

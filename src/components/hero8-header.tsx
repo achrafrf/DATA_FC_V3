@@ -95,6 +95,28 @@ export const HeroHeader: React.FC = () => {
                 Qui sommes nous
               </Link>
             </li>
+             {/* Nos Services */}
+            <li ref={servicesRef} className="relative">
+              <button
+                onClick={() => setServicesOpen(s => !s)}
+                className="flex items-center px-3 py-2 hover:text-teal-600 dark:hover:text-teal-400"
+              >
+                Nos Services
+{servicesOpen
+    ? <ChevronUp className="w-4 h-4 transition-transform" />
+    : <ChevronDown className="w-4 h-4 transition-transform" />
+  }              </button>
+              {servicesOpen && (
+                <ul className="absolute left-0 mt-2 w-96 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg overflow-hidden z-50">
+                  <li className="border-b-1 border-teal-600"><Link  href="/NosServices/Ingenierie_formation" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Ingenierie de formation</Link></li>
+                  <li className="border-b-1 border-teal-600"><Link href="/NosServices/Formation" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Formation continue: Formation qualifiante</Link></li>
+                  <li className="border-b-1 border-teal-600"><Link href="/NosServices/conseil_recrutement" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Assistance conseil en recrutement</Link></li>
+                  <li className="border-b-1 border-teal-600"><Link href="/NosServices/EXTERNALISATION" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Placement/externalisation RH</Link></li>
+                  <li className="border-b-1 border-teal-600"><Link href="/NosServices/interim_entreprise" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Fourniture de personnel intérimaire</Link></li>
+                  <li className="border-b-1 border-teal-600"><Link href="/NosServices/domiciliation" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">La Domiciliation des entreprises</Link></li>
+                </ul>
+              )} 
+            </li>
                {/* Nos formations */}
             <li ref={formationsRef} className="relative">
               <button
@@ -245,30 +267,7 @@ export const HeroHeader: React.FC = () => {
               )}
             </li>
 
-            {/* Nos Services */}
-            <li ref={servicesRef} className="relative">
-              <button
-                onClick={() => setServicesOpen(s => !s)}
-                className="flex items-center px-3 py-2 hover:text-teal-600 dark:hover:text-teal-400"
-              >
-                Nos Services
-{servicesOpen
-    ? <ChevronUp className="w-4 h-4 transition-transform" />
-    : <ChevronDown className="w-4 h-4 transition-transform" />
-  }              </button>
-              {servicesOpen && (
-                <ul className="absolute left-0 mt-2 w-96 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg overflow-hidden z-50">
-                  <li className="border-b-1 border-teal-600"><Link  href="/NosServices/Ingenierie_formation" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Ingenierie de formation</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/NosServices/Formation" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Formation continue: Formation qualifiante</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/NosServices/conseil_recrutement" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Assistance conseil en recrutement</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/NosServices/EXTERNALISATION" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Placement/externalisation RH</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/NosServices/interim_entreprise" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Fourniture de personnel intérimaire</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/services/prestations-informatiques" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Prestations informatiques</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/NosServices/domiciliation" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">La Domiciliation des entreprises</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/services/audit" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Audit</Link></li>
-                </ul>
-              )}
-            </li>
+           
             {/* Autres */}
            <li ref={autresRef} className="relative">
               <button
@@ -283,9 +282,9 @@ export const HeroHeader: React.FC = () => {
               {autresOpen && (
                 <ul className="absolute left-0 mt-2 w-60 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg overflow-hidden z-50">
                   <li className="border-b-1 border-teal-600"><Link href="/autre/Formation_Interentreprises" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Formation Interentreprises</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/services/formation-continue" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Demande de devis</Link></li>
+                  <li className="border-b-1 border-teal-600"><Link href="/autre/demande_devis" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Demande de devis</Link></li>
                   <li className="border-b-1 border-teal-600"><Link href="/services/conseil-recrutement" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Notre vivier de competence</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/services/conseil-recrutement" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Contact</Link></li>
+                  <li className="border-b-1 border-teal-600"><Link href="/autre/contact" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Contact</Link></li>
                 </ul>
               )}
             </li>
