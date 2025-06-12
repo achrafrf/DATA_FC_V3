@@ -35,7 +35,7 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning>
       <head>
-        <meta name="google-site-verification" content="-YYBkhMJOacVUc_FUP2i9lQzqbvfs5Mt03YKT9YdZ6I" />
+<meta name="google-site-verification" content="mDKUd3cCjyEURQvsM0lhM3qR-K4HnXqNsM0WG8ggGOs" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-gray-900`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
