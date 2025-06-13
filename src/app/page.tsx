@@ -40,9 +40,9 @@ export default function Home() {
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
             MOT DU DIRECTEUR
           </h2>
-          <h3 className="text-xl lg:text-2xl font-semibold text-teal-600 leading-tight">
+          <h1 className="text-xl lg:text-2xl font-semibold text-teal-600 leading-tight">
             DATA FC : VOTRE PARTENAIRE STRATÉGIQUE POUR UNE CROISSANCE DURABLE
-          </h3>
+          </h1>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">

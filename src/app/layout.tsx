@@ -18,10 +18,23 @@ const geistMono = Geist_Mono({
 // 👇 العنوان الذي يظهر في التبويب
 export const metadata = {
   title: "DATA FC",
-  description: "وصف اختياري للموقع",
+  description: "DATA FC : VOTRE PARTENAIRE STRATÉGIQUE POUR UNE CROISSANCE DURABLE",
   icons: {
   icon: "/favicon.ico",
 },
+openGraph: {
+    title: 'DATA FC',
+    description: 'Expert en recrutement, formation et outsourcing au Maroc',
+    url: 'https://data-fc.vercel.app',
+    images: [
+      {
+        url: 'https://data-fc.vercel.app/logo_datafc.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'DATA FC – Conseil & Formation',
+      },
+    ],
+  }
 };
 
 export default function RootLayout({
