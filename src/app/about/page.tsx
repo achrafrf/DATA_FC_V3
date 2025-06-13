@@ -138,7 +138,7 @@ Ensemble, construisons votre avenir avec efficacité et sérénité.
       {/* الـ iframe بالخلف */}
       <iframe
         className="absolute inset-0 w-full h-full object-cover rounded-md"
-        src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3047.6390233313264!2d-9.234552489219864!3d32.29563887375947!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzLCsDE3JzQ0LjMiTiA5wrAxMyc1NS4xIlc!5e1!3m2!1sen!2sma!4v1745425181349!5m2!1sen!2sma"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d986.5738935835457!2d-9.232323440823315!3d32.29515280189281!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdac21f384f18d8b%3A0x881f62c86ae07612!2sDATA%20FC%20S.A.R.L!5e1!3m2!1sen!2sma!4v1749746100909!5m2!1sen!2sma"
         style={{ border: 0 }}
         allowFullScreen
         loading="lazy"
@@ -146,7 +146,7 @@ Ensemble, construisons votre avenir avec efficacité et sérénité.
       />
       {/* طبقة الرابط الشفّافة */}
       <a
-        href="https://www.google.com/maps/place/32%C2%B017'44.3%22N+9%C2%B013'55.1%22W/@32.2956407,-9.2345402,700m/data=!3m2!1e3!4b1!4m4!3m3!8m2!3d32.2956407!4d-9.2319653?hl=en&entry=ttu&g_ep=EgoyMDI1MDUyMS4wIKXMDSoASAFQAw%3D%3D" // ضع هنا رابط Google Maps الموجّه مباشرة
+        href="https://www.google.com/maps/place/DATA+FC+S.A.R.L/@32.2951528,-9.2323234,227m/data=!3m1!1e3!4m12!1m5!3m4!2zMzLCsDE3JzQ0LjMiTiA5wrAxMyc1NS4xIlc!8m2!3d32.2956389!4d-9.2319722!3m5!1s0xdac21f384f18d8b:0x881f62c86ae07612!8m2!3d32.295101!4d-9.2316815!16s%2Fg%2F11hjlc113z?hl=en&entry=ttu&g_ep=EgoyMDI1MDYwOS4xIKXMDSoASAFQAw%3D%3D" // ضع هنا رابط Google Maps الموجّه مباشرة
         target="_blank"
         rel="noopener noreferrer"
         className="absolute inset-0 z-10"

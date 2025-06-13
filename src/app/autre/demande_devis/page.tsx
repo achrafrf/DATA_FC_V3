@@ -29,7 +29,7 @@ export default function Page() {
         />
         <input
           type="text"
-          placeholder="CIN"
+          placeholder="RC/CIN"
           className="w-full border border-gray-300 rounded-md px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-teal-300"
         />
 
@@ -41,7 +41,7 @@ export default function Page() {
         />
         <input
           type="url"
-          placeholder="Formation"
+          placeholder="prestation demander"
           className="w-full border border-gray-300 rounded-md px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-teal-300"
         />
 

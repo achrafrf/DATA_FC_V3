@@ -19,15 +19,12 @@ export const HeroHeader: React.FC = () => {
   const [finSubOpen, setFinSubOpen] = useState(false)
   const [grhSubOpen, setGrhSubOpen] = useState(false)
   const [qsseSubOpen, setQsseSubOpen] = useState(false)
-  const [langOpen, setLangOpen] = useState(false)
-  const [lang, setLang] = useState<'fr' | 'en' | 'ar'>('fr')
   const { theme, setTheme } = useTheme()
   const [scrolled, setScrolled] = useState(false)
 
   const servicesRef = useRef<HTMLLIElement>(null)
   const autresRef = useRef<HTMLLIElement>(null)
   const formationsRef = useRef<HTMLLIElement>(null)
-  const langRef = useRef<HTMLLIElement>(null)
 
   // Helpers to toggle only one formation submenu at a time
   const closeAllFormSubs = () => {
@@ -54,7 +51,6 @@ export const HeroHeader: React.FC = () => {
         setFormationsOpen(false)
         closeAllFormSubs()
       }
-      if (langRef.current && !langRef.current.contains(e.target as Node)) setLangOpen(false)
     }
     document.addEventListener('mousedown', handleClickOutside)
 
@@ -112,6 +108,7 @@ export const HeroHeader: React.FC = () => {
                   <li className="border-b-1 border-teal-600"><Link href="/NosServices/Formation" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Formation continue: Formation qualifiante</Link></li>
                   <li className="border-b-1 border-teal-600"><Link href="/NosServices/conseil_recrutement" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Assistance conseil en recrutement</Link></li>
                   <li className="border-b-1 border-teal-600"><Link href="/NosServices/EXTERNALISATION" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Placement/externalisation RH</Link></li>
+                  <li className="border-b-1 border-teal-600"><Link href="/NosServices/Prestations_informatique" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Prestations informatique</Link></li>
                   <li className="border-b-1 border-teal-600"><Link href="/NosServices/interim_entreprise" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Fourniture de personnel intérimaire</Link></li>
                   <li className="border-b-1 border-teal-600"><Link href="/NosServices/domiciliation" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">La Domiciliation des entreprises</Link></li>
                 </ul>
@@ -283,27 +280,12 @@ export const HeroHeader: React.FC = () => {
                 <ul className="absolute left-0 mt-2 w-60 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg overflow-hidden z-50">
                   <li className="border-b-1 border-teal-600"><Link href="/autre/Formation_Interentreprises" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Formation Interentreprises</Link></li>
                   <li className="border-b-1 border-teal-600"><Link href="/autre/demande_devis" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Demande de devis</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/services/conseil-recrutement" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Notre vivier de competence</Link></li>
+                  <li className="border-b-1 border-teal-600"><Link href="/autre/Notre_vivier" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Notre vivier de competence</Link></li>
                   <li className="border-b-1 border-teal-600"><Link href="/autre/contact" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Contact</Link></li>
                 </ul>
               )}
             </li>
-            {/* Lang selector */}
-            <li ref={langRef} className="relative">
-              <button onClick={() => setLangOpen(o => !o)} className="flex items-center px-3 py-2 hover:text-teal-600 dark:hover:text-teal-400">
-                {lang.toUpperCase()}{langOpen
-    ? <ChevronUp className="w-4 h-4 transition-transform" />
-    : <ChevronDown className="w-4 h-4 transition-transform" />
-  } 
-              </button>
-              {langOpen && (
-                <ul className="absolute right-0 mt-2 w-32 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg overflow-hidden z-50">
-                  <li className="border-b-1 border-teal-600"><button onClick={() => { setLang('fr'); setLangOpen(false) }} className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">FR</button></li>
-                  <li className="border-b-1 border-teal-600"><button onClick={() => { setLang('en'); setLangOpen(false) }} className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">EN</button></li>
-                  <li className="border-b-1 border-teal-600"><button onClick={() => { setLang('ar'); setLangOpen(false) }} className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">AR</button></li>
-                </ul>
-              )}
-            </li>
+           
             
             {/* Dark/light toggle */}
             <li className="flex items-center">
