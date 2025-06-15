@@ -67,7 +67,7 @@ export default function Home() {
   />
 
   {/* صورة فوق الشكل */}
-  <div className="absolute inset-0 z-10 flex items-center justify-center p-10">
+  <div className="absolute inset-0 z-10 flex items-center justify-center p-14">
     <Image
       src="/pic.png"
       alt="A. CHAKIK - Directeur DATA FC"
@@ -101,14 +101,34 @@ export default function Home() {
     des compétences – des défis que nous transformons en leviers de performance pour 
     votre organisation.
   </p>
-
-  
-
+  <p className='text-gray-800'>
+    <span className='text-teal-700'>Notre mission ? </span>Vous offrir une alliance unique d’expertises synergiques : de
+l’ingénierie de formation sur-mesure qui anticipe les besoins métiers, au recrutement
+stratégique de profils à haute valeur ajoutée ; de l’externalisation intelligente qui
+simplifie vos opérations, à la domiciliation professionnelle qui valorise votre image.
+Une approche intégrée où chaque solution concourt à un même objectif : libérer
+votre potentiel.
+  </p>
+            </div>
+          </div>
+        </div>
+    <div className="space-y-6 text-gray-700 leading-relaxed font-bold text-lg mt-9">
+  <p className='text-gray-800'>
+  <span className='text-teal-700'>Ce qui nous distingue ?</span>Une culture du sur-mesure alliant vision sectorielle et
+exécution pragmatique. Start-up agiles, PME en croissance ou grands groupes :
+nous adaptons notre écosystème (savoir-faire, réseaux, technologies) à vos enjeux
+spécifiques, avec une exigence commune – créer de la valeur tangible.
+  </p>
+  <p className='text-gray-800'>
+    Au-delà des services, nous cultivons une philosophie partenariale : écoute active,
+transparence opérationnelle et engagement mutuel. Car le Maroc, terre
+d’opportunités, mérite des synergies ambitieuses où votre succès devient notre
+référence.
+  </p>
   <p className="text-gray-800">
     Je vous invite à explorer nos solutions et à rencontrer nos équipes. Ensemble, 
     faisons de vos défis d&apos;aujourd&apos;hui les forces de demain.
   </p>
-
   <div className="pt-6">
     <p className="font-medium text-teal-600 text-lg">
       Bien sincèrement,
@@ -121,61 +141,8 @@ export default function Home() {
         Directeur : DATA FC
       </p>
     </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className='flex m-auto'>
-  <div className="relative flex flex-col my-6 mr-4 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
-  <div className="mx-3 mb-0 border-b border-slate-200 pt-3 pb-2 px-1">
-    <span className="text-lg text-teal-600 font-bold">
-      Notre mission ?
-    </span>
-  </div>
-  
-  <div className="p-4">
-    <p className="text-slate-600 leading-normal font-bold">
-Vous offrir une alliance unique d’expertises synergiques : de
-l’ingénierie de formation sur-mesure qui anticipe les besoins métiers, au recrutement
-stratégique de profils à haute valeur ajoutée ; de l’externalisation intelligente qui
-simplifie vos opérations, à la domiciliation professionnelle qui valorise votre image.
-Une approche intégrée où chaque solution concourt à un même objectif : libérer
-votre potentiel.    </p>
   </div>
 </div>
- <div className="relative flex flex-col my-6 mr-4 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
-  <div className="mx-3 mb-0 border-b border-slate-200 pt-3 pb-2 px-1">
-    <span className="text-lg text-teal-600 font-bold">
-      Ce qui nous distingue ?
-    </span>
-  </div>
-  
-  <div className="p-4">
-    <p className="text-slate-600 leading-normal font-bold">
-Une culture du sur-mesure alliant vision sectorielle et
-exécution pragmatique. Start-up agiles, PME en croissance ou grands groupes :
-nous adaptons notre écosystème (savoir-faire, réseaux, technologies) à vos enjeux
-spécifiques, avec une exigence commune – créer de la valeur tangible.    </p>
-  </div>
-</div>
- <div className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
-  <div className="mx-3 mb-0 border-b border-slate-200 pt-3 pb-2 px-1">
-    <span className="text-lg text-teal-600 font-bold">
-      Au-delà des services
-    </span>
-  </div>
-  
-  <div className="p-4">
-    <p className="text-slate-600 leading-normal font-bold">
-nous cultivons une philosophie partenariale : écoute active,
-transparence opérationnelle et engagement mutuel. Car le Maroc, terre
-d’opportunités, mérite des synergies ambitieuses où votre succès devient notre
-référence.
-</p>
-  </div>
-</div>
-  </div>
-  
       </main>
       </div>
                <div className="bg-white py-12 px-4 dark:bg-gray-800">

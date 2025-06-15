@@ -1,41 +1,34 @@
-"use client";
+'use client';
+import React, { useEffect, useState } from 'react';
+import { FaArrowUp } from 'react-icons/fa';
 
-import { useState, useEffect } from "react";
-import { ArrowUp } from "lucide-react";
-
-export function BackToTopButton() {
+const BackToTopButton = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    function onScroll() {
+    const toggleVisibility = () => {
       setVisible(window.scrollY > 300);
-    }
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    };
+
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
-  function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  if (!visible) return null;
 
   return (
     <button
       onClick={scrollToTop}
-      className={`
-        fixed bottom-6 right-6 z-50
-        w-12 h-12
-        flex items-center justify-center
-        rounded-full
-        bg-teal-600 text-white
-        shadow-lg
-        transition-opacity duration-300
-        ${visible ? "opacity-100" : "opacity-0 pointer-events-none"}
-        hover:bg-teal-700
-      `}
-      aria-label="Retour en haut"
+      className="bg-gray-700 hover:bg-gray-900 text-white p-3 rounded-full shadow-lg transition"
+      title="Retour en haut"
     >
-      {/* Flèche plus grosse */}
-      <ArrowUp size={28} />
+      <FaArrowUp size={20} />
     </button>
   );
-}
+};
+
+export default BackToTopButton;

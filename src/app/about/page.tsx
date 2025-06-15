@@ -99,7 +99,7 @@ Ensemble, construisons votre avenir avec efficacité et sérénité.
 
       <div className="flex-col justify-start items-start inline-flex">
         <h4 className="text-gray-900 text-4xl font-bold font-manrope leading-normal dark:text-white">
-          <CountUp end={inView ? 100 : 0}>
+          <CountUp end={inView ? 35 : 0}>
             {({ countUpRef, start }) => {
               if (inView) start();
               return <span ref={countUpRef} />;
@@ -112,7 +112,7 @@ Ensemble, construisons votre avenir avec efficacité et sérénité.
 
       <div className="flex-col justify-start items-start inline-flex">
         <h4 className="text-gray-900 text-4xl font-bold font-manrope leading-normal dark:text-white">
-          <CountUp end={inView ? 52 : 0}>
+          <CountUp end={inView ? 15 : 0}>
             {({ countUpRef, start }) => {
               if (inView) start();
               return <span ref={countUpRef} />;
@@ -204,7 +204,7 @@ Ensemble, construisons votre avenir avec efficacité et sérénité.
   ))}
 </div>
 <div className="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
-<h1 className="mb-10 text-center  font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white">Nous<mark className="px-2 ml-1 text-white bg-teal-600 rounded-sm dark:bg-teal-500">Focalisons</mark></h1>
+<h1 className="mb-10 text-center  font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white">Nous<mark className="px-2 ml-1 text-white bg-teal-600 rounded-sm dark:bg-teal-500">Focalisons sur:</mark></h1>
 <div className="flex lg:flex-row flex-col lg:gap-8 sm:gap-10 gap-12">
                 <div className="w-full lg:w-6/12">
                 <p className="font-normal text-2xl leading-6 text-gray-500 mt-6 dark:text-zinc-50">le marché des ressources humaines et des services aux entreprises et ce par:​</p>

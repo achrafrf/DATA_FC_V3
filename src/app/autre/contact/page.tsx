@@ -64,7 +64,7 @@ export default function ContactPage() {
               <FaWhatsapp className="text-teal-400 w-8 h-8" />
               <div>
                 <p className="text-lg font-semibold">Whatsapp</p>
-                <p className="text-teal-400">+212 664-198892</p>
+                <p className="text-teal-400">+212 675-343730</p>
               </div>
             </li>
             <li className="flex items-center space-x-4">
