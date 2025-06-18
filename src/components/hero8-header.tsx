@@ -69,7 +69,7 @@ export const HeroHeader: React.FC = () => {
       >
         <Header />
       </div>
-      <nav className={`bg-white font-bold dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 fixed w-full z-30  transition-all duration-400  ${scrolled ? "top-0" : "top-9"}  flex items-center justify-between px-4 py-3 lg:py-4 `}>
+      <nav className={`bg-amber-300 font-bold dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 fixed w-full z-30  transition-all duration-400  ${scrolled ? "top-0" : "top-9"}  flex items-center justify-between px-4 py-3 lg:py-4 `}>
            {/* Logo */}
         <Link href="/" className="hidden md:flex items-center">
   <Image src="/logo.png" alt="Logo" width={140} height={40} />
@@ -103,7 +103,7 @@ export const HeroHeader: React.FC = () => {
     : <ChevronDown className="w-4 h-4 transition-transform" />
   }              </button>
               {servicesOpen && (
-                <ul className="absolute left-0 mt-2 w-96 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg overflow-hidden z-50">
+                <ul className="absolute left-0 mt-2 w-96 bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg overflow-hidden z-50">
                   <li className="border-b-1 border-teal-600"><Link  href="/NosServices/Ingenierie_formation" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Ingenierie de formation</Link></li>
                   <li className="border-b-1 border-teal-600"><Link href="/NosServices/Formation" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Formation continue: Formation qualifiante</Link></li>
                   <li className="border-b-1 border-teal-600"><Link href="/NosServices/conseil_recrutement" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Assistance conseil en recrutement</Link></li>
@@ -126,7 +126,7 @@ export const HeroHeader: React.FC = () => {
     : <ChevronDown className="w-4 h-4 transition-transform" />
   }              </button>
               {formationsOpen && (
-                <ul className="absolute right-32 top-full  mt-1 w-full lg:w-[22rem] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50  gap-4 lg:absolute lg:right-32 lg:top-full">
+                <ul className="absolute right-32 top-full  mt-1 w-full lg:w-[22rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50  gap-4 lg:absolute lg:right-32 lg:top-full">
                   <li className="border-b-1 border-teal-600">
                   <button
   onClick={toggleGrh}
@@ -143,7 +143,7 @@ export const HeroHeader: React.FC = () => {
 </button>
 
                   {grhSubOpen && (
-              <ul className='mt-2  lg:w-[22rem] absolute left-full top-0 w-[32rem] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4 lg:absolute lg:left-full lg:top-0'>
+              <ul className='mt-2  lg:w-[22rem] absolute left-full top-0 w-[32rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4 lg:absolute lg:left-full lg:top-0'>
                       <li className="border-b-1 border-teal-600"><Link href="/Nosformations/GRH_Management/Management_equipe_projet" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC11 : </span>Management d’équipe-projet</Link></li>
                       <li className="border-b-1 border-teal-600"><Link href="/Nosformations/GRH_Management/Gestion_conflits_vie_professionnelle" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC12 : </span>Gestion des conflits dans la vie professionnelle</Link></li>
                       <li className="border-b-1 border-teal-600"><Link href="/Nosformations/GRH_Management/Missions_recrutement" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC13 : </span>GRH /Missions du RRH et recrutement</Link></li>
@@ -170,7 +170,7 @@ export const HeroHeader: React.FC = () => {
     : <ChevronDown className="w-4 h-4 transition-transform" />
   }                     </button>
                   {formSubOpen && (
-              <ul className='absolute left-full top-12 mt-1 w-[24rem] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
+              <ul className='absolute left-full top-12 mt-1 w-[24rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
                       <li className="border-b-1 border-teal-600"><Link href="/Nosformations/formation/metier_formateur" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC21 : </span> Se former au métier de formateur </Link></li>
                       <li className="border-b-1 border-teal-600"><Link href="/Nosformations/formation/action_formation" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC22 : </span>Réussir une action de formation</Link></li>
                     </ul>
@@ -189,7 +189,7 @@ export const HeroHeader: React.FC = () => {
     : <ChevronDown className="w-4 h-4 transition-transform" />
   }                   </button>
                   {qsseSubOpen && (
-              <ul className='absolute left-full top-0 mt-1 w-[36rem] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
+              <ul className='absolute left-full top-0 mt-1 w-[36rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
                       <li className="border-b-1 border-teal-600"><Link href="/Nosformations/QSSE/Sensibilisation_la_qualite" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC31 : </span>Sensibilisation à la qualité</Link></li>
                       <li className="border-b-1 border-teal-600"><Link href="/Nosformations/QSSE/Les_fondamentaux_de_qualite" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC32 : </span>Les fondamentaux de la qualité et de l’ISO 9001</Link></li>
                       <li className="border-b-1 border-teal-600"><Link href="/Nosformations/QSSE/Normes_HACCP" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC33 : </span>Normes HACCP</Link></li>
@@ -214,7 +214,7 @@ export const HeroHeader: React.FC = () => {
     : <ChevronDown className="w-4 h-4 transition-transform" />
   }                    </button>
                   {finSubOpen && (
-              <ul className='absolute left-full top-0 mt-1 w-[24rem] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
+              <ul className='absolute left-full top-0 mt-1 w-[24rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
                       <li className="border-b-1 border-teal-600"><Link href="/Nosformations/finance_comptabilite/Comptabilite_generale" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC41 : </span>Comptabilité générale</Link></li>
                       <li className="border-b-1 border-teal-600"><Link href="/Nosformations/finance_comptabilite/Comptabilite_Les_operations_courantes" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC42 : </span>Opérations courantes</Link></li>
                       <li className="border-b-1 border-teal-600"><Link href="/Nosformations/finance_comptabilite/Comptabilite_Analytique" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC43 : </span>Comptabilité analytique</Link></li>
@@ -237,7 +237,7 @@ export const HeroHeader: React.FC = () => {
     : <ChevronDown className="w-4 h-4 transition-transform" />
   }                    </button>
                     {commSubOpen && (
-              <ul className='absolute left-full top-0 mt-1 w-[28rem] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
+              <ul className='absolute left-full top-0 mt-1 w-[28rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
                         <li className="border-b-1 border-teal-600"><Link href="/Nosformations/communication/Communication_interne" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC51 : </span>Communication en interne</Link></li>
                         <li className="border-b-1 border-teal-600"><Link href="/Nosformations/communication/COMMUNICATION_ENTREPRISE" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC52 : </span>LA COMMUNICATION EN ENTREPRISE</Link></li>
                         <li className="border-b-1 border-teal-600"><Link href="/Nosformations/communication/Strategie_communication" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC53 : </span>Stratégie de communication</Link></li>
@@ -277,7 +277,7 @@ export const HeroHeader: React.FC = () => {
     : <ChevronDown className="w-4 h-4 transition-transform" />
   }              </button>
               {autresOpen && (
-                <ul className="absolute left-0 mt-2 w-60 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg overflow-hidden z-50">
+                <ul className="absolute left-0 mt-2 w-60 bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg overflow-hidden z-50">
                   <li className="border-b-1 border-teal-600"><Link href="/autre/Formation_Interentreprises" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Formation Interentreprises</Link></li>
                   <li className="border-b-1 border-teal-600"><Link href="/autre/demande_devis" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Demande de devis</Link></li>
                   <li className="border-b-1 border-teal-600"><Link href="/autre/Notre_vivier" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Notre vivier de competence</Link></li>

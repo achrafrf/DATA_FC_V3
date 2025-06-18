@@ -64,7 +64,7 @@ export default function AboutPage() {
                 QUI SOMMES-NOUS ?
                 </h2>
                 <div className="text-gray-500 font-normal leading-relaxed lg:text-start text-center dark:text-white">
-                Nous sommes un cabinet de conseil, de formation et d’accompagnement, engagé dans la réussite de vos projets de développement.
+                Cabinet de conseil, de formation et d’accompagnement, engagé dans la réussite de vos projets de développement.
 
 À travers cette présentation, nous vous offrons un aperçu de nos prestations et vous invitons à devenir notre partenaire, afin de vous aider à vous adapter à un monde en constante mutation et à vous sécuriser face à une réglementation en évolution permanente.
 
@@ -138,7 +138,7 @@ Ensemble, construisons votre avenir avec efficacité et sérénité.
       {/* الـ iframe بالخلف */}
       <iframe
         className="absolute inset-0 w-full h-full object-cover rounded-md"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d986.5738935835457!2d-9.232323440823315!3d32.29515280189281!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdac21f384f18d8b%3A0x881f62c86ae07612!2sDATA%20FC%20S.A.R.L!5e1!3m2!1sen!2sma!4v1749746100909!5m2!1sen!2sma"
+        src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d227.08886207652677!2d-9.231754829903931!3d32.29505380597294!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sma!4v1750262372369!5m2!1sen!2sma"
         style={{ border: 0 }}
         allowFullScreen
         loading="lazy"
@@ -204,7 +204,7 @@ Ensemble, construisons votre avenir avec efficacité et sérénité.
   ))}
 </div>
 <div className="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
-<h1 className="mb-10 text-center  font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white">Nous<mark className="px-2 ml-1 text-white bg-teal-600 rounded-sm dark:bg-teal-500">Focalisons sur:</mark></h1>
+<h1 className="mb-10 text-center  font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white">Nous, Nous<mark className="px-2 ml-1 text-white bg-teal-600 rounded-sm dark:bg-teal-500">Focalisons sur:</mark></h1>
 <div className="flex lg:flex-row flex-col lg:gap-8 sm:gap-10 gap-12">
                 <div className="w-full lg:w-6/12">
                 <p className="font-normal text-2xl leading-6 text-gray-500 mt-6 dark:text-zinc-50">le marché des ressources humaines et des services aux entreprises et ce par:​</p>

@@ -37,18 +37,13 @@ export default function Home() {
         
         {/* Title Section - Moved to top */}
         <div className="text-center mb-8 mt-4">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-            MOT DU DIRECTEUR
-          </h2>
-          <h1 className="text-xl lg:text-2xl font-semibold text-teal-600 leading-tight">
-            DATA FC : VOTRE PARTENAIRE STRATÉGIQUE POUR UNE CROISSANCE DURABLE
-          </h1>
+          
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-2 ">
           
           {/* Left Column - Image - Higher positioning */}
-          <div className="flex justify-center lg:justify-start relative order-1 lg:order-1">
+          <div className="flex justify-center relative order-1 ">
             <div className="relative">
               {/* Modern decorative elements */}
               <div className="absolute -top-8 -right-8 w-32 h-32 bg-teal-500 rounded-full opacity-10"></div>
@@ -56,20 +51,12 @@ export default function Home() {
               
                   <div className="relative w-96 h-96">
   {/* شكل عضوي بتدرج teal */}
-  <div
-    className="absolute inset-0 z-0"
-    style={{
-      clipPath:
-        'polygon(70% 0%, 100% 40%, 85% 100%, 15% 100%, 0% 40%, 30% 0%)',
-      borderRadius: '50%',
-      background: 'linear-gradient(to top right, #14b8a6, #5eead4)',
-    }}
-  />
+  
 
   {/* صورة فوق الشكل */}
-  <div className="absolute inset-0 z-10 flex items-center justify-center p-14">
+  <div className="absolute inset-0 z-10 flex items-center justify-center p-20">
     <Image
-      src="/pic.png"
+      src="/n-pic.png"
       alt="A. CHAKIK - Directeur DATA FC"
       className="w-full h-auto rounded-lg"
       width={3000}
@@ -84,37 +71,43 @@ export default function Home() {
           </div>
 
           {/* Right Column - Content */}
-          <div className="space-y-8 animate-fade-in order-2 lg:order-2">
+          <div className=" space-y-6 animate-fade-in order-2 lg:order-2">
             
             <Separator className="bg-teal-200" />
 
             {/* Message Content */}
-           <div className="space-y-6 text-gray-700 leading-relaxed font-bold text-lg">
+           <div className=" space-y-6 text-gray-700 leading-relaxed font-bold text-lg items-start">
+            <h2 className='text-teal-600'>
+            MOT DU DIRECTEUR
+            </h2>
+            <h2>
+            DATA FC : VOTRE PARTENAIRE STRATÉGIQUE POUR UNE CROISSANCE DURABLE
+            </h2>
   <p className="font-bold text-teal-600 text-lg">
     Chers Clients, Chers Partenaires,
   </p>
   
-  <p className="text-gray-800">
+  <p className="text-gray-800 ">
     Au nom de toute l&apos;équipe DATA FC, je vous remercie de votre confiance et vous 
     souhaite la bienvenue sur notre plateforme. Dans un environnement économique en 
     constante évolution, la différenciation passe par l&apos;agilité, l&apos;innovation et l&apos;optimisation 
     des compétences – des défis que nous transformons en leviers de performance pour 
     votre organisation.
   </p>
-  <p className='text-gray-800'>
-    <span className='text-teal-700'>Notre mission ? </span>Vous offrir une alliance unique d’expertises synergiques : de
+            </div>
+          </div>
+        </div>
+    <div className="space-y-6 text-gray-700 leading-relaxed font-bold text-lg mt-9">
+       <p className='text-gray-800'>
+    Notre mission ? Vous offrir une alliance unique d’expertises synergiques : de
 l’ingénierie de formation sur-mesure qui anticipe les besoins métiers, au recrutement
 stratégique de profils à haute valeur ajoutée ; de l’externalisation intelligente qui
 simplifie vos opérations, à la domiciliation professionnelle qui valorise votre image.
 Une approche intégrée où chaque solution concourt à un même objectif : libérer
 votre potentiel.
   </p>
-            </div>
-          </div>
-        </div>
-    <div className="space-y-6 text-gray-700 leading-relaxed font-bold text-lg mt-9">
   <p className='text-gray-800'>
-  <span className='text-teal-700'>Ce qui nous distingue ?</span>Une culture du sur-mesure alliant vision sectorielle et
+  Ce qui nous distingue ? Une culture du sur-mesure alliant vision sectorielle et
 exécution pragmatique. Start-up agiles, PME en croissance ou grands groupes :
 nous adaptons notre écosystème (savoir-faire, réseaux, technologies) à vos enjeux
 spécifiques, avec une exigence commune – créer de la valeur tangible.
