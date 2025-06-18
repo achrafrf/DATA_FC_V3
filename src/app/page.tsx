@@ -138,22 +138,39 @@ référence.
 </div>
       </main>
       </div>
-               <div className="bg-white py-12 px-4 dark:bg-gray-800">
+              
+
+  <div className="w-full min-h-screen mx-auto px-4 lg:px-8">
+  {/* Notre MISSION */}
+  <section className="py-16" id="notre-mission">
+    <NotreMission />
+  </section>
+
+  {/* Notre VISION */}
+  <section className="py-16">
+    <Notrevesion  />
+  </section>
+
+  {/* Nos ENGAGEMENT */}
+  <section className="py-16">
+    <Nosengagement  />
+  </section>
+
+  {/* Nos VALEURS */}
+  <section className="py-16">
+    <NosValeurs />
+  </section>
+   <div className="bg-white py-12 px-4 dark:bg-gray-800">
   <div className="mx-auto max-w-6xl lg:px-10">
     <div className="flex flex-col lg:flex-row lg:justify-between gap-y-8 lg:gap-x-12">
       
       {/* Texte */}
-      <div aria-label="text-area" className="max-w-lg mt-28">
-        <p className="text-4xl font-bold leading-tight text-teal-600 mb-4">
+      <div aria-label="text-area" className="max-w-lg">
+        <p className="text-4xl font-bold leading-tight text-teal-600 mb-6">
           Ils nous ont fait confiance
-        </p>
-        <p className="text-lg text-gray-800 font-bold dark:text-gray-100"> 
-          Nous sommes convaincus que nous pouvons trouver le processus qui vous aidera à atteindre vos objectifs.
-        </p>
-      </div>
-      
+        </p>  
       {/* Logos */}
-      <div className="hidden md:flex flex-col space-y-8">
+      <div className="hidden md:flex flex-col space-y-8 mt-4">
         
         {/* Ligne 1 */}
         <div className="flex items-center justify-between space-x-8">
@@ -180,12 +197,7 @@ référence.
             width={160}
             height={60}
           />
-        </div>
-        
-        <hr className="border-gray-300" />
-        
-        {/* Ligne 2 */}
-        <div className="flex items-center justify-between space-x-8">
+          <div className="border-l border-gray-300 h-12" />
           <Image
             className="h-20 w-auto object-contain"
             src="/hawd.jpg"
@@ -193,6 +205,14 @@ référence.
             width={160}
             height={60}
           />
+        <div className="border-l border-gray-300 h-12" />
+                <Image
+    className="h-20 w-auto object-contain"
+    src="/safirem.png"
+    alt="Safi Pech"
+    width={160}
+    height={60}
+  />
           <div className="border-l border-gray-300 h-12" />
           <Image
             className="h-20 w-auto object-contain"
@@ -211,6 +231,12 @@ référence.
           />
         </div>
         
+        
+        {/* Ligne 2 */}
+        <div className="flex items-center justify-between space-x-8">
+          
+        </div>
+        
         <hr className="border-gray-300" />
         
         {/* Ligne 3 */}
@@ -226,40 +252,45 @@ référence.
           <div className="border-l border-gray-300 h-12" />
            <Image
     className="h-20 w-auto object-contain"
-    src="/safi_pech.jpg"
+    src="/ITPM SAFI.png"
     alt="Safi Pech"
     width={160}
     height={60}
   />
-
+          <div className="border-l border-gray-300 h-12" />
+         
+          <Image
+            className="h-20 w-auto object-contain"
+            src="/nouest.png"
+            alt="Group Enfant"
+            width={160}
+            height={60}
+          />
+          <div className="border-l border-gray-300 h-12" />
+           <Image
+    className="h-20 w-auto object-contain"
+    src="/gardinnage.png"
+    alt="Safi Pech"
+    width={160}
+    height={60}
+  />
+<div className="border-l border-gray-300 h-12" />
+           <Image
+    className="h-20 w-auto object-contain"
+    src="/apme.png"
+    alt="Safi Pech"
+    width={160}
+    height={60}
+  />
+<div className="border-l border-gray-300 h-12" />
+     
         </div>
 
-        
+        </div>
       </div>
     </div>
   </div>
 </div>
-
-  <div className="w-full min-h-screen mx-auto px-4 lg:px-8">
-  {/* Notre MISSION */}
-  <section className="py-16" id="notre-mission">
-    <NotreMission />
-  </section>
-
-  {/* Notre VISION */}
-  <section className="py-16">
-    <Notrevesion  />
-  </section>
-
-  {/* Nos ENGAGEMENT */}
-  <section className="py-16">
-    <Nosengagement  />
-  </section>
-
-  {/* Nos VALEURS */}
-  <section className="py-16">
-    <NosValeurs />
-  </section>
 </div>
 
             </main>
