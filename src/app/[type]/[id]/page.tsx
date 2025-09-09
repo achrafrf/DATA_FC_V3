@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { FaBullseye, FaUserTie, FaClock, FaBookOpen } from "react-icons/fa";
+import Image from "next/image";
 
 interface Item {
   id: number;
@@ -33,7 +34,9 @@ export default function DetailsPage() {
     <div className="max-w-5xl mx-auto">
       {/* Hero Image + Title */}
       <div className="relative w-full h-72 md:h-96">
-        <img
+        <Image
+         width={800}
+        height={1000}
           src={item.image || "/default-hero.jpg"}
           alt={item.title}
           className="w-full h-full object-cover rounded-b-2xl"

@@ -14,6 +14,10 @@ import {
 import { useUser, ClerkLoaded, SignOutButton } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import TextType from "./TextType";
+import Image from 'next/image'
+import { useCallback } from "react";
+
+
 
 interface Item {
   id: number;
@@ -61,7 +65,7 @@ const [comments, setComments] = useState<Comment[]>([]);
     }
   }, [isLoaded, isSignedIn, router]);
 
-const fetchItems = async () => {
+const fetchItems = useCallback(async () => {
   const resFormations = await fetch('/api/formations');
   const dataFormations = await resFormations.json();
   setTotalFormations(dataFormations.length);
@@ -78,12 +82,12 @@ const fetchItems = async () => {
 
   const currentData = currentPage === 'formations' ? dataFormations : dataServices;
   setItems(currentData);
-};
+}, [currentPage]);
 
 
-  useEffect(() => {
-    if (isSignedIn) fetchItems();
-  }, [isSignedIn, currentPage]);
+useEffect(() => {
+  if (isSignedIn) fetchItems();
+}, [isSignedIn, fetchItems]);
 
   const showAlert = (message: string, type: "success" | "error") => {
     setAlert({ message, type });
@@ -168,8 +172,13 @@ const handleDeleteComment = async (id: number) => {
         <aside className="w-64 bg-gradient-to-b from-teal-700 to-teal-600 text-white flex flex-col shadow-lg dark:bg-gray-700">
           <div className="flex flex-col items-center justify-center p-6 border-b border-teal-500">
             <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-amber-400 shadow-md mb-3">
-              <img src="/pic.png" alt="Logo" className="w-full h-full  object-cover" />
-            </div>
+<Image
+  src="/pic.png"
+  alt="Image"
+  width={500}       // عرض الصورة
+  height={300}      // ارتفاع الصورة
+  className="rounded-lg"
+/>            </div>
             <div className="text-xl font-bold">AZIZ CHAKIK</div>
             <p>datafc2019@gmail.com</p>
           </div>

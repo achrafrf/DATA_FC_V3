@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { SignIn } from '@clerk/nextjs';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function LoginPage() {
   const { isSignedIn, isLoaded } = useUser();
@@ -44,7 +45,12 @@ useEffect(() => {
   if (!isLoaded || showLoading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-green-200">
-        <img src="/logo.png" alt="Logo" className="w-28 h-28 mb-6 animate-bounce" />
+        <Image 
+         width={800}
+        height={1000} 
+        src="/logo.png" 
+        alt="Logo" 
+        className="w-28 h-28 mb-6 animate-bounce" />
         <div className="w-64 h-4 bg-white/30 rounded-full overflow-hidden">
           <motion.div
             className="h-full rounded-full bg-gradient-to-r from-teal-800 via-green-400 to-teal-700"
