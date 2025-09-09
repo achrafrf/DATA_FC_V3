@@ -1,41 +1,39 @@
-// app/api/contact/route.ts
-import { NextResponse } from 'next/server'
+// src/app/api/contact/route.ts
+import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
 
-export async function POST(request: Request) {
-  const { nom, email, objet, message } = await request.json()
+interface ContactBody {
+  nom: string
+  email: string
+  objet?: string
+  message: string
+}
 
-  // 1) Transporteur SMTP
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT),
-    secure: true,
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  })
+// إعداد transporter
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
+  },
+})
 
-  // 2) Envoi du mail
-  await transporter.sendMail({
-    from: `"Site Contact" <${process.env.SMTP_USER}>`,
-    to: process.env.SMTP_USER,
-    subject: `Nouveau message de ${nom} – ${objet}`,
-    text: `
-Nom   : ${nom}
-Email : ${email}
-Objet : ${objet}
+export async function POST(req: NextRequest) {
+  try {
+    const body: ContactBody = await req.json()
 
-Message :
-${message}
-    `,
-    html: `
-      <h2>Nouveau message de <i>${nom}</i></h2>
-      <p><strong>Email :</strong> ${email}</p>
-      <p><strong>Objet :</strong> ${objet}</p>
-      <p><strong>Message :</strong><br/>${message.replace(/\n/g, '<br/>')}</p>
-    `,
-  })
+    await transporter.sendMail({
+      from: `"${body.nom}" <${body.email}>`, 
+      to: 'youssefradion@gmail.com',      
+      subject: body.objet || 'Nouveau message de contact',
+      html: `<h2>Message de ${body.nom}</h2>
+             <p><strong>Email:</strong> ${body.email}</p>
+             <p>${body.message}</p>`,
+    })
 
-  return NextResponse.json({ ok: true })
+    return NextResponse.json({ message: 'Success' }, { status: 200 })
+  } catch (error) {
+    console.error('Email error:', error)
+    return NextResponse.json({ message: 'Failed' }, { status: 500 })
+  }
 }

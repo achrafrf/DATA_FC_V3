@@ -26,6 +26,19 @@ export const HeroHeader: React.FC = () => {
   const autresRef = useRef<HTMLLIElement>(null)
   const formationsRef = useRef<HTMLLIElement>(null)
 
+
+  //dynamic
+  interface Item {
+  id: number
+  title: string
+  description: string
+}
+
+  // فوق داخل HeroHeader
+const [services, setServices] = useState<Item[]>([])
+const [formations, setFormations] = useState<Item[]>([])
+
+
   // Helpers to toggle only one formation submenu at a time
   const closeAllFormSubs = () => {
     setCommSubOpen(false)
@@ -40,25 +53,47 @@ export const HeroHeader: React.FC = () => {
   const toggleGrh = () => { closeAllFormSubs(); setGrhSubOpen(o => !o) }
   const toggleQsse = () => { closeAllFormSubs(); setQsseSubOpen(o => !o) }
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 100)
-    window.addEventListener('scroll', onScroll)
+ useEffect(() => {
+  // scroll
+  const onScroll = () => setScrolled(window.scrollY > 100)
+  window.addEventListener('scroll', onScroll)
 
-    const handleClickOutside = (e: MouseEvent) => {
-      if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) setServicesOpen(false)
-      if (autresRef.current && !autresRef.current.contains(e.target as Node)) setAutresOpen(false)
-      if (formationsRef.current && !formationsRef.current.contains(e.target as Node)) {
-        setFormationsOpen(false)
-        closeAllFormSubs()
-      }
+  // click outside
+  const handleClickOutside = (e: MouseEvent) => {
+    if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
+      setServicesOpen(false)
     }
-    document.addEventListener('mousedown', handleClickOutside)
+    if (autresRef.current && !autresRef.current.contains(e.target as Node)) {
+      setAutresOpen(false)
+    }
+    if (formationsRef.current && !formationsRef.current.contains(e.target as Node)) {
+      setFormationsOpen(false)
+      closeAllFormSubs()
+    }
+  }
+  document.addEventListener('mousedown', handleClickOutside)
 
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      document.removeEventListener('mousedown', handleClickOutside)
+  // fetch services & formations
+  const fetchData = async () => {
+    try {
+      const resServices = await fetch('/api/services')
+      const resFormations = await fetch('/api/formations')
+
+      if (resServices.ok) setServices(await resServices.json())
+      if (resFormations.ok) setFormations(await resFormations.json())
+    } catch (err) {
+      console.error('Erreur chargement navbar:', err)
     }
-  }, [])
+  }
+  fetchData()
+
+  // cleanup
+  return () => {
+    window.removeEventListener('scroll', onScroll)
+    document.removeEventListener('mousedown', handleClickOutside)
+  }
+}, [])
+
 
   return (
     <header>
@@ -111,9 +146,23 @@ export const HeroHeader: React.FC = () => {
                   <li className="border-b-1 border-teal-600"><Link href="/NosServices/Prestations_informatique" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Prestations informatique</Link></li>
                   <li className="border-b-1 border-teal-600"><Link href="/NosServices/interim_entreprise" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Fourniture de personnel intérimaire</Link></li>
                   <li className="border-b-1 border-teal-600"><Link href="/NosServices/domiciliation" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">La Domiciliation des entreprises</Link></li>
+                         {/* dynamic */}
+
+            {services.map(service => (
+  <li key={service.id} className="border-b border-teal-600">
+    <Link
+      href={`/services/${service.id}`}
+      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+    >
+      {service.title}
+    </Link>
+  </li>
+))}
                 </ul>
               )} 
             </li>
+     
+
                {/* Nos formations */}
             <li ref={formationsRef} className="relative">
               <button
@@ -126,7 +175,8 @@ export const HeroHeader: React.FC = () => {
     : <ChevronDown className="w-4 h-4 transition-transform" />
   }              </button>
               {formationsOpen && (
-                <ul className="absolute right-32 top-full  mt-1 w-full lg:w-[22rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50  gap-4 lg:absolute lg:right-32 lg:top-full">
+                <ul className="absolute right-32 top-full mt-1 w-full lg:w-[22rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-0 z-50 gap-4 lg:absolute lg:right-32 lg:top-full">
+  <div className="max-h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-teal-500 scrollbar-track-amber-200 p-4 gap-4"></div>
                   <li className="border-b-1 border-teal-600">
                   <button
   onClick={toggleGrh}
@@ -260,10 +310,23 @@ export const HeroHeader: React.FC = () => {
                   <li className="border-b-1 border-teal-600"><Link href="/formations/bases-bigdata" className="block px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700">Formation Big Data</Link></li>
                   <li className="border-b-1 border-teal-600"><Link href="/formations/bi" className="block px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700">Formation BI</Link></li>
                   <li className="border-b-1 border-teal-600"><Link href="/formations/gestion-projets" className="block px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700">Formation gestion projets</Link></li>
+                  {/* dynamic */}
+
+            {formations.map(formation => (
+  <li key={formation.id} className="border-b border-teal-600">
+    <Link
+      href={`/formations/${formation.id}`}
+      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+    >
+      {formation.title}
+    </Link>
+  </li>
+))}
+
                 </ul>
               )}
             </li>
-
+            
            
             {/* Autres */}
            <li ref={autresRef} className="relative">

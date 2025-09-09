@@ -7,15 +7,15 @@ const NosValeurs = () => {
               <p className="font-normal text-2xl leading-6 text-gray-500 mt-10 dark:text-white">Nos  activités professionnelles  reposent sur un équilibre de cinq piliers :</p>
               <div className="relative mt-14 z-10">
                   <div className="grid sm:grid-cols-3 grid-cols-2 sm:gap-8 gap-4">
-                    <div className="z-20 w-12 h-12 text-white bg-gray-800 rounded-full flex justify-center items-center">
+                    <div className="z-20 w-12 h-12 text-white bg-teal-600 rounded-full flex justify-center items-center">
                       <FaLightbulb  className="animate-bounce"/>
                       </div>
 
-                      <div className="z-20 w-12 h-12 text-white bg-gray-800 rounded-full flex justify-center items-center">
+                      <div className="z-20 w-12 h-12 text-white bg-teal-600 rounded-full flex justify-center items-center">
                       <FaLock   className="animate-bounce"/>
                       </div>
 
-                      <div className="z-20 w-12 h-12 text-white bg-gray-800 rounded-full flex justify-center items-center">
+                      <div className="z-20 w-12 h-12 text-white bg-teal-600 rounded-full flex justify-center items-center">
                       <FaClipboardCheck   className="animate-bounce"/>
                       </div>
                   </div>
@@ -37,11 +37,11 @@ const NosValeurs = () => {
 
             <div className="relative mt-24 z-10">
                 <div className="grid sm:grid-cols-3 grid-cols-2 sm:gap-8 gap-4">
-                    <div className="z-20 w-12 h-12 text-white bg-gray-800 rounded-full flex justify-center items-center ">
+                    <div className="z-20 w-12 h-12 text-white bg-teal-600 rounded-full flex justify-center items-center ">
                     <FaHandshake  className="animate-bounce"/>
                     </div>
 
-                    <div className="z-20 w-12 h-12 text-white bg-gray-800 rounded-full flex justify-center items-center">
+                    <div className="z-20 w-12 h-12 text-white bg-teal-600 rounded-full flex justify-center items-center">
                     <FaTachometerAlt className="animate-bounce"/>
                     </div>
                 </div>

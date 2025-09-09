@@ -5,6 +5,7 @@ import Nosengagement from '@/components/nosengagement'
 import NosValeurs from '@/components/nosValeurs'
 import Notrevesion from '@/components/notrevesion'
 import { Separator } from "@/components/ui/separator";
+import CommentRating from './api/comments/Comments'
 
 
 export default function Home() {
@@ -292,7 +293,7 @@ référence.
   </div>
 </div>
 </div>
-
+<CommentRating />
             </main>
     </>
   );
