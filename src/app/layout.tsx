@@ -48,28 +48,28 @@ export default function RootLayout({
   params: { locale: string };
 }>) {
   return (
-    <ClerkProvider>
-      <html suppressHydrationWarning>
-        <head>
-          <meta
-            name="google-site-verification"
-            content="mDKUd3cCjyEURQvsM0lhM3qR-K4HnXqNsM0WG8ggGOs"
-          />
-        </head>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-gray-900`}
-        >
-          <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-            <div className="fixed top-0 left-0 w-full h-16 z-50">
-              <HeroHeader />
-            </div>
-            <main className="pt-16 mt-9">{children}</main>
-            {modal}
-            <FloatingSocialButtons />
-            <Footer />
-          </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+    <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
+  <html suppressHydrationWarning>
+    <head>
+      <meta
+        name="google-site-verification"
+        content="mDKUd3cCjyEURQvsM0lhM3qR-K4HnXqNsM0WG8ggGOs"
+      />
+    </head>
+    <body
+      className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-gray-900`}
+    >
+      <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+        <div className="fixed top-0 left-0 w-full h-16 z-50">
+          <HeroHeader />
+        </div>
+        <main className="pt-16 mt-9">{children}</main>
+        {modal}
+        <FloatingSocialButtons />
+        <Footer />
+      </ThemeProvider>
+    </body>
+  </html>
+</ClerkProvider>
   );
 }
