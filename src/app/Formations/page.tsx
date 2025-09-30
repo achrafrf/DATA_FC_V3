@@ -62,23 +62,29 @@ export default function DashboardPage() {
   }, [isLoaded, isSignedIn, router]);
 
   const fetchItems = useCallback(async () => {
+  try {
     const resFormations = await fetch('/api/formations');
-    const dataFormations = await resFormations.json();
+    const dataFormations = await resFormations.ok ? await resFormations.json() : [];
     setTotalFormations(dataFormations.length);
 
     const resServices = await fetch('/api/services');
-    const dataServices = await resServices.json();
+    const dataServices = await resServices.ok ? await resServices.json() : [];
     setTotalServices(dataServices.length);
 
     const resComments = await fetch('/api/comments');
-    const dataComments = await resComments.json();
+    const dataComments = await resComments.ok ? await resComments.json() : { comments: [], avgRating: 0 };
     setTotalComments(dataComments.comments.length);
-    setAvgRating(dataComments.avgRating.toFixed(1) as unknown as number);
-    setComments(dataComments.comments);
+    setAvgRating(Number(dataComments.avgRating?.toFixed(1)) || 0);
+    setComments(dataComments.comments || []);
 
     const currentData = currentPage === 'formations' ? dataFormations : dataServices;
     setItems(currentData);
-  }, [currentPage]);
+  } catch (error) {
+    console.error("Fetch error:", error);
+    showAlert("❌ Failed to load data from server", "error");
+  }
+}, [currentPage]);
+
 
   useEffect(() => {
     if (isSignedIn) fetchItems();
@@ -93,6 +99,7 @@ export default function DashboardPage() {
   try {
     const endpoint = currentPage === 'formations' ? '/api/formations' : '/api/services';
     let res;
+
     if (editing) {
       res = await fetch(`${endpoint}?id=${editing.id}`, {
         method: "PUT",
@@ -107,18 +114,24 @@ export default function DashboardPage() {
       });
     }
 
-    if (res.ok) {
-      showAlert(`✅ ${editing ? "Updated" : "Added"} successfully`, "success");
+    let jsonData;
+    try {
+      jsonData = await res.json();
+    } catch {
+      jsonData = null; // إذا الرد فارغ
+    }
 
-      // ✅ إعادة تعيين الفورم بعد الإضافة
+    if (res.ok && jsonData) {
+      showAlert(`✅ ${editing ? "Updated" : "Added"} successfully`, "success");
       setModalOpen(false);
       setEditing(null);
-      setEditorValue("");  // تنظيف الـ editor
-      fetchItems();        // تحديث الجدول
+      setEditorValue("");
+      fetchItems();
     } else {
-      showAlert("❌ Something went wrong!", "error");
+      showAlert(jsonData?.message || "❌ Something went wrong!", "error");
     }
-  } catch {
+  } catch (error) {
+    console.error("Save error:", error);
     showAlert("❌ Error connecting to server", "error");
   }
 };
