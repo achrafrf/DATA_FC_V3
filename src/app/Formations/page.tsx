@@ -89,37 +89,40 @@ export default function DashboardPage() {
     setTimeout(() => setAlert(null), 3000);
   };
 
-  const handleSave = async (data: Partial<Item>) => {
-    try {
-      const endpoint = currentPage === 'formations' ? '/api/formations' : '/api/services';
-      let res;
-      if (editing) {
-        res = await fetch(`${endpoint}?id=${editing.id}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        });
-      } else {
-        res = await fetch(endpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        });
-      }
-
-      if (res.ok) {
-        showAlert(`✅ ${editing ? "Updated" : "Added"} successfully`, "success");
-        setModalOpen(false);
-        setEditing(null);
-        setEditorValue("");
-        fetchItems();
-      } else {
-        showAlert("❌ Something went wrong!", "error");
-      }
-    } catch {
-      showAlert("❌ Error connecting to server", "error");
+ const handleSave = async (data: Partial<Item>) => {
+  try {
+    const endpoint = currentPage === 'formations' ? '/api/formations' : '/api/services';
+    let res;
+    if (editing) {
+      res = await fetch(`${endpoint}?id=${editing.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+    } else {
+      res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
     }
-  };
+
+    if (res.ok) {
+      showAlert(`✅ ${editing ? "Updated" : "Added"} successfully`, "success");
+
+      // ✅ إعادة تعيين الفورم بعد الإضافة
+      setModalOpen(false);
+      setEditing(null);
+      setEditorValue("");  // تنظيف الـ editor
+      fetchItems();        // تحديث الجدول
+    } else {
+      showAlert("❌ Something went wrong!", "error");
+    }
+  } catch {
+    showAlert("❌ Error connecting to server", "error");
+  }
+};
+
 
   const handleDelete = async (id: number) => {
     try {

@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { kv } from "@vercel/kv";
+import { v4 as uuidv4 } from "uuid";
 
 // ✅ تعريف Formation
 export interface Formation {
-  id: number;
+  id: string; // ✅ UUID
   title: string;
   description: string;
   code: string;
@@ -32,7 +33,7 @@ export async function GET(req: NextRequest) {
   const id = req.nextUrl.searchParams.get("id");
 
   if (id) {
-    const formation = formations.find(f => f.id === parseInt(id));
+    const formation = formations.find(f => f.id === id);
     return NextResponse.json(
       formation || { message: "Not found" },
       { status: formation ? 200 : 404 }
@@ -46,14 +47,11 @@ export async function GET(req: NextRequest) {
 // POST
 // --------------------
 export async function POST(req: NextRequest) {
-  let formation: Partial<Formation> = {};
-
-  // 🔹 هنا بغيت نخليها بسيطة بلا upload file system
-  formation = await req.json();
+  const formation: Partial<Formation> = await req.json();
 
   const formations = await getFormations();
   const newFormation: Formation = {
-    id: formations.length ? formations[formations.length - 1].id + 1 : 1,
+    id: uuidv4(), // ✅ ID فريد لكل formation
     title: formation.title || "",
     description: formation.description || "",
     code: formation.code || "DFC7",
@@ -80,7 +78,7 @@ export async function PUT(req: NextRequest) {
     return NextResponse.json({ message: "ID is required" }, { status: 400 });
 
   const formations = await getFormations();
-  const index = formations.findIndex(f => f.id === parseInt(id));
+  const index = formations.findIndex(f => f.id === id);
   if (index === -1)
     return NextResponse.json({ message: "Not found" }, { status: 404 });
 
@@ -100,7 +98,7 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ message: "ID is required" }, { status: 400 });
 
   let formations = await getFormations();
-  formations = formations.filter(f => f.id !== parseInt(id));
+  formations = formations.filter(f => f.id !== id);
 
   await saveFormations(formations);
   return NextResponse.json({ message: "Deleted successfully" });
