@@ -7,6 +7,11 @@ export interface Formation {
   id: number;
   title: string;
   description: string;
+  code: string;
+  image?: string;
+  objectifs?: string;
+  population?: string;
+  duree?: string;
   date?: string;
   type?: "formation" | "service";
 }

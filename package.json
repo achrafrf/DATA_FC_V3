@@ -25,6 +25,7 @@
     "@radix-ui/react-switch": "^1.1.4",
     "@react-hookz/web": "^25.1.1",
     "@splinetool/react-spline": "^4.0.0",
+    "@vercel/kv": "^3.0.0",
     "accept-language": "^3.0.20",
     "axios": "^1.11.0",
     "class-variance-authority": "^0.7.1",

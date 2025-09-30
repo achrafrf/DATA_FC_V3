@@ -17,8 +17,6 @@ import TextType from "./TextType";
 import Image from 'next/image'
 import { useCallback } from "react";
 
-
-
 interface Item {
   id: number;
   title: string;
@@ -27,6 +25,7 @@ interface Item {
   objectifs?: string;
   population?: string;
   duree?: string;
+  code?: string; // ✅ added code field
 }
 
 interface Comment {
@@ -40,7 +39,7 @@ export default function DashboardPage() {
   const { isSignedIn , isLoaded } = useUser();
   const router = useRouter();
 
-const [currentPage, setCurrentPage] = useState<'dashboard' | 'formations' | 'services' | 'comments'>('dashboard');
+  const [currentPage, setCurrentPage] = useState<'dashboard' | 'formations' | 'services' | 'comments'>('dashboard');
   const [items, setItems] = useState<Item[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<Item | null>(null);
@@ -50,11 +49,8 @@ const [currentPage, setCurrentPage] = useState<'dashboard' | 'formations' | 'ser
   const [totalServices, setTotalServices] = useState(0);
 
   const [totalComments, setTotalComments] = useState(0);
-const [avgRating, setAvgRating] = useState(0);
-const [comments, setComments] = useState<Comment[]>([]);
-
-
-  
+  const [avgRating, setAvgRating] = useState(0);
+  const [comments, setComments] = useState<Comment[]>([]);
 
   // ✅ Alert State
   const [alert, setAlert] = useState<{ message: string; type: "success" | "error" } | null>(null);
@@ -65,29 +61,28 @@ const [comments, setComments] = useState<Comment[]>([]);
     }
   }, [isLoaded, isSignedIn, router]);
 
-const fetchItems = useCallback(async () => {
-  const resFormations = await fetch('/api/formations');
-  const dataFormations = await resFormations.json();
-  setTotalFormations(dataFormations.length);
+  const fetchItems = useCallback(async () => {
+    const resFormations = await fetch('/api/formations');
+    const dataFormations = await resFormations.json();
+    setTotalFormations(dataFormations.length);
 
-  const resServices = await fetch('/api/services');
-  const dataServices = await resServices.json();
-  setTotalServices(dataServices.length);
+    const resServices = await fetch('/api/services');
+    const dataServices = await resServices.json();
+    setTotalServices(dataServices.length);
 
-  const resComments = await fetch('/api/comments');
-  const dataComments = await resComments.json();
-  setTotalComments(dataComments.comments.length);
-  setAvgRating(dataComments.avgRating.toFixed(1));
-  setComments(dataComments.comments);
+    const resComments = await fetch('/api/comments');
+    const dataComments = await resComments.json();
+    setTotalComments(dataComments.comments.length);
+    setAvgRating(dataComments.avgRating.toFixed(1) as unknown as number);
+    setComments(dataComments.comments);
 
-  const currentData = currentPage === 'formations' ? dataFormations : dataServices;
-  setItems(currentData);
-}, [currentPage]);
+    const currentData = currentPage === 'formations' ? dataFormations : dataServices;
+    setItems(currentData);
+  }, [currentPage]);
 
-
-useEffect(() => {
-  if (isSignedIn) fetchItems();
-}, [isSignedIn, fetchItems]);
+  useEffect(() => {
+    if (isSignedIn) fetchItems();
+  }, [isSignedIn, fetchItems]);
 
   const showAlert = (message: string, type: "success" | "error") => {
     setAlert({ message, type });
@@ -149,21 +144,20 @@ useEffect(() => {
 
   if (!isLoaded || !isSignedIn) return null;
 
-
   // حذف تعليق
-const handleDeleteComment = async (id: number) => {
-  try {
-    const res = await fetch(`/api/comments?id=${id}`, { method: "DELETE" });
-    if (res.ok) {
-      showAlert("✅ Comment deleted", "success");
-      fetchItems(); // إعادة جلب التعليقات بعد الحذف
-    } else {
-      showAlert("❌ Failed to delete comment", "error");
+  const handleDeleteComment = async (id: number) => {
+    try {
+      const res = await fetch(`/api/comments?id=${id}`, { method: "DELETE" });
+      if (res.ok) {
+        showAlert("✅ Comment deleted", "success");
+        fetchItems(); // إعادة جلب التعليقات بعد الحذف
+      } else {
+        showAlert("❌ Failed to delete comment", "error");
+      }
+    } catch {
+      showAlert("❌ Error connecting to server", "error");
     }
-  } catch {
-    showAlert("❌ Error connecting to server", "error");
-  }
-};
+  };
 
   return (
     <ClerkLoaded>
@@ -172,13 +166,14 @@ const handleDeleteComment = async (id: number) => {
         <aside className="w-64 bg-gradient-to-b from-teal-700 to-teal-600 text-white flex flex-col shadow-lg dark:bg-gray-700">
           <div className="flex flex-col items-center justify-center p-6 border-b border-teal-500">
             <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-amber-400 shadow-md mb-3">
-<Image
-  src="/pic.png"
-  alt="Image"
-  width={500}       // عرض الصورة
-  height={300}      // ارتفاع الصورة
-  className="rounded-lg"
-/>            </div>
+              <Image
+                src="/pic.png"
+                alt="Image"
+                width={500}
+                height={300}
+                className="rounded-lg"
+              />
+            </div>
             <div className="text-xl font-bold">AZIZ CHAKIK</div>
             <p>datafc2019@gmail.com</p>
           </div>
@@ -195,23 +190,21 @@ const handleDeleteComment = async (id: number) => {
                 <FiBriefcase /> Services
               </li>
               <li 
-  onClick={() => setCurrentPage('comments')} 
-  className={`px-6 py-3 flex items-center gap-2 cursor-pointer hover:bg-teal-500 ${currentPage==='comments'?'bg-teal-500':''}`}
->
-  <FiMessageSquare />  Comments
-</li>
-
+                onClick={() => setCurrentPage('comments')} 
+                className={`px-6 py-3 flex items-center gap-2 cursor-pointer hover:bg-teal-500 ${currentPage==='comments'?'bg-teal-500':''}`}
+              >
+                <FiMessageSquare />  Comments
+              </li>
             </ul>
           </nav>
 
-      <div className="px-6 py-3 border-t border-teal-500 mt-auto hover:bg-teal-500">
-  <SignOutButton redirectUrl="/login">
-    <button className="w-full flex items-center gap-2 text-left">
-      <FiLogOut /> Déconnexion
-    </button>
-  </SignOutButton>
-</div>
-
+          <div className="px-6 py-3 border-t border-teal-500 mt-auto hover:bg-teal-500">
+            <SignOutButton redirectUrl="/login">
+              <button className="w-full flex items-center gap-2 text-left">
+                <FiLogOut /> Déconnexion
+              </button>
+            </SignOutButton>
+          </div>
         </aside>
 
         {/* Main Content */}
@@ -254,15 +247,12 @@ const handleDeleteComment = async (id: number) => {
                   <span className="mt-1 text-gray-500 text-sm dark:text-white">Updated today</span>
                 </div>
 
-                 <div className="bg-white rounded-xl shadow p-6 flex flex-col dark:bg-gray-600">
-  <h2 className="text-xl font-semibold text-gray-700 dark:text-white">Total Comments</h2>
-  <p className="mt-2 text-3xl font-bold text-teal-600 dark:text-white">{totalComments}</p>
-  <span className="mt-1 text-gray-500 text-sm dark:text-white">Avg Rating: ⭐ {avgRating}</span>
-</div>
+                <div className="bg-white rounded-xl shadow p-6 flex flex-col dark:bg-gray-600">
+                  <h2 className="text-xl font-semibold text-gray-700 dark:text-white">Total Comments</h2>
+                  <p className="mt-2 text-3xl font-bold text-teal-600 dark:text-white">{totalComments}</p>
+                  <span className="mt-1 text-gray-500 text-sm dark:text-white">Avg Rating: ⭐ {avgRating}</span>
+                </div>
               </div>
-
-             
-
             </>
           )}
 
@@ -306,8 +296,6 @@ const handleDeleteComment = async (id: number) => {
                   </tbody>
                 </table>
               </div>
-             
-
 
               {/* Modal */}
               {modalOpen && (
@@ -326,6 +314,7 @@ const handleDeleteComment = async (id: number) => {
                         population: formData.get("population") as string,
                         duree: formData.get("duree") as string,
                         description: editorValue,
+                        code: currentPage === 'formations' ? (formData.get("code") as string) : undefined, // ✅ include code only for formations
                       });
                     }} className="space-y-4">
                       {/* form inputs ... كما في كودك */}
@@ -349,6 +338,30 @@ const handleDeleteComment = async (id: number) => {
                         <label className="block text-sm font-medium text-gray-700">Durée</label>
                         <input name="duree" defaultValue={editing?.duree} className="w-full border rounded px-3 py-2 mt-1 focus:ring-2 focus:ring-teal-500" />
                       </div>
+
+                      {/* <-- NEW: code select (only for formations) */}
+                      {currentPage === 'formations' && (
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700">Catégorie (Code)</label>
+                          <select
+                            name="code"
+defaultValue={editing?.code || "DFC7"}
+                            className="w-full border rounded px-3 py-2 mt-1 focus:ring-2 focus:ring-teal-500"
+                          >
+                            <option value="DFC1">DFC1 : GRH et Management</option>
+                            <option value="DFC2">DFC2 : Formation</option>
+                            <option value="DFC3">DFC3 : Qualité-Santé-Sécurité-Environnement (QSSE)</option>
+                            <option value="DFC4">DFC4 : Finance, Comptabilité et Assurance</option>
+                            <option value="DFC5">DFC5 : Communication</option>
+                            <option value="DFC6">DFC6 : Management</option>
+                            <option value="DFC7">DFC7 : TIC et Informatique</option>
+                            <option value="DFC8">DFC8 : Vente & Marketing</option>
+                            <option value="DFC9">DFC9 : Sécurité routière</option>
+                            <option value="OTHER">Autre</option>
+                          </select>
+                        </div>
+                      )}
+
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Programme de formation (Description)</label>
                         <div contentEditable className="border rounded p-2 min-h-[120px]" onInput={(e) => setEditorValue((e.target as HTMLDivElement).innerHTML)} dangerouslySetInnerHTML={{ __html: editorValue }} />
@@ -365,7 +378,7 @@ const handleDeleteComment = async (id: number) => {
             </>
           )}
 
-           {/* Comments Page */}
+          {/* Comments Page */}
           {currentPage==='comments' && (
             <div className="bg-white rounded-xl shadow-md overflow-hidden">
               <table className="min-w-full divide-y divide-gray-200">

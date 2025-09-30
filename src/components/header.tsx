@@ -34,7 +34,7 @@ const Header = () => {
             </p>
           </li>
 
-          {/* login أو Clerk UserButton مع صورة مخصصة */}
+          {/* login أو Clerk UserButton مع زر Dashboard */}
           <div className="flex items-center gap-2 mt-2 ml-3 mb-2 md:mt-0">
             {!isSignedIn ? (
               <Link href="/login">
@@ -43,15 +43,25 @@ const Header = () => {
                 </button>
               </Link>
             ) : (
-              <UserButton
-                afterSignOutUrl="/"
-                appearance={{
-                  elements: {
-                    userButtonAvatarBox:
-                      "w-10 h-10 rounded-full border-2 border-white shadow-md bg-[url('/pic.png')] bg-cover bg-center",
-                  },
-                }}
-              />
+              <>
+                {/* زر Dashboard */}
+                <Link href="/Formations">
+                  <button className="px-5 py-1 bg-white text-teal-600 font-semibold rounded-full shadow hover:bg-teal-50 hover:shadow-lg transition-all duration-300">
+                    Dashboard
+                  </button>
+                </Link>
+
+                {/* Clerk User Button */}
+                <UserButton
+                  afterSignOutUrl="/"
+                  appearance={{
+                    elements: {
+                      userButtonAvatarBox:
+                        "w-10 h-10 rounded-full border-2 border-white shadow-md bg-[url('/pic.png')] bg-cover bg-center",
+                    },
+                  }}
+                />
+              </>
             )}
           </div>
         </ul>
