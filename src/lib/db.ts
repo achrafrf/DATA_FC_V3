@@ -1,21 +1,54 @@
-import Database from "better-sqlite3";
-import path from "path";
+import { Redis } from "@upstash/redis";
 
-const dbPath = path.join(process.cwd(), "data.db");
-const db = new Database(dbPath);
+// ⚡ إنشاء اتصال مع Upstash Redis REST
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL!,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+});
 
-// إنشاء جدول formations إذا ما كاينش
-db.prepare(`
-  CREATE TABLE IF NOT EXISTS formations (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT NOT NULL,
-    description TEXT,
-    code TEXT,
-    image TEXT,
-    objectifs TEXT,
-    population TEXT,
-    duree TEXT
-  )
-`).run();
+// المفتاح الرئيسي لتخزين formations
+const KV_KEY = "formations";
 
-export default db;
+// تعريف النوع
+export interface Formation {
+  id: number;
+  title: string;
+  description: string;
+  image?: string;
+  objectifs?: string;
+  population?: string;
+  duree?: string;
+  code?: string;
+}
+
+// جلب جميع formations
+export const getFormations = async (): Promise<Formation[]> => {
+  const data = await redis.get(KV_KEY);
+  return (data as Formation[]) || [];
+};
+
+// إضافة formation جديدة
+export const addFormation = async (formation: Formation): Promise<Formation> => {
+  const current = await getFormations();
+  current.push(formation);
+  await redis.set(KV_KEY, current);
+  return formation;
+};
+
+// تعديل formation
+export const updateFormation = async (id: number, updated: Partial<Formation>): Promise<Formation | null> => {
+  const current = await getFormations();
+  const index = current.findIndex(f => f.id === id);
+  if (index === -1) return null;
+  current[index] = { ...current[index], ...updated };
+  await redis.set(KV_KEY, current);
+  return current[index];
+};
+
+// حذف formation
+export const deleteFormation = async (id: number): Promise<boolean> => {
+  const current = await getFormations();
+  const filtered = current.filter(f => f.id !== id);
+  await redis.set(KV_KEY, filtered);
+  return true;
+};

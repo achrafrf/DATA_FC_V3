@@ -1,58 +1,52 @@
 import { NextRequest, NextResponse } from "next/server";
-import db from "@/lib/db";
+import { getFormations, addFormation, updateFormation, deleteFormation, Formation } from "@/lib/db";
 
-// GET all
 export async function GET() {
-  const rows = db.prepare("SELECT * FROM formations").all();
-  return NextResponse.json(rows);
+  try {
+    const data = await getFormations();
+    return NextResponse.json(data);
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: "Failed to fetch formations" }, { status: 500 });
+  }
 }
 
-// POST add new
 export async function POST(req: NextRequest) {
-  const body = await req.json();
-  const stmt = db.prepare(`
-    INSERT INTO formations 
-    (title, description, code, image, objectifs, population, duree)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
-  `);
-  const info = stmt.run(
-    body.title,
-    body.description,
-    body.code,
-    body.image,
-    body.objectifs,
-    body.population,
-    body.duree
-  );
-  return NextResponse.json({ id: info.lastInsertRowid, ...body });
+  try {
+    const body = await req.json();
+    const formations = await getFormations();
+    const newFormation: Formation = {
+      id: formations.length ? formations[formations.length - 1].id + 1 : 1,
+      ...body
+    };
+    await addFormation(newFormation);
+    return NextResponse.json(newFormation);
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: "Failed to add formation" }, { status: 500 });
+  }
 }
 
-// PUT update
 export async function PUT(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const id = searchParams.get("id");
-  const body = await req.json();
-  db.prepare(`
-    UPDATE formations SET
-    title=?, description=?, code=?, image=?, objectifs=?, population=?, duree=?
-    WHERE id=?
-  `).run(
-    body.title,
-    body.description,
-    body.code,
-    body.image,
-    body.objectifs,
-    body.population,
-    body.duree,
-    id
-  );
-  return NextResponse.json({ message: "updated" });
+  try {
+    const id = Number(req.nextUrl.searchParams.get("id"));
+    const body = await req.json();
+    const updated = await updateFormation(id, body);
+    if (!updated) return NextResponse.json({ error: "Formation not found" }, { status: 404 });
+    return NextResponse.json(updated);
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: "Failed to update formation" }, { status: 500 });
+  }
 }
 
-// DELETE
 export async function DELETE(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const id = searchParams.get("id");
-  db.prepare("DELETE FROM formations WHERE id=?").run(id);
-  return NextResponse.json({ message: "deleted" });
+  try {
+    const id = Number(req.nextUrl.searchParams.get("id"));
+    await deleteFormation(id);
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: "Failed to delete formation" }, { status: 500 });
+  }
 }
