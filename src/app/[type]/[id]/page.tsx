@@ -14,6 +14,7 @@ interface Item {
   duree?: string
 }
 
+// helper: تحويل description لكل سطر في عنصر قائمة
 const renderList = (items: string[]) => (
   <ul className="list-none space-y-4">
     {items.map((item, idx) => (
@@ -32,31 +33,43 @@ const renderList = (items: string[]) => (
 export default function DetailsPage() {
   const { type, id } = useParams<{ type: string; id: string }>()
   const [item, setItem] = useState<Item | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(`/api/${type}?id=${id}`)
-      const data = await res.json()
-      setItem(data)
+      try {
+        setLoading(true)
+        const res = await fetch(`/api/${type}?id=${id}`)
+        if (!res.ok) throw new Error("Failed to fetch data")
+        const data = await res.json()
+
+        // إذا البيانات جاو string (من Redis)، حوّلهم ل JSON
+        const parsed = typeof data === "string" ? JSON.parse(data) : data
+        setItem(parsed)
+      } catch (error) {
+        console.error("Fetch error:", error)
+        setItem(null)
+      } finally {
+        setLoading(false)
+      }
     }
-    fetchData()
+
+    if (id && type) fetchData()
   }, [type, id])
 
-  if (!item) return <p className="p-8">Loading...</p>
+  if (loading) return <p className="p-8">Loading...</p>
+  if (!item) return <p className="p-8 text-red-500">Item not found</p>
 
-  // تحويل description إلى قائمة (كل سطر = عنصر)
   const programme = item.description
     ? item.description.split("\n").filter(line => line.trim() !== "")
     : []
 
   return (
-    <div className="dark:bg-gray-900">
+    <div className="dark:bg-gray-900 min-h-screen">
       {/* Banner */}
       <div
         className="relative h-80 md:h-96 bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${item.image || "/default-hero.jpg"})`,
-        }}
+        style={{ backgroundImage: `url(${item.image || "/default-hero.jpg"})` }}
       >
         <div className="absolute inset-0 bg-black/25" />
         <header className="relative flex items-center justify-center h-full">
@@ -66,7 +79,7 @@ export default function DetailsPage() {
         </header>
       </div>
 
-      {/* Info & Program */}
+      {/* Info & Programme */}
       <div className="w-full my-12 p-4">
         {item.objectifs && (
           <p className="mb-4 flex items-center text-xl text-gray-800 dark:text-gray-200">
@@ -79,9 +92,7 @@ export default function DetailsPage() {
         {item.population && (
           <p className="mb-4 flex items-center text-xl text-gray-800 dark:text-gray-200">
             <Users className="w-6 h-6 text-green-800 mr-2 flex-shrink-0" />
-            <span className="font-semibold text-2xl mr-1">
-              Population cible :
-            </span>
+            <span className="font-semibold text-2xl mr-1">Population cible :</span>
             <span>{item.population}</span>
           </p>
         )}
@@ -96,9 +107,7 @@ export default function DetailsPage() {
 
         <p className="mb-4 flex items-center text-lg text-gray-800 dark:text-gray-200">
           <Book className="w-6 h-6 text-green-800 mr-2 flex-shrink-0" />
-          <span className="font-semibold text-2xl">
-            Programme de formation :
-          </span>
+          <span className="font-semibold text-2xl">Programme de formation :</span>
         </p>
 
         <div className="text-center">

@@ -63,27 +63,47 @@ export default function DashboardPage() {
 
   const fetchItems = useCallback(async () => {
   try {
+    // --- Formations ---
     const resFormations = await fetch('/api/formations');
-    const dataFormations = await resFormations.ok ? await resFormations.json() : [];
+    let dataFormations: Item[] = [];
+    if (resFormations.ok) {
+      const json = await resFormations.json();
+      dataFormations = Array.isArray(json) ? json : [];
+    }
     setTotalFormations(dataFormations.length);
 
+    // --- Services ---
     const resServices = await fetch('/api/services');
-    const dataServices = await resServices.ok ? await resServices.json() : [];
+    let dataServices: Item[] = [];
+    if (resServices.ok) {
+      const json = await resServices.json();
+      dataServices = Array.isArray(json) ? json : [];
+    }
     setTotalServices(dataServices.length);
 
+    // --- Comments ---
     const resComments = await fetch('/api/comments');
-    const dataComments = await resComments.ok ? await resComments.json() : { comments: [], avgRating: 0 };
+    let dataComments: { comments: Comment[]; avgRating: number } = { comments: [], avgRating: 0 };
+    if (resComments.ok) {
+      const json = await resComments.json();
+      dataComments = {
+        comments: Array.isArray(json.comments) ? json.comments : [],
+        avgRating: typeof json.avgRating === "number" ? json.avgRating : 0,
+      };
+    }
     setTotalComments(dataComments.comments.length);
     setAvgRating(Number(dataComments.avgRating?.toFixed(1)) || 0);
-    setComments(dataComments.comments || []);
+    setComments(dataComments.comments);
 
+    // --- Items حسب الصفحة الحالية ---
     const currentData = currentPage === 'formations' ? dataFormations : dataServices;
-    setItems(currentData);
+    setItems(Array.isArray(currentData) ? currentData : []);
   } catch (error) {
     console.error("Fetch error:", error);
     showAlert("❌ Failed to load data from server", "error");
   }
 }, [currentPage]);
+
 
 
   useEffect(() => {
