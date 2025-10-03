@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "next/navigation"
 import { Target, Users, Clock, Book } from "lucide-react"
+import NotFoundItem from "@/app/not-found"
 
 interface Item {
   id: number
@@ -14,22 +15,6 @@ interface Item {
   duree?: string
 }
 
-// helper: تحويل description لكل سطر في عنصر قائمة
-const renderList = (items: string[]) => (
-  <ul className="list-none space-y-4">
-    {items.map((item, idx) => (
-      <li
-        key={idx}
-        className="fade-in-item flex justify-center items-center space-x-2 text-xl text-gray-800 dark:text-gray-200"
-        style={{ animationDelay: `${idx * 0.3}s` }}
-      >
-        <span className="block w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[8px] border-l-green-800" />
-        <span className="text-center">{item}</span>
-      </li>
-    ))}
-  </ul>
-)
-
 export default function DetailsPage() {
   const { type, id } = useParams<{ type: string; id: string }>()
   const [item, setItem] = useState<Item | null>(null)
@@ -40,10 +25,9 @@ export default function DetailsPage() {
       try {
         setLoading(true)
         const res = await fetch(`/api/${type}?id=${id}`)
-        if (!res.ok) throw new Error("Failed to fetch data")
+        if (!res.ok) throw new Error("Failed to fetch data") 
         const data = await res.json()
 
-        // إذا البيانات جاو string (من Redis)، حوّلهم ل JSON
         const parsed = typeof data === "string" ? JSON.parse(data) : data
         setItem(parsed)
       } catch (error) {
@@ -58,11 +42,7 @@ export default function DetailsPage() {
   }, [type, id])
 
   if (loading) return <p className="p-8">Loading...</p>
-  if (!item) return <p className="p-8 text-red-500">Item not found</p>
-
-  const programme = item.description
-    ? item.description.split("\n").filter(line => line.trim() !== "")
-    : []
+  if (!item) return <NotFoundItem />
 
   return (
     <div className="dark:bg-gray-900 min-h-screen">
@@ -110,9 +90,7 @@ export default function DetailsPage() {
           <span className="font-semibold text-2xl">Programme de formation :</span>
         </p>
 
-        <div className="text-center">
-          {programme.length > 0 ? renderList(programme) : <p>{item.description}</p>}
-        </div>
+        <div className="prose dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: item.description }} />
       </div>
     </div>
   )

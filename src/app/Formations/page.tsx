@@ -16,6 +16,9 @@ import { useRouter } from "next/navigation";
 import TextType from "./TextType";
 import Image from 'next/image'
 import { useCallback } from "react";
+import RichTextEditor, { RichTextEditorHandle } from "@/app/Formations/RichTextEditor";
+import { useRef } from "react";
+
 
 interface Item {
   id: number;
@@ -43,7 +46,6 @@ export default function DashboardPage() {
   const [items, setItems] = useState<Item[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<Item | null>(null);
-  const [editorValue, setEditorValue] = useState("");
 
   const [totalFormations, setTotalFormations] = useState(0);
   const [totalServices, setTotalServices] = useState(0);
@@ -51,6 +53,17 @@ export default function DashboardPage() {
   const [totalComments, setTotalComments] = useState(0);
   const [avgRating, setAvgRating] = useState(0);
   const [comments, setComments] = useState<Comment[]>([]);
+
+  const [confirmOpen, setConfirmOpen] = useState(false);
+const [deleteTarget, setDeleteTarget] = useState<{ id: number; type: "item" | "comment" } | null>(null);
+
+const editorRef = useRef<RichTextEditorHandle>(null);
+const [editorValue, setEditorValue] = useState("");
+
+
+
+
+
 
   // ✅ Alert State
   const [alert, setAlert] = useState<{ message: string; type: "success" | "error" } | null>(null);
@@ -142,12 +155,12 @@ export default function DashboardPage() {
     }
 
     if (res.ok && jsonData) {
-      showAlert(`✅ ${editing ? "Updated" : "Added"} successfully`, "success");
-      setModalOpen(false);
-      setEditing(null);
-      setEditorValue("");
-      fetchItems();
-    } else {
+  showAlert(`✅ ${editing ? "Updated" : "Added"} successfully`, "success");
+  setModalOpen(false);
+  setEditing(null);
+  fetchItems();
+}
+ else {
       showAlert(jsonData?.message || "❌ Something went wrong!", "error");
     }
   } catch (error) {
@@ -172,11 +185,13 @@ export default function DashboardPage() {
     }
   };
 
-  const handleEdit = (item: Item) => {
-    setEditing(item);
-    setEditorValue(item.description);
-    setModalOpen(true);
-  };
+const handleEdit = (item: Item) => {
+  setEditing(item);
+  setEditorValue(item.description || ""); // ⚡ هنا نملأ الـ editor
+  setModalOpen(true);
+};
+
+
 
   if (!isLoaded || !isSignedIn) return null;
 
@@ -299,9 +314,19 @@ export default function DashboardPage() {
                 <h1 className="text-3xl font-bold text-gray-800">
                   {currentPage === 'formations' ? "📚 Formations" : "💼 Services"}
                 </h1>
-                <button onClick={() => { setEditing(null); setEditorValue(""); setModalOpen(true); }} className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700">
-                  <FiPlus /> Add {currentPage === 'formations' ? "Formation" : "Service"}
-                </button>
+               <button
+               className="flex items-center gap-2 bg-teal-600 text-white px-4 py-3 rounded-lg hover:bg-teal-700"
+  onClick={() => {
+    setEditing(null);
+    setEditorValue(""); // ⚡ فارغ عند إضافة جديد
+    setModalOpen(true);
+  }}
+>
+  <FiPlus /> Add {currentPage === 'formations' ? "Formation" : "Service"}
+</button>
+
+
+
               </div>
 
               {/* Table */}
@@ -322,10 +347,23 @@ export default function DashboardPage() {
                         <td className="px-6 py-4 font-bold text-teal-700 cursor-pointer hover:underline">
                           <a href={`/${currentPage}/${item.id}`}>{item.title}</a>
                         </td>
-                        <td className="px-6 py-4 prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: item.description }} />
+<td className="px-6 py-4 max-w-none">
+  {item.description
+    ? `${item.description.replace(/<[^>]+>/g, '').slice(0, 10)}${item.description.replace(/<[^>]+>/g, '').length > 10 ? "..." : ""}`
+    : ""}
+</td>
+
                         <td className="px-6 py-4 text-right space-x-2">
                           <button onClick={() => handleEdit(item)} className="text-yellow-500 hover:text-yellow-600"><FiEdit /></button>
-                          <button onClick={() => handleDelete(item.id)} className="text-red-500 hover:text-red-600"><FiTrash2 /></button>
+<button 
+  onClick={() => {
+    setDeleteTarget({ id: item.id, type: "item" });
+    setConfirmOpen(true);
+  }} 
+  className="text-red-500 hover:text-red-600"
+>
+  <FiTrash2 />
+</button>
                         </td>
                       </tr>
                     ))}
@@ -343,15 +381,17 @@ export default function DashboardPage() {
                     <form onSubmit={(e) => {
                       e.preventDefault();
                       const formData = new FormData(e.currentTarget);
-                      handleSave({
-                        title: formData.get("title") as string,
-                        image: formData.get("image") as string,
-                        objectifs: formData.get("objectifs") as string,
-                        population: formData.get("population") as string,
-                        duree: formData.get("duree") as string,
-                        description: editorValue,
-                        code: currentPage === 'formations' ? (formData.get("code") as string) : undefined, // ✅ include code only for formations
-                      });
+                     handleSave({
+  title: formData.get("title") as string,
+  image: formData.get("image") as string,
+  objectifs: formData.get("objectifs") as string,
+  population: formData.get("population") as string,
+  duree: formData.get("duree") as string,
+  description: editorRef.current?.getContent() || "", // ⚡ هنا نأخذ المحتوى
+  code: currentPage === 'formations' ? (formData.get("code") as string) : undefined,
+});
+
+
                     }} className="space-y-4">
                       {/* form inputs ... كما في كودك */}
                       <div>
@@ -398,10 +438,13 @@ defaultValue={editing?.code || "DFC7"}
                         </div>
                       )}
 
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Programme de formation (Description)</label>
-                        <div contentEditable className="border rounded p-2 min-h-[120px]" onInput={(e) => setEditorValue((e.target as HTMLDivElement).innerHTML)} dangerouslySetInnerHTML={{ __html: editorValue }} />
-                      </div>
+                     <div>
+  <label className="block text-sm font-medium text-gray-700 mb-2">
+    Programme de formation (Description)
+  </label>
+<RichTextEditor ref={editorRef} initialValue={editorValue} />
+</div>
+
 
                       <div className="flex justify-end gap-2 mt-4">
                         <button type="button" onClick={() => { setModalOpen(false); setEditing(null); }} className="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500">Cancel</button>
@@ -433,7 +476,15 @@ defaultValue={editing?.code || "DFC7"}
                       <td className="px-6 py-4">{c.text}</td>
                       <td className="px-6 py-4">⭐ {c.rating}</td>
                       <td className="px-6 py-4 text-right">
-                        <button onClick={()=>handleDeleteComment(c.id)} className="text-red-500 hover:text-red-600"><FiTrash2 /></button>
+<button 
+  onClick={() => {
+    setDeleteTarget({ id: c.id, type: "comment" });
+    setConfirmOpen(true);
+  }} 
+  className="text-red-500 hover:text-red-600"
+>
+  <FiTrash2 />
+</button>
                       </td>
                     </tr>
                   ))}
@@ -441,6 +492,41 @@ defaultValue={editing?.code || "DFC7"}
               </table>
             </div>
           )}
+{confirmOpen && deleteTarget && (
+  <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-sm">
+      <h2 className="text-lg font-bold text-gray-800 mb-4">⚠️ Confirmation</h2>
+      <p className="mb-6 text-gray-600">
+        Etes-vous sûr de vouloir supprimer cet {deleteTarget.type === "item" ? "élément" : "comment"}?
+      </p>
+      <div className="flex justify-end gap-2">
+        <button
+          onClick={() => {
+            setConfirmOpen(false);
+            setDeleteTarget(null);
+          }}
+          className="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500"
+        >
+          Cancel
+        </button>
+        <button
+          onClick={() => {
+            if (deleteTarget.type === "item") {
+              handleDelete(deleteTarget.id);
+            } else {
+              handleDeleteComment(deleteTarget.id);
+            }
+            setConfirmOpen(false);
+            setDeleteTarget(null);
+          }}
+          className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+)}
 
         </main>
       </div>

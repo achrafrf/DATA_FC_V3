@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
 
     await transporter.sendMail({
       from: `"${body.nom}" <${body.email}>`, 
-      to: 'youssefradion@gmail.com',      
+      to: 'datafc2019@gmail.com',      
       subject: body.objet || 'Nouveau message de contact',
       html: `<h2>Message de ${body.nom}</h2>
              <p><strong>Email:</strong> ${body.email}</p>
