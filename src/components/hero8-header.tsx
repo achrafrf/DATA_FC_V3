@@ -39,6 +39,7 @@ interface Item {
   population?: string
   duree?: string
   image?: string
+  customCode?: string
 }
 
 
@@ -250,12 +251,12 @@ const [formations, setFormations] = useState<Item[]>([])
                        {formations
         .filter((f) => f.code === "DFC2")
         .map((f) => (
-          <li key={f.id} className="border-b-1 border-teal-600">
+          <li key={f.customCode} className="border-b-1 border-teal-600">
             <Link
               href={`/formations/${f.id}`}
               className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
             >
-              <span className="text-teal-700">{f.code}{f.id} : </span>
+              <span className="text-teal-700">{f.customCode} : </span>
               {f.title}
             </Link>
           </li>

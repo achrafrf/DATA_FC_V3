@@ -28,7 +28,8 @@ interface Item {
   objectifs?: string;
   population?: string;
   duree?: string;
-  code?: string; // ✅ added code field
+  code?: string; 
+  customCode?: string;
 }
 
 interface Comment {
@@ -335,6 +336,7 @@ const handleEdit = (item: Item) => {
                   <thead className="bg-teal-50">
                     <tr>
                       <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600 uppercase">ID</th>
+                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600 uppercase">Code</th>
                       <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600 uppercase">Title</th>
                       <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600 uppercase">Description</th>
                       <th className="px-6 py-3 text-right text-sm font-semibold text-gray-600 uppercase">Actions</th>
@@ -344,6 +346,7 @@ const handleEdit = (item: Item) => {
                     {items.map((item) => (
                       <tr key={item.id} className="hover:bg-gray-50 transition">
                         <td className="px-6 py-4">{item.id}</td>
+                        <td className="px-6 py-4 font-mono text-teal-800">{item.customCode || "-"}</td>
                         <td className="px-6 py-4 font-bold text-teal-700 cursor-pointer hover:underline">
                           <a href={`/${currentPage}/${item.id}`}>{item.title}</a>
                         </td>
@@ -381,15 +384,21 @@ const handleEdit = (item: Item) => {
                     <form onSubmit={(e) => {
                       e.preventDefault();
                       const formData = new FormData(e.currentTarget);
-                     handleSave({
+                   handleSave({
   title: formData.get("title") as string,
   image: formData.get("image") as string,
   objectifs: formData.get("objectifs") as string,
   population: formData.get("population") as string,
   duree: formData.get("duree") as string,
-  description: editorRef.current?.getContent() || "", // ⚡ هنا نأخذ المحتوى
+  description: editorRef.current?.getContent() || "",
   code: currentPage === 'formations' ? (formData.get("code") as string) : undefined,
+  customCode: currentPage === 'formations' 
+    ? `DFC${formData.get("customCode")}` 
+    : undefined,
 });
+
+
+
 
 
                     }} className="space-y-4">
@@ -436,7 +445,24 @@ defaultValue={editing?.code || "DFC7"}
                             <option value="OTHER">Autre</option>
                           </select>
                         </div>
+                        
                       )}
+{currentPage === 'formations' && (
+  <div className="mt-3">
+    <label className="block text-sm font-medium text-gray-700">
+      CODE :
+    </label>
+    <input
+  type="text"
+  name="customCode"
+  defaultValue={editing?.customCode?.replace(/^DFC/, "") || ""} // إزالة DFC إذا موجود عند التعديل
+  placeholder="NUMBER"
+  required
+  className="w-full border rounded px-3 py-2 mt-1 focus:ring-2 focus:ring-teal-500"
+/>
+
+  </div>
+)}
 
                      <div>
   <label className="block text-sm font-medium text-gray-700 mb-2">

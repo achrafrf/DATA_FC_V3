@@ -16,6 +16,7 @@ export interface Formation {
   duree?: string;
   date?: string;
   type?: "formation" | "service";
+  customCode?: string;
 }
 
 const FORMATIONS_KEY = "formations";
