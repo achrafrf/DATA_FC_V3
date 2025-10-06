@@ -90,7 +90,7 @@ export default function Home() {
   
   <p className="text-gray-800 ">
     Au nom de toute l&apos;équipe DATA FC, je vous remercie de votre confiance et vous 
-    souhaite la bienvenue sur notre plateforme. 
+    souhaite la bienvenue sur notre plateforme.<br/> 
     Dans un environnement économique en 
     constante évolution, la différenciation passe par l&apos;agilité, l&apos;innovation et l&apos;optimisation 
     des compétences – des défis que nous transformons en leviers de performance pour 
