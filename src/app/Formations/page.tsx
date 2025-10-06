@@ -9,7 +9,8 @@ import {
   FiUser, 
   FiBriefcase, 
   FiLogOut, 
-  FiMessageSquare   // ✅ أيقونة للتعليقات
+  FiMessageSquare,
+  FiBook
 } from "react-icons/fi";
 import { useUser, ClerkLoaded, SignOutButton } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
@@ -43,7 +44,7 @@ export default function DashboardPage() {
   const { isSignedIn , isLoaded } = useUser();
   const router = useRouter();
 
-  const [currentPage, setCurrentPage] = useState<'dashboard' | 'formations' | 'services' | 'comments'>('dashboard');
+const [currentPage, setCurrentPage] = useState<'dashboard' | 'formations' | 'services' | 'comments' | 'autres'>('dashboard');
   const [items, setItems] = useState<Item[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<Item | null>(null);
@@ -60,6 +61,14 @@ const [deleteTarget, setDeleteTarget] = useState<{ id: number; type: "item" | "c
 
 const editorRef = useRef<RichTextEditorHandle>(null);
 const [editorValue, setEditorValue] = useState("");
+
+const [selectedCode, setSelectedCode] = useState("DFC1"); 
+
+const [form, setForm] = useState<Partial<Item>>({});
+
+
+const [selectedPage, setSelectedPage] = useState<string | null>(null);
+const [pages, setPages] = useState<{ id: string; title: string; content: string }[]>([]);
 
 
 
@@ -128,6 +137,20 @@ const [editorValue, setEditorValue] = useState("");
     setAlert({ message, type });
     setTimeout(() => setAlert(null), 3000);
   };
+
+  useEffect(() => {
+  const loadPages = async () => {
+    if (currentPage !== 'autres') return; // ✅ الشرط داخل الدالة وليس خارج useEffect
+    try {
+      const res = await fetch('/api/pages');
+      const data = await res.json();
+      setPages(data);
+    } catch {
+      showAlert("❌ Échec du chargement des pages", "error");
+    }
+  };
+  loadPages();
+}, [currentPage]);
 
  const handleSave = async (data: Partial<Item>) => {
   try {
@@ -211,6 +234,27 @@ const handleEdit = (item: Item) => {
     }
   };
 
+
+
+
+
+
+const handleSavePage = async () => {
+  const content = editorRef.current?.getContent() || "";
+  const current = pages.find(p => p.id === selectedPage);
+  if (!current) return;
+  
+  const updated = { ...current, content };
+  await fetch('/api/pages', {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(updated),
+  });
+
+  showAlert("✅ Page mise à jour avec succès", "success");
+};
+
+
   return (
     <ClerkLoaded>
       <div className="flex h-screen bg-gray-100 dark:bg-gray-800">
@@ -239,8 +283,15 @@ const handleEdit = (item: Item) => {
                 <FiUser /> Formations
               </li>
               <li onClick={() => setCurrentPage('services')} className={`px-6 py-3 flex items-center gap-2 cursor-pointer hover:bg-teal-500 ${currentPage==='services'?'bg-teal-500':''}`}>
-                <FiBriefcase /> Services
+                <FiBook /> Services
               </li>
+              <li 
+  onClick={() => setCurrentPage('autres')} 
+  className={`px-6 py-3 flex items-center gap-2 cursor-pointer hover:bg-teal-500 ${currentPage==='autres'?'bg-teal-500':''}`}
+>
+  <FiBriefcase /> Autres
+</li>
+
               <li 
                 onClick={() => setCurrentPage('comments')} 
                 className={`px-6 py-3 flex items-center gap-2 cursor-pointer hover:bg-teal-500 ${currentPage==='comments'?'bg-teal-500':''}`}
@@ -315,17 +366,37 @@ const handleEdit = (item: Item) => {
                 <h1 className="text-3xl font-bold text-gray-800">
                   {currentPage === 'formations' ? "📚 Formations" : "💼 Services"}
                 </h1>
-               <button
-               className="flex items-center gap-2 bg-teal-600 text-white px-4 py-3 rounded-lg hover:bg-teal-700"
+
+                 {currentPage === 'formations' && (
+    <select
+      value={selectedCode}
+      onChange={(e) => setSelectedCode(e.target.value)}
+      className="border bg-teal-600 text-white rounded px-3 py-2 focus:ring-2 focus:ring-teal-500"
+    >
+      <option className="bg-white text-teal-600 font-bold" value="DFC1">DFC1 : GRH et Management</option>
+      <option className="bg-white text-teal-600 font-bold" value="DFC2">DFC2 : Formation</option>
+      <option className="bg-white text-teal-600 font-bold" value="DFC3">DFC3 : Qualité-Santé-Sécurité-Environnement (QSSE)</option>
+      <option className="bg-white text-teal-600 font-bold" value="DFC4">DFC4 : Finance, Comptabilité et Assurance</option>
+      <option className="bg-white text-teal-600 font-bold" value="DFC5">DFC5 : Communication</option>
+      <option className="bg-white text-teal-600 font-bold" value="DFC6">DFC6 : Management</option>
+      <option className="bg-white text-teal-600 font-bold" value="DFC7">DFC7 : TIC et Informatique</option>
+      <option className="bg-white text-teal-600 font-bold" value="DFC8">DFC8 : Vente & Marketing</option>
+      <option className="bg-white text-teal-600 font-bold" value="DFC9">DFC9 : Sécurité routière</option>
+    </select>
+  )}
+
+<button
+  className="flex items-center gap-2 bg-teal-600 text-white px-4 py-3 rounded-lg hover:bg-teal-700"
   onClick={() => {
     setEditing(null);
-    setEditorValue(""); // ⚡ فارغ عند إضافة جديد
+    setEditorValue("");
+    // ✅ عند الفتح، نملأ الكود المختار من الـ select في الأعلى
+    setForm(prev => ({ ...prev, code: selectedCode }));
     setModalOpen(true);
   }}
 >
   <FiPlus /> Add {currentPage === 'formations' ? "Formation" : "Service"}
 </button>
-
 
 
               </div>
@@ -335,7 +406,6 @@ const handleEdit = (item: Item) => {
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-teal-50">
                     <tr>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600 uppercase">ID</th>
                       <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600 uppercase">Code</th>
                       <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600 uppercase">Title</th>
                       <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600 uppercase">Description</th>
@@ -343,9 +413,10 @@ const handleEdit = (item: Item) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {items.map((item) => (
+                    {items
+  .filter((item) => currentPage === 'formations' ? item.code === selectedCode : true)
+  .map((item) => (
                       <tr key={item.id} className="hover:bg-gray-50 transition">
-                        <td className="px-6 py-4">{item.id}</td>
                         <td className="px-6 py-4 font-mono text-teal-800">{item.customCode || "-"}</td>
                         <td className="px-6 py-4 font-bold text-teal-700 cursor-pointer hover:underline">
                           <a href={`/${currentPage}/${item.id}`}>{item.title}</a>
@@ -428,22 +499,15 @@ const handleEdit = (item: Item) => {
                       {currentPage === 'formations' && (
                         <div>
                           <label className="block text-sm font-medium text-gray-700">Catégorie (Code)</label>
-                          <select
-                            name="code"
-defaultValue={editing?.code || "DFC7"}
-                            className="w-full border rounded px-3 py-2 mt-1 focus:ring-2 focus:ring-teal-500"
-                          >
-                            <option value="DFC1">DFC1 : GRH et Management</option>
-                            <option value="DFC2">DFC2 : Formation</option>
-                            <option value="DFC3">DFC3 : Qualité-Santé-Sécurité-Environnement (QSSE)</option>
-                            <option value="DFC4">DFC4 : Finance, Comptabilité et Assurance</option>
-                            <option value="DFC5">DFC5 : Communication</option>
-                            <option value="DFC6">DFC6 : Management</option>
-                            <option value="DFC7">DFC7 : TIC et Informatique</option>
-                            <option value="DFC8">DFC8 : Vente & Marketing</option>
-                            <option value="DFC9">DFC9 : Sécurité routière</option>
-                            <option value="OTHER">Autre</option>
-                          </select>
+                         <input
+  type="text"
+  name="code"
+  value={form.code || selectedCode}
+  readOnly
+  className="w-full bg-gray-100 border rounded px-3 py-2 mt-1 text-gray-600 cursor-not-allowed"
+  title="Catégorie sélectionnée automatiquement"
+/>
+
                         </div>
                         
                       )}
@@ -482,6 +546,57 @@ defaultValue={editing?.code || "DFC7"}
               )}
             </>
           )}
+          {/* Autres Page */}
+{currentPage === 'autres' && (
+  <div className="bg-white rounded-xl shadow-md p-6">
+    <h1 className="text-2xl font-bold text-teal-700 mb-6">📦 Gestion du contenu</h1>
+
+    {/* Tabs */}
+    <div className="flex gap-2 mb-4 flex-wrap">
+      {[
+        { id: "interentreprises", label: "Formation Interentreprises" },
+        { id: "devis", label: "Demande de devis" },
+        { id: "vivier", label: "Notre vivier de compétence" },
+        { id: "contact", label: "Contact" },
+      ].map(page => (
+        <button
+          key={page.id}
+          onClick={() => setSelectedPage(page.id)}
+          className={`px-4 py-2 rounded-lg text-sm font-semibold border ${
+            selectedPage === page.id
+              ? "bg-teal-600 text-white"
+              : "bg-gray-100 text-teal-600 hover:bg-teal-200"
+          }`}
+        >
+          {page.label}
+        </button>
+      ))}
+    </div>
+
+    {/* Content editor */}
+    {selectedPage && (
+      <div>
+        <h2 className="text-xl font-bold text-teal-700 mb-3">
+          Modifier : {pages.find(p => p.id === selectedPage)?.title}
+        </h2>
+        <RichTextEditor
+          ref={editorRef}
+          initialValue={editorValue}
+        />
+        <div className="flex justify-end gap-2 mt-4">
+          <button
+            onClick={handleSavePage}
+            className="px-4 py-2 bg-teal-600 text-white rounded hover:bg-teal-700"
+          >
+            💾 Enregistrer
+          </button>
+        </div>
+      </div>
+    )}
+  </div>
+)}
+
+
 
           {/* Comments Page */}
           {currentPage==='comments' && (
@@ -506,7 +621,7 @@ defaultValue={editing?.code || "DFC7"}
   onClick={() => {
     setDeleteTarget({ id: c.id, type: "comment" });
     setConfirmOpen(true);
-  }} 
+  }}
   className="text-red-500 hover:text-red-600"
 >
   <FiTrash2 />
