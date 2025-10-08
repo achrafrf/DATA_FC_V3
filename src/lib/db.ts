@@ -123,3 +123,65 @@ export const deleteComment = async (id: number): Promise<boolean> => {
   await redis.set(COMMENTS_KEY, newComments);
   return true;
 };
+
+// ================== AUTRES (Calendrier des Formations) ==================
+export interface CalendarItem {
+   id: number
+  mois: string
+  formation: string
+  duree: string
+  prixJour: string
+  prixTotal: string
+}
+
+const AUTRES_KEY = "autres_calendar";
+
+export const getAutres = async (): Promise<CalendarItem[]> => {
+  const data = await redis.get(AUTRES_KEY);
+
+  // إذا ما كاين حتى data نرجعو Array فارغ
+  if (!data) return [];
+
+  // إذا كانت string، نحاولوا نعملوا JSON.parse
+  if (typeof data === "string") {
+    try {
+      const parsed = JSON.parse(data);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  }
+
+  // إذا كانت data أصلاً array
+  if (Array.isArray(data)) return data as CalendarItem[];
+
+  // fallback
+  return [];
+};
+
+
+export const addAutre = async (item: CalendarItem): Promise<void> => {
+  const autres = await getAutres();
+  autres.push(item);
+  await redis.set(AUTRES_KEY, autres);
+};
+
+export const updateAutre = async (
+  id: number,
+  updates: Partial<CalendarItem>
+): Promise<CalendarItem | null> => {
+  const autres = await getAutres();
+  const index = autres.findIndex((a) => a.id === id);
+  if (index === -1) return null;
+  autres[index] = { ...autres[index], ...updates };
+  await redis.set(AUTRES_KEY, autres);
+  return autres[index];
+};
+
+export const deleteAutre = async (id: number): Promise<boolean> => {
+  const autres = await getAutres();
+  const newAutres = autres.filter((a) => a.id !== id);
+  if (newAutres.length === autres.length) return false;
+  await redis.set(AUTRES_KEY, newAutres);
+  return true;
+};

@@ -87,8 +87,7 @@ export default function Home() {
   <p className="font-bold text-teal-600 text-lg">
     Chers Clients, Chers Partenaires,
   </p>
-  
-  <p className="text-gray-800 ">
+    <p className="text-gray-800 ">
     Au nom de toute l&apos;équipe DATA FC, je vous remercie de votre confiance et vous 
     souhaite la bienvenue sur notre plateforme.<br/> 
     Dans un environnement économique en 

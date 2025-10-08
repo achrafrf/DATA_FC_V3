@@ -20,6 +20,10 @@ export const HeroHeader: React.FC = () => {
   const [grhSubOpen, setGrhSubOpen] = useState(false)
   const [qsseSubOpen, setQsseSubOpen] = useState(false)
   const [ticSubOpen, setTicSubOpen] = useState(false)
+  const [DFC6Open, setDFC6Open] = useState(false)
+  const [DFC7Open, setDFC7Open] = useState(false)
+  const [DFC8Open, setDFC8Open] = useState(false)
+  const [DFC9Open, setDFC9Open] = useState(false)
 
   const { theme, setTheme } = useTheme()
   const [scrolled, setScrolled] = useState(false)
@@ -56,6 +60,10 @@ const [formations, setFormations] = useState<Item[]>([])
     setGrhSubOpen(false)
     setQsseSubOpen(false)
     setTicSubOpen(false);
+    setDFC6Open(false);
+    setDFC7Open(false);
+    setDFC8Open(false);
+    setDFC9Open(false);
   }
   const toggleComm = () => { closeAllFormSubs(); setCommSubOpen(o => !o) }
   const toggleForm = () => { closeAllFormSubs(); setFormSubOpen(o => !o) }
@@ -63,6 +71,10 @@ const [formations, setFormations] = useState<Item[]>([])
   const toggleGrh = () => { closeAllFormSubs(); setGrhSubOpen(o => !o) }
   const toggleQsse = () => { closeAllFormSubs(); setQsseSubOpen(o => !o) }
   const toggleTic = () => { closeAllFormSubs(); setTicSubOpen(o => !o) }
+  const toggleDFC6 = () => { closeAllFormSubs(); setDFC6Open(o => !o) }
+  const toggleDFC7 = () => { closeAllFormSubs(); setDFC7Open(o => !o) }
+  const toggleDFC8 = () => { closeAllFormSubs(); setDFC8Open(o => !o) }
+  const toggleDFC9 = () => { closeAllFormSubs(); setDFC9Open(o => !o) }
 
 
  useEffect(() => {
@@ -352,21 +364,53 @@ const [formations, setFormations] = useState<Item[]>([])
   )}
 </li>
 
-                  <li className="border-b-1 border-teal-600"><Link href="/formations/management" className="block px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700"> <span className="text-teal-700">DFC6 :</span>Formation en Management</Link></li>
                   <li className="border-b-1 border-teal-600">
   <button
-    onClick={toggleTic}
+    onClick={toggleDFC6}
+    className="w-full text-left px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
+  >
+    <span>
+      <span className="text-teal-700">DFC6 :</span> Formation en Management
+    </span>
+    {DFC6Open
+      ? <ChevronUp className="w-4 h-4 transition-transform" />
+      : <ChevronDown className="w-4 h-4 transition-transform" />}
+  </button>
+
+  {DFC6Open && (
+    <ul className='absolute left-full top-0 mt-1 w-[24rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
+        {formations
+        .filter((f) => f.code === "DFC6")
+        .map((f) => (
+          <li key={f.customCode} className="border-b-1 border-teal-600">
+            <Link
+              href={`/formations/${f.id}`}
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <span className="text-teal-700">{f.customCode} : </span>
+              {f.title}
+            </Link>
+          </li>
+        ))}
+  
+    </ul>
+  )}
+</li>
+
+  <li className="border-b-1 border-teal-600">
+  <button
+    onClick={toggleDFC7}
     className="w-full text-left px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
   >
     <span>
       <span className="text-teal-700">DFC7 :</span> Formation en TIC et Informatique
     </span>
-    {ticSubOpen
+    {DFC7Open
       ? <ChevronUp className="w-4 h-4 transition-transform" />
       : <ChevronDown className="w-4 h-4 transition-transform" />}
   </button>
 
-  {ticSubOpen && (
+  {DFC7Open && (
     <ul className='absolute left-full top-0 mt-1 w-[24rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
         {formations
         .filter((f) => f.code === "DFC7")
@@ -386,11 +430,166 @@ const [formations, setFormations] = useState<Item[]>([])
   )}
 </li>
 
-                  <li className="border-b-1 border-teal-600"><Link href="/formations/vente-marketing" className="block px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700"><span className="text-teal-700">DFC8 :</span>Formation en Vente & Marketing</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/formations/securite-routiere" className="block px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700"><span className="text-teal-700">DFC9 :</span>Formation en sécurité routière</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/formations/industrielle" className="block px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700">Formation industrielle</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/formations/reconversion" className="block px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700">Formation de reconversion</Link></li> 
-                  <li className="border-b-1 border-teal-600"><Link href="/formations/gestion-projets" className="block px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700">Formation gestion projets</Link></li>
+                   <li className="border-b-1 border-teal-600">
+  <button
+    onClick={toggleDFC8}
+    className="w-full text-left px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
+  >
+    <span>
+      <span className="text-teal-700">DFC8 :</span> Formation en Vente & Marketing
+    </span>
+    {DFC8Open
+      ? <ChevronUp className="w-4 h-4 transition-transform" />
+      : <ChevronDown className="w-4 h-4 transition-transform" />}
+  </button>
+
+  {DFC8Open && (
+    <ul className='absolute left-full top-0 mt-1 w-[24rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
+        {formations
+        .filter((f) => f.code === "DFC8")
+        .map((f) => (
+          <li key={f.customCode} className="border-b-1 border-teal-600">
+            <Link
+              href={`/formations/${f.id}`}
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <span className="text-teal-700">{f.customCode} : </span>
+              {f.title}
+            </Link>
+          </li>
+        ))}
+  
+    </ul>
+  )}
+</li>
+                    <li className="border-b-1 border-teal-600">
+  <button
+    onClick={toggleDFC9}
+    className="w-full text-left px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
+  >
+    <span>
+      <span className="text-teal-700">DFC9 :</span> Formation en sécurité routière
+    </span>
+    {DFC9Open
+      ? <ChevronUp className="w-4 h-4 transition-transform" />
+      : <ChevronDown className="w-4 h-4 transition-transform" />}
+  </button>
+
+  {DFC9Open && (
+    <ul className='absolute left-full top-0 mt-1 w-[24rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
+        {formations
+        .filter((f) => f.code === "DFC9")
+        .map((f) => (
+          <li key={f.customCode} className="border-b-1 border-teal-600">
+            <Link
+              href={`/formations/${f.id}`}
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <span className="text-teal-700">{f.customCode} : </span>
+              {f.title}
+            </Link>
+          </li>
+        ))}
+  
+    </ul>
+  )}
+</li>
+                   <li className="border-b-1 border-teal-600">
+  <button
+    onClick={toggleTic}
+    className="w-full text-left px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
+  >
+    <span>
+      <span className="text-teal-700">DFB1 :</span> Formation industrielle
+    </span>
+    {ticSubOpen
+      ? <ChevronUp className="w-4 h-4 transition-transform" />
+      : <ChevronDown className="w-4 h-4 transition-transform" />}
+  </button>
+
+  {ticSubOpen && (
+    <ul className='absolute left-full top-0 mt-1 w-[24rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
+        {formations
+        .filter((f) => f.code === "DFB1")
+        .map((f) => (
+          <li key={f.customCode} className="border-b-1 border-teal-600">
+            <Link
+              href={`/formations/${f.id}`}
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <span className="text-teal-700">{f.customCode} : </span>
+              {f.title}
+            </Link>
+          </li>
+        ))}
+  
+    </ul>
+  )}
+</li>
+                          <li className="border-b-1 border-teal-600">
+  <button
+    onClick={toggleTic}
+    className="w-full text-left px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
+  >
+    <span>
+      <span className="text-teal-700">DFB2 :</span> Formation de reconversion
+    </span>
+    {ticSubOpen
+      ? <ChevronUp className="w-4 h-4 transition-transform" />
+      : <ChevronDown className="w-4 h-4 transition-transform" />}
+  </button>
+
+  {ticSubOpen && (
+    <ul className='absolute left-full top-0 mt-1 w-[24rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
+        {formations
+        .filter((f) => f.code === "DFB2")
+        .map((f) => (
+          <li key={f.customCode} className="border-b-1 border-teal-600">
+            <Link
+              href={`/formations/${f.id}`}
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <span className="text-teal-700">{f.customCode} : </span>
+              {f.title}
+            </Link>
+          </li>
+        ))}
+  
+    </ul>
+  )}
+</li>
+                         <li className="border-b-1 border-teal-600">
+  <button
+    onClick={toggleTic}
+    className="w-full text-left px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
+  >
+    <span>
+      <span className="text-teal-700">DFB3 :</span> Formation gestion projets
+    </span>
+    {ticSubOpen
+      ? <ChevronUp className="w-4 h-4 transition-transform" />
+      : <ChevronDown className="w-4 h-4 transition-transform" />}
+  </button>
+
+  {ticSubOpen && (
+    <ul className='absolute left-full top-0 mt-1 w-[24rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
+        {formations
+        .filter((f) => f.code === "DFB3")
+        .map((f) => (
+          <li key={f.customCode} className="border-b-1 border-teal-600">
+            <Link
+              href={`/formations/${f.id}`}
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <span className="text-teal-700">{f.customCode} : </span>
+              {f.title}
+            </Link>
+          </li>
+        ))}
+  
+    </ul>
+  )}
+</li>
                   {/* dynamic */}
 
             {formations
