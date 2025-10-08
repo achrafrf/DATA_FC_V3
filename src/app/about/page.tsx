@@ -36,7 +36,7 @@ export default function AboutPage() {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   return (
-    <section className="py-24 relative dark:bg-gray-900">
+    <section className=" py-7 relative dark:bg-gray-900">
       <div className="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto mt-7">
         <div className="w-full justify-start items-center gap-12 grid lg:grid-cols-2 grid-cols-1">
           <div className="w-full justify-center items-start gap-6 grid sm:grid-cols-2 grid-cols-1 lg:order-first order-last">
@@ -64,11 +64,10 @@ export default function AboutPage() {
                 QUI SOMMES-NOUS ?
                 </h2>
                 <div className="text-gray-500 font-normal leading-relaxed lg:text-start text-center dark:text-white">
-                Cabinet de conseil, de formation et d’accompagnement, engagé dans la réussite de vos projets de développement.
-
-À travers cette présentation, nous vous offrons un aperçu de nos prestations et vous invitons à devenir notre partenaire, afin de vous aider à vous adapter à un monde en constante mutation et à vous sécuriser face à une réglementation en évolution permanente.
-
-Nous mettons à votre disposition :
+                Nous sommes votre partenaire stratégique, de l’analyse à la réalisation. Notre cabinet vous accompagne pour anticiper les mutations et sécuriser votre croissance grâce à trois expertises complémentaires : <br/>
+                des études (audits, veille, analyse de marché) pour éclairer vos décisions ; du conseil sur-mesure pour renforcer votre compétitivité ;<br/>
+                 et de la formation pour développer les compétences de vos équipes.<br/>
+                 Au-delà de notre méthodologie, nous nous engageons sur des bénéfices concrets en mettant à votre disposition :
       <ul className='list-disc ml-8 text-black font-bold dark:text-white'>
         <li> Des prestations de qualité.</li>
         <li>Un encadrement professionnel.</li>  
