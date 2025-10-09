@@ -77,8 +77,6 @@
 
 
 
-
-
     // ✅ Alert State
     const [alert, setAlert] = useState<{ message: string; type: "success" | "error" } | null>(null);
 
@@ -116,7 +114,6 @@
     dataAutres = Array.isArray(json) ? json : [];
   }
   setItems(dataAutres);
-
 
 
       // --- Comments ---
@@ -421,6 +418,9 @@ const handleEditAutre = (item: Item) => {
         <option className="bg-white text-teal-600 font-bold" value="DFC7">DFC7 : TIC et Informatique</option>
         <option className="bg-white text-teal-600 font-bold" value="DFC8">DFC8 : Vente & Marketing</option>
         <option className="bg-white text-teal-600 font-bold" value="DFC9">DFC9 : Sécurité routière</option>
+        <option className="bg-white text-teal-600 font-bold" value="DFB1">DFB1 : Formation industrielle</option>
+        <option className="bg-white text-teal-600 font-bold" value="DFB2">DFB2 : Formation de reconversion</option>
+        <option className="bg-white text-teal-600 font-bold" value="DFB3">DFB3 : Formation gestion projets</option>
       </select>
     )}
 
@@ -502,9 +502,9 @@ const handleEditAutre = (item: Item) => {
     duree: formData.get("duree") as string,
     description: editorRef.current?.getContent() || "",
     code: currentPage === 'formations' ? (formData.get("code") as string) : undefined,
-    customCode: currentPage === 'formations' 
-      ? `DFC${formData.get("customCode")}` 
-      : undefined,
+   customCode: currentPage === 'formations'
+  ? `${formData.get("prefix")}${formData.get("customCode")}`
+  : undefined,
   });
 
 
@@ -550,22 +550,40 @@ const handleEditAutre = (item: Item) => {
                           </div>
                           
                         )}
-  {currentPage === 'formations' && (
-    <div className="mt-3">
-      <label className="block text-sm font-medium text-gray-700">
-        CODE :
-      </label>
-      <input
-    type="text"
-    name="customCode"
-    defaultValue={editing?.customCode?.replace(/^DFC/, "") || ""} // إزالة DFC إذا موجود عند التعديل
-    placeholder="NUMBER"
-    required
-    className="w-full border rounded px-3 py-2 mt-1 focus:ring-2 focus:ring-teal-500"
-  />
+ {currentPage === 'formations' && (
+  <div className="mt-3">
+    <label className="block text-sm font-medium text-gray-700">
+      CODE :
+    </label>
 
+    <div className="flex items-center gap-2">
+      {/* اختيار النوع DFC أو DFB */}
+      <select
+        name="prefix"
+        defaultValue={editing?.customCode?.startsWith("DFB") ? "DFB" : "DFC"}
+        className="border rounded px-3 py-2 focus:ring-2 focus:ring-teal-500"
+      >
+        <option value="DFC">DFC</option>
+        <option value="DFB">DFB</option>
+      </select>
+
+      {/* رقم الكود */}
+      <input
+        type="text"
+        name="customCode"
+        defaultValue={
+          editing?.customCode
+            ? editing.customCode.replace(/^DFC|^DFB/, "") // إزالة DFC أو DFB من البداية
+            : ""
+        }
+        placeholder="NUMÉRO"
+        required
+        className="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-teal-500"
+      />
     </div>
-  )}
+  </div>
+)}
+
 
                       <div>
     <label className="block text-sm font-medium text-gray-700 mb-2">

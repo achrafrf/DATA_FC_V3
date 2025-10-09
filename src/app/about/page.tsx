@@ -85,7 +85,7 @@ Ensemble, construisons votre avenir avec efficacité et sérénité.
     >
       <div className="flex-col justify-start items-start inline-flex">
         <h3 className="text-gray-900 text-4xl font-bold font-manrope leading-normal dark:text-white">
-          <CountUp end={inView ? 10 : 0}>
+          <CountUp end={inView ? 5 : 0}>
             {({ countUpRef, start }) => {
               if (inView) start();
               return <span ref={countUpRef} />;
@@ -98,7 +98,7 @@ Ensemble, construisons votre avenir avec efficacité et sérénité.
 
       <div className="flex-col justify-start items-start inline-flex">
         <h4 className="text-gray-900 text-4xl font-bold font-manrope leading-normal dark:text-white">
-          <CountUp end={inView ? 35 : 0}>
+          <CountUp end={inView ? 20 : 0}>
             {({ countUpRef, start }) => {
               if (inView) start();
               return <span ref={countUpRef} />;

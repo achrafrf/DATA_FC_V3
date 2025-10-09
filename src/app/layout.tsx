@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 
 // 👇 العنوان الذي يظهر في التبويب
 export const metadata = {
-  metadataBase: new URL('https://data-fc.vercel.app'),
+  metadataBase: new URL('https://www.datafc.ma/'),
   title: "DATA FC",
   description: "DATA FC : VOTRE PARTENAIRE STRATÉGIQUE POUR UNE CROISSANCE DURABLE",
   icons: { icon: "/favicon.ico" },
@@ -50,12 +50,14 @@ export default function RootLayout({
   return (
     <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
   <html suppressHydrationWarning>
-    <head>
-      <meta
-        name="google-site-verification"
-        content="mDKUd3cCjyEURQvsM0lhM3qR-K4HnXqNsM0WG8ggGOs"
-      />
-    </head>
+   <head>
+  <meta
+    name="google-site-verification"
+    content="mDKUd3cCjyEURQvsM0lhM3qR-K4HnXqNsM0WG8ggGOs"
+  />
+  <meta name="robots" content="index, follow" />
+</head>
+
     <body
       className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-gray-900`}
     >

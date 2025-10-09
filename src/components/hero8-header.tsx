@@ -24,6 +24,9 @@ export const HeroHeader: React.FC = () => {
   const [DFC7Open, setDFC7Open] = useState(false)
   const [DFC8Open, setDFC8Open] = useState(false)
   const [DFC9Open, setDFC9Open] = useState(false)
+  const [DFB1Open, setDFB1Open] = useState(false)
+  const [DFB2Open, setDFB2Open] = useState(false)
+  const [DFB3Open, setDFB3Open] = useState(false)
 
   const { theme, setTheme } = useTheme()
   const [scrolled, setScrolled] = useState(false)
@@ -64,18 +67,22 @@ const [formations, setFormations] = useState<Item[]>([])
     setDFC7Open(false);
     setDFC8Open(false);
     setDFC9Open(false);
+    setDFB1Open(false);
+    setDFB2Open(false);
+    setDFB3Open(false);
   }
   const toggleComm = () => { closeAllFormSubs(); setCommSubOpen(o => !o) }
   const toggleForm = () => { closeAllFormSubs(); setFormSubOpen(o => !o) }
   const toggleFin = () => { closeAllFormSubs(); setFinSubOpen(o => !o) }
   const toggleGrh = () => { closeAllFormSubs(); setGrhSubOpen(o => !o) }
   const toggleQsse = () => { closeAllFormSubs(); setQsseSubOpen(o => !o) }
-  const toggleTic = () => { closeAllFormSubs(); setTicSubOpen(o => !o) }
   const toggleDFC6 = () => { closeAllFormSubs(); setDFC6Open(o => !o) }
   const toggleDFC7 = () => { closeAllFormSubs(); setDFC7Open(o => !o) }
   const toggleDFC8 = () => { closeAllFormSubs(); setDFC8Open(o => !o) }
   const toggleDFC9 = () => { closeAllFormSubs(); setDFC9Open(o => !o) }
-
+  const toggleDFB1 = () => { closeAllFormSubs(); setDFB1Open(o => !o) }
+  const toggleDFB2 = () => { closeAllFormSubs(); setDFB2Open(o => !o) }
+  const toggleDFB3 = () => { closeAllFormSubs(); setDFB3Open(o => !o) }
 
  useEffect(() => {
   // scroll
@@ -496,7 +503,7 @@ const [formations, setFormations] = useState<Item[]>([])
 </li>
                    <li className="border-b-1 border-teal-600">
   <button
-    onClick={toggleTic}
+    onClick={toggleDFB1}
     className="w-full text-left px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
   >
     <span>
@@ -507,7 +514,7 @@ const [formations, setFormations] = useState<Item[]>([])
       : <ChevronDown className="w-4 h-4 transition-transform" />}
   </button>
 
-  {ticSubOpen && (
+  {DFB1Open && (
     <ul className='absolute left-full top-0 mt-1 w-[24rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
         {formations
         .filter((f) => f.code === "DFB1")
@@ -528,18 +535,18 @@ const [formations, setFormations] = useState<Item[]>([])
 </li>
                           <li className="border-b-1 border-teal-600">
   <button
-    onClick={toggleTic}
+    onClick={toggleDFB2}
     className="w-full text-left px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
   >
     <span>
       <span className="text-teal-700">DFB2 :</span> Formation de reconversion
     </span>
-    {ticSubOpen
+    {DFB2Open
       ? <ChevronUp className="w-4 h-4 transition-transform" />
       : <ChevronDown className="w-4 h-4 transition-transform" />}
   </button>
 
-  {ticSubOpen && (
+  {DFB2Open && (
     <ul className='absolute left-full top-0 mt-1 w-[24rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
         {formations
         .filter((f) => f.code === "DFB2")
@@ -560,18 +567,18 @@ const [formations, setFormations] = useState<Item[]>([])
 </li>
                          <li className="border-b-1 border-teal-600">
   <button
-    onClick={toggleTic}
+    onClick={toggleDFB3}
     className="w-full text-left px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
   >
     <span>
       <span className="text-teal-700">DFB3 :</span> Formation gestion projets
     </span>
-    {ticSubOpen
+    {DFB3Open
       ? <ChevronUp className="w-4 h-4 transition-transform" />
       : <ChevronDown className="w-4 h-4 transition-transform" />}
   </button>
 
-  {ticSubOpen && (
+  {DFB3Open && (
     <ul className='absolute left-full top-0 mt-1 w-[24rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
         {formations
         .filter((f) => f.code === "DFB3")
