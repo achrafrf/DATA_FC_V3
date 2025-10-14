@@ -21,6 +21,7 @@
   import { useRef } from "react";
 
 
+
   interface Item {
     id: number;
     title: string;
@@ -44,6 +45,12 @@
     text: string;
     rating: number;
   }
+
+  interface Stats {
+  experienceYears: number
+  successfulProjects: number
+  happyClients: number
+}
 
   export default function DashboardPage() {
     const { isSignedIn , isLoaded } = useUser();
@@ -71,8 +78,16 @@
 
   const [form, setForm] = useState<Partial<Item>>({});
 
+  const [editOpen, setEditOpen] = useState(false);
+const [loading ,setLoading] = useState(false);
 
 
+
+const [stats, setStats] = useState<Stats>({
+  experienceYears: 0,
+  successfulProjects: 0,
+  happyClients: 0,
+});
 
 
 
@@ -154,6 +169,18 @@
       setAlert({ message, type });
       setTimeout(() => setAlert(null), 3000);
     };
+
+    useEffect(() => {
+  const fetchStats = async () => {
+    const res = await fetch('/api/stats');
+    if (res.ok) {
+      const data = await res.json();
+      setStats(data);
+    }
+  };
+  fetchStats();
+}, []);
+
 
   const handleSave = async (data: Partial<Item>) => {
     try {
@@ -288,6 +315,18 @@ const handleEditAutre = (item: Item) => {
 };
 
 
+const handleSaveStats = async (data: Partial<Stats>) => {
+  const res = await fetch('/api/stats', {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  if (res.ok) setStats(prev => ({ ...prev, ...data }));
+};
+
+
+
+
 
 
 
@@ -392,6 +431,133 @@ const handleEditAutre = (item: Item) => {
                     <span className="mt-1 text-gray-500 text-sm dark:text-white">Avg Rating: ⭐ {avgRating}</span>
                   </div>
                 </div>
+                {/* ✅ قسم تعديل أرقام الإحصائيات العامة */}
+  <div className="mt-8 bg-white dark:bg-gray-700 rounded-xl shadow p-6">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-bold text-teal-700 dark:text-white">
+            Modifier les Statistiques
+          </h2>
+          <button
+            onClick={() => setEditOpen(true)}
+            className="flex items-center gap-2 bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700"
+          >
+            <FiEdit /> Modifier
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+          <div>
+            <p className="text-gray-600 dark:text-gray-300 font-semibold">
+              Années d’expérience
+            </p>
+            <p className="text-3xl font-bold text-teal-600 dark:text-white">
+              {stats.experienceYears}+
+            </p>
+          </div>
+          <div>
+            <p className="text-gray-600 dark:text-gray-300 font-semibold">
+              Projets réussis
+            </p>
+            <p className="text-3xl font-bold text-teal-600 dark:text-white">
+              {stats.successfulProjects}+
+            </p>
+          </div>
+          <div>
+            <p className="text-gray-600 dark:text-gray-300 font-semibold">
+              Clients satisfaits
+            </p>
+            <p className="text-3xl font-bold text-teal-600 dark:text-white">
+              {stats.happyClients}+
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Modal تعديل الإحصائيات */}
+      {editOpen && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-md shadow-lg">
+            <h2 className="text-xl font-bold text-teal-700 dark:text-white mb-4">
+              ✏️ Modifier les Statistiques
+            </h2>
+
+           <form
+  onSubmit={async (e) => {
+    e.preventDefault(); // منع إعادة تحميل الصفحة
+
+    const formData = new FormData(e.currentTarget); // الحصول على بيانات الفورم
+   const data: Partial<Stats> = {
+  experienceYears: Number(formData.get("experience")),
+  successfulProjects: Number(formData.get("projects")),
+  happyClients: Number(formData.get("clients")),
+};
+
+
+    setLoading(true); // تفعيل حالة التحميل
+await handleSaveStats(data); // ✅
+    setLoading(false); // إيقاف التحميل
+    setEditOpen(false); // إغلاق المودال
+  }}
+  className="space-y-4"
+>
+  <div>
+    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+      Années d’expérience
+    </label>
+    <input
+      type="number"
+      name="experience"
+      defaultValue={stats.experienceYears}
+      className="w-full border rounded px-3 py-2 mt-1 focus:ring-2 focus:ring-teal-500"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+      Projets réussis
+    </label>
+    <input
+      type="number"
+      name="projects"
+      defaultValue={stats.successfulProjects}
+      className="w-full border rounded px-3 py-2 mt-1 focus:ring-2 focus:ring-teal-500"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+      Clients satisfaits
+    </label>
+    <input
+      type="number"
+      name="clients"
+      defaultValue={stats.happyClients}
+      className="w-full border rounded px-3 py-2 mt-1 focus:ring-2 focus:ring-teal-500"
+    />
+  </div>
+
+  <div className="flex justify-end gap-2 pt-4">
+    <button
+      type="button"
+      onClick={() => setEditOpen(false)}
+      className="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500"
+      disabled={loading}
+    >
+      Annuler
+    </button>
+    <button
+      type="submit"
+      className="px-4 py-2 bg-teal-600 text-white rounded hover:bg-teal-700"
+      disabled={loading}
+    >
+      {loading ? 'Enregistrement...' : 'Enregistrer'}
+    </button>
+  </div>
+</form>
+
+          </div>
+        </div>
+      )}
               </>
             )}
 

@@ -1,16 +1,46 @@
 "use client";
 
+import React, { useEffect, useState } from 'react';
 import Image from "next/image";
-import { useState } from 'react';
 import Modal from "@/components/Modal";
-import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
 import {FaMapMarkerAlt,FaExclamationCircle
  } from "react-icons/fa";
 
 
+interface Stats {
+  experienceYears: number;
+  successfulProjects: number;
+  happyClients: number;
+}
+
 export default function AboutPage() {
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 1 });
+const { ref } = useInView({ triggerOnce: true, threshold: 1 });
+
+   const [stats, setStats] = useState<Stats>({
+    experienceYears: 0,
+    successfulProjects: 0,
+    happyClients: 0,
+  });
+
+  // ✅ Fetch stats from API (if you have one)
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const res = await fetch('/api/stats'); // endpoint that returns { experienceYears, successfulProjects, happyClients }
+        if (res.ok) {
+          const data: Stats = await res.json();
+          setStats(data);
+        } else {
+          console.error('Failed to fetch stats');
+        }
+      } catch (error) {
+        console.error('Error fetching stats:', error);
+      }
+    };
+
+    fetchStats();
+  }, []);
 
   const cards = [
     {
@@ -85,39 +115,21 @@ Ensemble, construisons votre avenir avec efficacité et sérénité.
     >
       <div className="flex-col justify-start items-start inline-flex">
         <h3 className="text-gray-900 text-4xl font-bold font-manrope leading-normal dark:text-white">
-          <CountUp end={inView ? 5 : 0}>
-            {({ countUpRef, start }) => {
-              if (inView) start();
-              return <span ref={countUpRef} />;
-            }}
-          </CountUp>
-          +
+         {stats.experienceYears}+
         </h3>
         <h6 className="text-gray-500 text-base font-normal leading-relaxed dark:text-white">Années expérience</h6>
       </div>
 
       <div className="flex-col justify-start items-start inline-flex">
         <h4 className="text-gray-900 text-4xl font-bold font-manrope leading-normal dark:text-white">
-          <CountUp end={inView ? 20 : 0}>
-            {({ countUpRef, start }) => {
-              if (inView) start();
-              return <span ref={countUpRef} />;
-            }}
-          </CountUp>
-          +
+         {stats.successfulProjects}+
         </h4>
         <h6 className="text-gray-500 text-base font-normal leading-relaxed dark:text-white">Projets réussis</h6>
       </div>
 
       <div className="flex-col justify-start items-start inline-flex">
         <h4 className="text-gray-900 text-4xl font-bold font-manrope leading-normal dark:text-white">
-          <CountUp end={inView ? 15 : 0}>
-            {({ countUpRef, start }) => {
-              if (inView) start();
-              return <span ref={countUpRef} />;
-            }}
-          </CountUp>
-          +
+         {stats.happyClients}+
         </h4>
         <h6 className="text-gray-500 text-base font-normal leading-relaxed dark:text-white">Clients satisfaits</h6>
       </div>

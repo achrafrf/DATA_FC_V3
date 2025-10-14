@@ -185,3 +185,27 @@ export const deleteAutre = async (id: number): Promise<boolean> => {
   await redis.set(AUTRES_KEY, newAutres);
   return true;
 };
+
+// ================== STATISTICS ==================
+export interface Stats {
+  experienceYears: number
+  successfulProjects: number
+  happyClients: number
+}
+
+const STATS_KEY = "site_stats"
+
+// ✅ Get Statistics
+export const getStats = async (): Promise<Stats> => {
+  const data = await redis.get(STATS_KEY)
+  return (data as Stats) || {
+    experienceYears: 0,
+    successfulProjects: 0,
+    happyClients: 0,
+  }
+}
+
+// ✅ Update Statistics
+export const updateStats = async (stats: Stats): Promise<void> => {
+  await redis.set(STATS_KEY, stats)
+}
