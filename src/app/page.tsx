@@ -332,7 +332,7 @@ référence.
     </div>
   </div>
 </div>
-</div>
+</div> 
 <CommentRating />
             </main>
     </>
