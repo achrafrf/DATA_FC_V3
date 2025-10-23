@@ -334,7 +334,6 @@ référence.
 </div>
 </div>
 <CommentRating />
-<h1>achrafox12</h1>
             </main>
     </>
   );

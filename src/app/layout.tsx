@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-// 👇 العنوان الذي يظهر في التبويب
+// 👇 معلومات الـ SEO
 export const metadata = {
   metadataBase: new URL('https://www.datafc.ma/'),
   title: "DATA FC",
@@ -25,31 +25,32 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: "/", // يعتمد على metadataBase
+    url: "/",
     siteName: "DATA FC",
     title: "DATA FC – Conseil, Formation & Outsourcing",
     description: "Cabinet marocain expert en recrutement, formation et externalisation.",
-    images: [{ url: "/logo_datafc.jpg", width: 1200, height: 630, alt: "DATA FC – Conseil & Formation" }],
+    images: [
+      { url: "/logo_datafc.jpg", width: 1200, height: 630, alt: "DATA FC – Conseil & Formation" },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "DATA FC",
     description: "Recrutement, formation, outsourcing au Maroc",
     images: ["/logo_datafc.jpg"],
-  }
+  },
 };
 
-export default function RootLayout({
-  children,
-  modal,
-}: Readonly<{
+interface RootLayoutProps {
   children: React.ReactNode;
-  modal: React.ReactNode;
-  params: { locale: string };
-}>) {
+  modal?: React.ReactNode; // ✅ جعلها اختيارية لتفادي الخطأ
+  params?: { locale?: string };
+}
+
+export default function RootLayout({ children, modal }: RootLayoutProps) {
   return (
     <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
-      <html suppressHydrationWarning>
+      <html suppressHydrationWarning lang="fr">
         <head>
           <meta
             name="google-site-verification"
@@ -65,7 +66,7 @@ export default function RootLayout({
               <HeroHeader />
             </div>
             <main className="pt-16 mt-9">{children}</main>
-            {modal}
+            {modal && modal}
             <FloatingSocialButtons />
             <Footer />
           </ThemeProvider>
