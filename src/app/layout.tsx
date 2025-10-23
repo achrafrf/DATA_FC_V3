@@ -4,6 +4,14 @@ import { ThemeProvider } from 'next-themes';
 import { Footer } from '@/components/footer';
 import { HeroHeader } from '@/components/hero8-header';
 import FloatingSocialButtons from '@/components/FloatingSocialButtons';
+import {
+  ClerkProvider,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from '@clerk/nextjs'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -48,6 +56,7 @@ export default function RootLayout({
   params: { locale: string };
 }>) {
   return (
+                <ClerkProvider>
     <html suppressHydrationWarning>
       <head>
 <meta name="google-site-verification" content="mDKUd3cCjyEURQvsM0lhM3qR-K4HnXqNsM0WG8ggGOs" />
@@ -57,6 +66,17 @@ export default function RootLayout({
           <div className="fixed top-0 left-0 w-full h-16 z-50">
             <HeroHeader />
           </div>
+          <SignedOut>
+              <SignInButton />
+              <SignUpButton>
+                <button className="bg-[#6c47ff] text-ceramic-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           <main className="pt-16">
             {children}
           </main>
@@ -66,5 +86,7 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
+                  </ClerkProvider>
+
   );
 }
