@@ -50,6 +50,7 @@
     "i18next-http-backend": "^3.0.2",
     "keen-slider": "^6.8.6",
     "lexical": "^0.36.2",
+    "lightningcss": "1.30.2",
     "lucide-react": "^0.488.0",
     "mongodb": "^6.15.0",
     "motion": "^12.7.3",
