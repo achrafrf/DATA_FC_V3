@@ -1,7 +1,31 @@
 // app/autre/demande_devis/page.tsx
-import React from 'react'
+'use client' 
+import React, { useState } from 'react'
 
 export default function Page() {
+    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')  
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setStatus('loading')
+
+    const formData = new FormData(e.currentTarget)
+    const data = Object.fromEntries(formData.entries())
+
+    try {
+      const res = await fetch('/api/demande-devis', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+
+      if (!res.ok) throw new Error()
+      setStatus('success')
+      e.currentTarget.reset()
+    } catch {
+      setStatus('error')
+    }
+  }
   return (
     <>
      <div
@@ -20,7 +44,7 @@ export default function Page() {
       {/* Logo */}
 
       {/* Formulaire */}
-      <form className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-3xl">
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-3xl">
         <input
           type="text"
           placeholder="Société / particulier*"
@@ -88,15 +112,25 @@ export default function Page() {
           className="w-full border border-gray-300 rounded-md px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-teal-300"
         />
 
+        <textarea
+          placeholder="Écrire la prestation demandée ici..."
+          required
+          className="col-span-full border-gray-300 rounded text-base   font-bold py-3 hover:opacity-90 transition focus:outline-none focus:ring-2 focus:ring-teal-300"
+        />
+
       
 
         {/* Bouton d'envoi */}
-        <button
-          type="submit"
-          className="col-span-full bg-teal-500 text-white font-bold py-3 rounded-md hover:opacity-90 transition"
-        >
-          ENVOYER
-        </button>
+       <button
+            type="submit"
+            disabled={status === 'loading'}
+            className="col-span-full bg-teal-500 text-white font-bold py-3 rounded-md hover:opacity-90 transition"
+          >
+            {status === 'loading' ? 'Envoi en cours…' : 'ENVOYER'}
+          </button>
+
+          {status === 'success' && <p className="col-span-full text-green-600 text-center">✅ Demande envoyée avec succès !</p>}
+          {status === 'error' && <p className="col-span-full text-red-600 text-center">❌ Une erreur est survenue, réessayez plus tard.</p>}
       </form>
     </main>
     </>

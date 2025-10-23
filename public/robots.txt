@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /sign-in/
+Disallow: /sign-up/
+Disallow: /user-profile/
 
-Sitemap: https://data-fc.vercel.app/sitemap.xml
+Sitemap: https://www.datafc.ma/sitemap.xml

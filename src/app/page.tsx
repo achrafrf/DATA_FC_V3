@@ -5,6 +5,7 @@ import Nosengagement from '@/components/nosengagement'
 import NosValeurs from '@/components/nosValeurs'
 import Notrevesion from '@/components/notrevesion'
 import { Separator } from "@/components/ui/separator";
+import CommentRating from './api/comments/Comments'
 
 
 export default function Home() {
@@ -74,10 +75,10 @@ export default function Home() {
   <p className="font-bold text-teal-600 text-base sm:text-lg">
     Chers Clients, Chers Partenaires,
   </p>
-  
-  <p className="text-gray-800 text-sm sm:text-base leading-relaxed">
+    <p className="text-gray-800 ">
     Au nom de toute l&apos;équipe DATA FC, je vous remercie de votre confiance et vous 
-    souhaite la bienvenue sur notre plateforme. Dans un environnement économique en 
+    souhaite la bienvenue sur notre plateforme.<br/> 
+    Dans un environnement économique en 
     constante évolution, la différenciation passe par l&apos;agilité, l&apos;innovation et l&apos;optimisation 
     des compétences – des défis que nous transformons en leviers de performance pour 
     votre organisation.<br/>Notre mission ? Vous offrir une alliance unique d’expertises synergiques : de l’ingénierie de formation sur-mesure qui anticipe les besoins métiers, au recrutement stratégique de profils à haute valeur ajoutée ; de l’externalisation intelligente qui simplifie vos opérations, à la domiciliation professionnelle qui valorise votre image. Une approche intégrée où chaque solution concourt à un même objectif : libérer votre potentiel.
@@ -332,7 +333,7 @@ référence.
   </div>
 </div>
 </div>
-
+<CommentRating />
             </main>
     </>
   );

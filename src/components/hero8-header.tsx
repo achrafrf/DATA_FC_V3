@@ -19,12 +19,41 @@ export const HeroHeader: React.FC = () => {
   const [finSubOpen, setFinSubOpen] = useState(false)
   const [grhSubOpen, setGrhSubOpen] = useState(false)
   const [qsseSubOpen, setQsseSubOpen] = useState(false)
+  const [ticSubOpen, setTicSubOpen] = useState(false)
+  const [DFC6Open, setDFC6Open] = useState(false)
+  const [DFC7Open, setDFC7Open] = useState(false)
+  const [DFC8Open, setDFC8Open] = useState(false)
+  const [DFC9Open, setDFC9Open] = useState(false)
+  const [DFB1Open, setDFB1Open] = useState(false)
+  const [DFB2Open, setDFB2Open] = useState(false)
+  const [DFB3Open, setDFB3Open] = useState(false)
+
   const { theme, setTheme } = useTheme()
   const [scrolled, setScrolled] = useState(false)
 
   const servicesRef = useRef<HTMLLIElement>(null)
   const autresRef = useRef<HTMLLIElement>(null)
   const formationsRef = useRef<HTMLLIElement>(null)
+
+
+  //dynamic
+interface Item {
+  id: number
+  title: string
+  description: string
+  code?: string        // ✅ خاصية اختيارية
+  objectifs?: string
+  population?: string
+  duree?: string
+  image?: string
+  customCode?: string
+}
+
+
+  // فوق داخل HeroHeader
+const [services, setServices] = useState<Item[]>([])
+const [formations, setFormations] = useState<Item[]>([])
+
 
   // Helpers to toggle only one formation submenu at a time
   const closeAllFormSubs = () => {
@@ -33,32 +62,69 @@ export const HeroHeader: React.FC = () => {
     setFinSubOpen(false)
     setGrhSubOpen(false)
     setQsseSubOpen(false)
+    setTicSubOpen(false);
+    setDFC6Open(false);
+    setDFC7Open(false);
+    setDFC8Open(false);
+    setDFC9Open(false);
+    setDFB1Open(false);
+    setDFB2Open(false);
+    setDFB3Open(false);
   }
   const toggleComm = () => { closeAllFormSubs(); setCommSubOpen(o => !o) }
   const toggleForm = () => { closeAllFormSubs(); setFormSubOpen(o => !o) }
   const toggleFin = () => { closeAllFormSubs(); setFinSubOpen(o => !o) }
   const toggleGrh = () => { closeAllFormSubs(); setGrhSubOpen(o => !o) }
   const toggleQsse = () => { closeAllFormSubs(); setQsseSubOpen(o => !o) }
+  const toggleDFC6 = () => { closeAllFormSubs(); setDFC6Open(o => !o) }
+  const toggleDFC7 = () => { closeAllFormSubs(); setDFC7Open(o => !o) }
+  const toggleDFC8 = () => { closeAllFormSubs(); setDFC8Open(o => !o) }
+  const toggleDFC9 = () => { closeAllFormSubs(); setDFC9Open(o => !o) }
+  const toggleDFB1 = () => { closeAllFormSubs(); setDFB1Open(o => !o) }
+  const toggleDFB2 = () => { closeAllFormSubs(); setDFB2Open(o => !o) }
+  const toggleDFB3 = () => { closeAllFormSubs(); setDFB3Open(o => !o) }
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 100)
-    window.addEventListener('scroll', onScroll)
+ useEffect(() => {
+  // scroll
+  const onScroll = () => setScrolled(window.scrollY > 100)
+  window.addEventListener('scroll', onScroll)
 
-    const handleClickOutside = (e: MouseEvent) => {
-      if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) setServicesOpen(false)
-      if (autresRef.current && !autresRef.current.contains(e.target as Node)) setAutresOpen(false)
-      if (formationsRef.current && !formationsRef.current.contains(e.target as Node)) {
-        setFormationsOpen(false)
-        closeAllFormSubs()
-      }
+  // click outside
+  const handleClickOutside = (e: MouseEvent) => {
+    if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
+      setServicesOpen(false)
     }
-    document.addEventListener('mousedown', handleClickOutside)
-
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      document.removeEventListener('mousedown', handleClickOutside)
+    if (autresRef.current && !autresRef.current.contains(e.target as Node)) {
+      setAutresOpen(false)
     }
-  }, [])
+    if (formationsRef.current && !formationsRef.current.contains(e.target as Node)) {
+      setFormationsOpen(false)
+      closeAllFormSubs()
+    }
+  }
+  document.addEventListener('mousedown', handleClickOutside)
+
+  // fetch services & formations
+  const fetchData = async () => {
+    try {
+      const resServices = await fetch('/api/services')
+      const resFormations = await fetch('/api/formations')
+
+      if (resServices.ok) setServices(await resServices.json())
+      if (resFormations.ok) setFormations(await resFormations.json())
+    } catch (err) {
+      console.error('Erreur chargement navbar:', err)
+    }
+  }
+  fetchData()
+
+  // cleanup
+  return () => {
+    window.removeEventListener('scroll', onScroll)
+    document.removeEventListener('mousedown', handleClickOutside)
+  }
+}, [])
+
 
   return (
     <header>
@@ -111,9 +177,23 @@ export const HeroHeader: React.FC = () => {
                   <li className="border-b-1 border-teal-600"><Link href="/NosServices/Prestations_informatique" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Prestations informatique</Link></li>
                   <li className="border-b-1 border-teal-600"><Link href="/NosServices/interim_entreprise" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Fourniture de personnel intérimaire</Link></li>
                   <li className="border-b-1 border-teal-600"><Link href="/NosServices/domiciliation" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">La Domiciliation des entreprises</Link></li>
+                         {/* dynamic */}
+
+            {services.map(service => (
+  <li key={service.id} className="border-b border-teal-600">
+    <Link
+      href={`/services/${service.id}`}
+      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+    >
+      {service.title}
+    </Link>
+  </li>
+))}
                 </ul>
               )} 
             </li>
+     
+
                {/* Nos formations */}
             <li ref={formationsRef} className="relative">
               <button
@@ -126,7 +206,8 @@ export const HeroHeader: React.FC = () => {
     : <ChevronDown className="w-4 h-4 transition-transform" />
   }              </button>
               {formationsOpen && (
-                <ul className="absolute right-32 top-full  mt-1 w-full lg:w-[22rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50  gap-4 lg:absolute lg:right-32 lg:top-full">
+                <ul className="absolute right-32 top-full mt-1 w-full lg:w-[22rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-0 z-50 gap-4 lg:absolute lg:right-32 lg:top-full">
+  <div className="max-h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-teal-500 scrollbar-track-amber-200 p-4 gap-4"></div>
                   <li className="border-b-1 border-teal-600">
                   <button
   onClick={toggleGrh}
@@ -144,16 +225,22 @@ export const HeroHeader: React.FC = () => {
 
                   {grhSubOpen && (
               <ul className='mt-2  lg:w-[22rem] absolute left-full top-0 w-[32rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4 lg:absolute lg:left-full lg:top-0'>
-                      <li className="border-b-1 border-teal-600"><Link href="/Nosformations/GRH_Management/Management_equipe_projet" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC11 : </span>Management d’équipe-projet</Link></li>
-                      <li className="border-b-1 border-teal-600"><Link href="/Nosformations/GRH_Management/Gestion_conflits_vie_professionnelle" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC12 : </span>Gestion des conflits dans la vie professionnelle</Link></li>
-                      <li className="border-b-1 border-teal-600"><Link href="/Nosformations/GRH_Management/Missions_recrutement" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC13 : </span>GRH /Missions du RRH et recrutement</Link></li>
-                      <li className="border-b-1 border-teal-600"><Link href="/Nosformations/GRH_Management/gestion_competences" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC14 : </span>GRH/La gestion des compétences</Link></li>
-                      <li className="border-b-1 border-teal-600"><Link href="/Nosformations/GRH_Management/Gestion_Formation_Continue" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC15 : </span>Formation Professionnelle</Link></li>
-                      <li className="border-b-1 border-teal-600"><Link href="/Nosformations/GRH_Management/Fonction_RH" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC16 : </span>Fonction RH, Evaluation mobilité et gestion des talents</Link></li>
-                      <li className="border-b-1 border-teal-600"><Link href="/Nosformations/GRH_Management/GRH_remuneration" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC17 : </span>GRH/La rémunération</Link></li>
-                      <li className="border-b-1 border-teal-600"><Link href="/Nosformations/GRH_Management/GRH_Legislation_travail" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC18 : </span>GRH/Législation de travail</Link></li>
+                      {formations
+        .filter((f) => f.code === "DFC1")
+        .map((f) => (
+          <li key={f.customCode} className="border-b-1 border-teal-600">
+            <Link
+              href={`/formations/${f.id}`}
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <span className="text-teal-700">{f.customCode} : </span>
+              {f.title}
+            </Link>
+          </li>
+        ))}
                     </ul>
                   )}
+                   
                 </li>
                  {/* Foramation Submenu */}
                 <li className="border-b-1 border-teal-600">
@@ -171,8 +258,19 @@ export const HeroHeader: React.FC = () => {
   }                     </button>
                   {formSubOpen && (
               <ul className='absolute left-full top-12 mt-1 w-[24rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
-                      <li className="border-b-1 border-teal-600"><Link href="/Nosformations/formation/metier_formateur" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC21 : </span> Se former au métier de formateur </Link></li>
-                      <li className="border-b-1 border-teal-600"><Link href="/Nosformations/formation/action_formation" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC22 : </span>Réussir une action de formation</Link></li>
+                       {formations
+        .filter((f) => f.code === "DFC2")
+        .map((f) => (
+          <li key={f.customCode} className="border-b-1 border-teal-600">
+            <Link
+              href={`/formations/${f.id}`}
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <span className="text-teal-700">{f.customCode} : </span>
+              {f.title}
+            </Link>
+          </li>
+        ))}
                     </ul>
                   )}
                 </li>
@@ -190,15 +288,22 @@ export const HeroHeader: React.FC = () => {
   }                   </button>
                   {qsseSubOpen && (
               <ul className='absolute left-full top-0 mt-1 w-[36rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
-                      <li className="border-b-1 border-teal-600"><Link href="/Nosformations/QSSE/Sensibilisation_la_qualite" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC31 : </span>Sensibilisation à la qualité</Link></li>
-                      <li className="border-b-1 border-teal-600"><Link href="/Nosformations/QSSE/Les_fondamentaux_de_qualite" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC32 : </span>Les fondamentaux de la qualité et de l’ISO 9001</Link></li>
-                      <li className="border-b-1 border-teal-600"><Link href="/Nosformations/QSSE/Normes_HACCP" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC33 : </span>Normes HACCP</Link></li>
-                      <li className="border-b-1 border-teal-600"><Link href="/Nosformations/QSSE/Hygiene_securite" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC34 : </span>Hygiène et sécurité «Sensibilisation à la santé et sécurité au travail»</Link></li>
-                      <li className="border-b-1 border-teal-600"><Link href="/Nosformations/QSSE/Management_Sante" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC35 : </span>Management de la Santé/Sécurité et environnement dans l’entreprise</Link></li>
-                      <li className="border-b-1 border-teal-600"><Link href="/Nosformations/QSSE/Securite-_arbre_causes" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC36 : </span>Santé/Sécurité- arbre des causes</Link></li>
-                      <li className="border-b-1 border-teal-600"><Link href="/Nosformations/QSSE/Prevention_risques" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC37 : </span>Santé/Sécurité- Prévention des risques</Link></li>
+                       {formations
+        .filter((f) => f.code === "DFC3")
+        .map((f) => (
+          <li key={f.customCode} className="border-b-1 border-teal-600">
+            <Link
+              href={`/formations/${f.id}`}
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <span className="text-teal-700">{f.customCode} : </span>
+              {f.title}
+            </Link>
+          </li>
+        ))}
                     </ul>
                   )}
+                  
                 </li>
                    {/* Finance Submenu */}
                 <li className="border-b-1 border-teal-600">
@@ -215,55 +320,302 @@ export const HeroHeader: React.FC = () => {
   }                    </button>
                   {finSubOpen && (
               <ul className='absolute left-full top-0 mt-1 w-[24rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
-                      <li className="border-b-1 border-teal-600"><Link href="/Nosformations/finance_comptabilite/Comptabilite_generale" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC41 : </span>Comptabilité générale</Link></li>
-                      <li className="border-b-1 border-teal-600"><Link href="/Nosformations/finance_comptabilite/Comptabilite_Les_operations_courantes" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC42 : </span>Opérations courantes</Link></li>
-                      <li className="border-b-1 border-teal-600"><Link href="/Nosformations/finance_comptabilite/Comptabilite_Analytique" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC43 : </span>Comptabilité analytique</Link></li>
-                      <li className="border-b-1 border-teal-600"><Link href="/Nosformations/finance_comptabilite/Pratiquer_analyse_financiere" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC44 : </span>Pratiquer l’analyse financière</Link></li>
-                      <li className="border-b-1 border-teal-600"><Link href="/Nosformations/finance_comptabilite/Analyse_financiere_du_tableau" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC45 : </span>Analyse des flux de trésorerie</Link></li>
+                       {formations
+        .filter((f) => f.code === "DFC4")
+        .map((f) => (
+          <li key={f.customCode} className="border-b-1 border-teal-600">
+            <Link
+              href={`/formations/${f.id}`}
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <span className="text-teal-700">{f.customCode} : </span>
+              {f.title}
+            </Link>
+          </li>
+        ))}
                     </ul>
                   )}
                 </li>
                    
                   <li className="border-b-1 border-teal-600">
-                    <button
-                      onClick={toggleComm}
-                      className="w-full text-left px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
-                    >
-                    <span>
-    <span className="text-teal-700">DFC5 :</span> Formation en Communication
-  </span>
-{commSubOpen
-    ? <ChevronUp className="w-4 h-4 transition-transform" />
-    : <ChevronDown className="w-4 h-4 transition-transform" />
-  }                    </button>
-                    {commSubOpen && (
-              <ul className='absolute left-full top-0 mt-1 w-[28rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
-                        <li className="border-b-1 border-teal-600"><Link href="/Nosformations/communication/Communication_interne" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC51 : </span>Communication en interne</Link></li>
-                        <li className="border-b-1 border-teal-600"><Link href="/Nosformations/communication/COMMUNICATION_ENTREPRISE" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC52 : </span>LA COMMUNICATION EN ENTREPRISE</Link></li>
-                        <li className="border-b-1 border-teal-600"><Link href="/Nosformations/communication/Strategie_communication" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><span className='text-teal-700'>DFC53 : </span>Stratégie de communication</Link></li>
-                      </ul>
-                    )}
-                  </li>
+  <button
+    onClick={toggleComm}
+    className="w-full text-left px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
+  >
+    <span>
+      <span className="text-teal-700">DFC5 :</span> Formation en Communication
+    </span>
+    {commSubOpen ? (
+      <ChevronUp className="w-4 h-4 transition-transform" />
+    ) : (
+      <ChevronDown className="w-4 h-4 transition-transform" />
+    )}
+  </button>
 
-                
-                  
+  {commSubOpen && (
+    <ul className="absolute left-full top-0 mt-1 w-[28rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4">
+      {formations
+        .filter((f) => f.code === "DFC5")
+        .map((f) => (
+          <li key={f.customCode} className="border-b-1 border-teal-600">
+            <Link
+              href={`/formations/${f.id}`}
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <span className="text-teal-700">{f.customCode} : </span>
+              {f.title}
+            </Link>
+          </li>
+        ))}
+    </ul>
+  )}
+</li>
 
-                  <li className="border-b-1 border-teal-600"><Link href="/formations/management" className="block px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700">Formation en Management</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/formations/tic" className="block px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700">Formation en TIC</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/formations/vente-marketing" className="block px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700">Formation en Vente & Marketing</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/formations/securite-routiere" className="block px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700">Formation en sécurité routière</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/formations/conducteurs-routiers" className="block px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700">Formation conducteurs routiers</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/formations/industrielle" className="block px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700">Formation industrielle</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/formations/reconversion" className="block px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700">Formation de reconversion</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/formations/informatique" className="block px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700">Formation en Informatique</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/formations/systems-info" className="block px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700">Formation SI</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/formations/bases-bigdata" className="block px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700">Formation Big Data</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/formations/bi" className="block px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700">Formation BI</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/formations/gestion-projets" className="block px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700">Formation gestion projets</Link></li>
+                  <li className="border-b-1 border-teal-600">
+  <button
+    onClick={toggleDFC6}
+    className="w-full text-left px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
+  >
+    <span>
+      <span className="text-teal-700">DFC6 :</span> Formation en Management
+    </span>
+    {DFC6Open
+      ? <ChevronUp className="w-4 h-4 transition-transform" />
+      : <ChevronDown className="w-4 h-4 transition-transform" />}
+  </button>
+
+  {DFC6Open && (
+    <ul className='absolute left-full top-0 mt-1 w-[24rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
+        {formations
+        .filter((f) => f.code === "DFC6")
+        .map((f) => (
+          <li key={f.customCode} className="border-b-1 border-teal-600">
+            <Link
+              href={`/formations/${f.id}`}
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <span className="text-teal-700">{f.customCode} : </span>
+              {f.title}
+            </Link>
+          </li>
+        ))}
+  
+    </ul>
+  )}
+</li>
+
+  <li className="border-b-1 border-teal-600">
+  <button
+    onClick={toggleDFC7}
+    className="w-full text-left px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
+  >
+    <span>
+      <span className="text-teal-700">DFC7 :</span> Formation en TIC et Informatique
+    </span>
+    {DFC7Open
+      ? <ChevronUp className="w-4 h-4 transition-transform" />
+      : <ChevronDown className="w-4 h-4 transition-transform" />}
+  </button>
+
+  {DFC7Open && (
+    <ul className='absolute left-full top-0 mt-1 w-[24rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
+        {formations
+        .filter((f) => f.code === "DFC7")
+        .map((f) => (
+          <li key={f.customCode} className="border-b-1 border-teal-600">
+            <Link
+              href={`/formations/${f.id}`}
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <span className="text-teal-700">{f.customCode} : </span>
+              {f.title}
+            </Link>
+          </li>
+        ))}
+  
+    </ul>
+  )}
+</li>
+
+                   <li className="border-b-1 border-teal-600">
+  <button
+    onClick={toggleDFC8}
+    className="w-full text-left px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
+  >
+    <span>
+      <span className="text-teal-700">DFC8 :</span> Formation en Vente & Marketing
+    </span>
+    {DFC8Open
+      ? <ChevronUp className="w-4 h-4 transition-transform" />
+      : <ChevronDown className="w-4 h-4 transition-transform" />}
+  </button>
+
+  {DFC8Open && (
+    <ul className='absolute left-full top-0 mt-1 w-[24rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
+        {formations
+        .filter((f) => f.code === "DFC8")
+        .map((f) => (
+          <li key={f.customCode} className="border-b-1 border-teal-600">
+            <Link
+              href={`/formations/${f.id}`}
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <span className="text-teal-700">{f.customCode} : </span>
+              {f.title}
+            </Link>
+          </li>
+        ))}
+  
+    </ul>
+  )}
+</li>
+                    <li className="border-b-1 border-teal-600">
+  <button
+    onClick={toggleDFC9}
+    className="w-full text-left px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
+  >
+    <span>
+      <span className="text-teal-700">DFC9 :</span> Formation en sécurité routière
+    </span>
+    {DFC9Open
+      ? <ChevronUp className="w-4 h-4 transition-transform" />
+      : <ChevronDown className="w-4 h-4 transition-transform" />}
+  </button>
+
+  {DFC9Open && (
+    <ul className='absolute left-full top-0 mt-1 w-[24rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
+        {formations
+        .filter((f) => f.code === "DFC9")
+        .map((f) => (
+          <li key={f.customCode} className="border-b-1 border-teal-600">
+            <Link
+              href={`/formations/${f.id}`}
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <span className="text-teal-700">{f.customCode} : </span>
+              {f.title}
+            </Link>
+          </li>
+        ))}
+  
+    </ul>
+  )}
+</li>
+                   <li className="border-b-1 border-teal-600">
+  <button
+    onClick={toggleDFB1}
+    className="w-full text-left px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
+  >
+    <span>
+      <span className="text-teal-700">DFB1 :</span> Formation industrielle
+    </span>
+    {ticSubOpen
+      ? <ChevronUp className="w-4 h-4 transition-transform" />
+      : <ChevronDown className="w-4 h-4 transition-transform" />}
+  </button>
+
+  {DFB1Open && (
+    <ul className='absolute left-full top-0 mt-1 w-[24rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
+        {formations
+        .filter((f) => f.code === "DFB1")
+        .map((f) => (
+          <li key={f.customCode} className="border-b-1 border-teal-600">
+            <Link
+              href={`/formations/${f.id}`}
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <span className="text-teal-700">{f.customCode} : </span>
+              {f.title}
+            </Link>
+          </li>
+        ))}
+  
+    </ul>
+  )}
+</li>
+                          <li className="border-b-1 border-teal-600">
+  <button
+    onClick={toggleDFB2}
+    className="w-full text-left px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
+  >
+    <span>
+      <span className="text-teal-700">DFB2 :</span> Formation de reconversion
+    </span>
+    {DFB2Open
+      ? <ChevronUp className="w-4 h-4 transition-transform" />
+      : <ChevronDown className="w-4 h-4 transition-transform" />}
+  </button>
+
+  {DFB2Open && (
+    <ul className='absolute left-full top-0 mt-1 w-[24rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
+        {formations
+        .filter((f) => f.code === "DFB2")
+        .map((f) => (
+          <li key={f.customCode} className="border-b-1 border-teal-600">
+            <Link
+              href={`/formations/${f.id}`}
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <span className="text-teal-700">{f.customCode} : </span>
+              {f.title}
+            </Link>
+          </li>
+        ))}
+  
+    </ul>
+  )}
+</li>
+                         <li className="border-b-1 border-teal-600">
+  <button
+    onClick={toggleDFB3}
+    className="w-full text-left px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
+  >
+    <span>
+      <span className="text-teal-700">DFB3 :</span> Formation gestion projets
+    </span>
+    {DFB3Open
+      ? <ChevronUp className="w-4 h-4 transition-transform" />
+      : <ChevronDown className="w-4 h-4 transition-transform" />}
+  </button>
+
+  {DFB3Open && (
+    <ul className='absolute left-full top-0 mt-1 w-[24rem] bg-amber-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg p-4 z-50 gap-4'>
+        {formations
+        .filter((f) => f.code === "DFB3")
+        .map((f) => (
+          <li key={f.customCode} className="border-b-1 border-teal-600">
+            <Link
+              href={`/formations/${f.id}`}
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <span className="text-teal-700">{f.customCode} : </span>
+              {f.title}
+            </Link>
+          </li>
+        ))}
+  
+    </ul>
+  )}
+</li>
+                  {/* dynamic */}
+
+            {formations
+        .filter((f) => f.code === "DFC")
+        .map((f) => (
+          <li key={f.id} className="border-b-1 border-teal-600">
+            <Link
+              href={`/Nosformations/${f.code}/${f.title.replace(/\s+/g, "_")}`}
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <span className="text-teal-700">{f.code}{f.id} : </span>
+              {f.title}
+            </Link>
+          </li>
+        ))}
                 </ul>
               )}
             </li>
-
+            
            
             {/* Autres */}
            <li ref={autresRef} className="relative">

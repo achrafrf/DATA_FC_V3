@@ -1,16 +1,46 @@
 "use client";
 
+import React, { useEffect, useState } from 'react';
 import Image from "next/image";
-import { useState } from 'react';
 import Modal from "@/components/Modal";
-import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
 import {FaMapMarkerAlt,FaExclamationCircle
  } from "react-icons/fa";
 
 
+interface Stats {
+  experienceYears: number;
+  successfulProjects: number;
+  happyClients: number;
+}
+
 export default function AboutPage() {
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 1 });
+const { ref } = useInView({ triggerOnce: true, threshold: 1 });
+
+   const [stats, setStats] = useState<Stats>({
+    experienceYears: 0,
+    successfulProjects: 0,
+    happyClients: 0,
+  });
+
+  // ✅ Fetch stats from API (if you have one)
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const res = await fetch('/api/stats'); // endpoint that returns { experienceYears, successfulProjects, happyClients }
+        if (res.ok) {
+          const data: Stats = await res.json();
+          setStats(data);
+        } else {
+          console.error('Failed to fetch stats');
+        }
+      } catch (error) {
+        console.error('Error fetching stats:', error);
+      }
+    };
+
+    fetchStats();
+  }, []);
 
   const cards = [
     {
@@ -36,7 +66,7 @@ export default function AboutPage() {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   return (
-    <section className="py-24 relative dark:bg-gray-900">
+    <section className=" py-7 relative dark:bg-gray-900">
       <div className="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto mt-7">
         <div className="w-full justify-start items-center gap-12 grid lg:grid-cols-2 grid-cols-1">
           <div className="w-full justify-center items-start gap-6 grid sm:grid-cols-2 grid-cols-1 lg:order-first order-last">
@@ -64,11 +94,10 @@ export default function AboutPage() {
                 QUI SOMMES-NOUS ?
                 </h2>
                 <div className="text-gray-500 font-normal leading-relaxed lg:text-start text-center dark:text-white">
-                Cabinet de conseil, de formation et d’accompagnement, engagé dans la réussite de vos projets de développement.
-
-À travers cette présentation, nous vous offrons un aperçu de nos prestations et vous invitons à devenir notre partenaire, afin de vous aider à vous adapter à un monde en constante mutation et à vous sécuriser face à une réglementation en évolution permanente.
-
-Nous mettons à votre disposition :
+                Nous sommes votre partenaire stratégique, de l’analyse à la réalisation. Notre cabinet vous accompagne pour anticiper les mutations et sécuriser votre croissance grâce à trois expertises complémentaires : <br/>
+                des études (audits, veille, analyse de marché) pour éclairer vos décisions ; du conseil sur-mesure pour renforcer votre compétitivité ;<br/>
+                 et de la formation pour développer les compétences de vos équipes.<br/>
+                 Au-delà de notre méthodologie, nous nous engageons sur des bénéfices concrets en mettant à votre disposition :
       <ul className='list-disc ml-8 text-black font-bold dark:text-white'>
         <li> Des prestations de qualité.</li>
         <li>Un encadrement professionnel.</li>  
@@ -86,39 +115,21 @@ Ensemble, construisons votre avenir avec efficacité et sérénité.
     >
       <div className="flex-col justify-start items-start inline-flex">
         <h3 className="text-gray-900 text-4xl font-bold font-manrope leading-normal dark:text-white">
-          <CountUp end={inView ? 10 : 0}>
-            {({ countUpRef, start }) => {
-              if (inView) start();
-              return <span ref={countUpRef} />;
-            }}
-          </CountUp>
-          +
+         {stats.experienceYears}+
         </h3>
         <h6 className="text-gray-500 text-base font-normal leading-relaxed dark:text-white">Années expérience</h6>
       </div>
 
       <div className="flex-col justify-start items-start inline-flex">
         <h4 className="text-gray-900 text-4xl font-bold font-manrope leading-normal dark:text-white">
-          <CountUp end={inView ? 35 : 0}>
-            {({ countUpRef, start }) => {
-              if (inView) start();
-              return <span ref={countUpRef} />;
-            }}
-          </CountUp>
-          +
+         {stats.successfulProjects}+
         </h4>
         <h6 className="text-gray-500 text-base font-normal leading-relaxed dark:text-white">Projets réussis</h6>
       </div>
 
       <div className="flex-col justify-start items-start inline-flex">
         <h4 className="text-gray-900 text-4xl font-bold font-manrope leading-normal dark:text-white">
-          <CountUp end={inView ? 15 : 0}>
-            {({ countUpRef, start }) => {
-              if (inView) start();
-              return <span ref={countUpRef} />;
-            }}
-          </CountUp>
-          +
+         {stats.happyClients}+
         </h4>
         <h6 className="text-gray-500 text-base font-normal leading-relaxed dark:text-white">Clients satisfaits</h6>
       </div>
