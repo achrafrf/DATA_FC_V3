@@ -1,12 +1,9 @@
 User-agent: *
-# منع صفحات المصادقة والملف الشخصي من الفهرسة
 Disallow: /sign-in/
 Disallow: /sign-up/
 Disallow: /user-profile/
+Disallow: /login/
 
-# السماح بفهرسة الصفحة الرئيسية و /about فقط
-Allow: /$
-Allow: /about$
+Allow: /
 
-# رابط ملف sitemap
 Sitemap: https://www.datafc.ma/sitemap.xml
