@@ -16,7 +16,7 @@ export default function Home() {
       {/* Modern background pattern */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Modern geometric grid pattern */}
-        <div className="absolute inset-0 bg-gradient-to-br from-teal-50 to-white opacity-60"></div>
+        <div className="absolute inset-0 from-teal-50 to-white opacity-60"></div>
         <div className="absolute inset-0" style={{
           backgroundImage: `linear-gradient(90deg, transparent 79px, rgba(20, 184, 166, 0.1) 80px, rgba(20, 184, 166, 0.1) 81px, transparent 82px),
                            linear-gradient(rgba(20, 184, 166, 0.1) 79px, transparent 80px, transparent 81px, rgba(20, 184, 166, 0.1) 82px)`,
