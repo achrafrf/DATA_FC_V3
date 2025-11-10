@@ -34,8 +34,8 @@ const Header = () => {
             </p>
           </li>
 
-          {/* login أو Clerk UserButton مع زر Dashboard */}
-          <div className="flex items-center gap-2 mt-2 ml-3 mb-2 md:mt-0">
+          {/* login أو Clerk UserButton مع زر Dashboard - مخفي في الجوال */}
+          <div className="hidden lg:flex items-center gap-2 mt-2 ml-3 mb-2 md:mt-0">
             {!isSignedIn ? (
               <Link href="/login">
                 <button className="px-5 py-1 bg-white text-teal-600 font-semibold rounded-full shadow hover:bg-teal-50 hover:shadow-lg transition-all duration-300">
