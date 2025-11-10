@@ -69,19 +69,20 @@ export default function Home() {
             <h2 className='text-teal-600 text-lg sm:text-xl font-bold'>
             MOT DU DIRECTEUR
             </h2>
-            <h2 className='text-lg sm:text-xl text-gray-800 font-bold'>
-            DATA FC : VOTRE PARTENAIRE STRATÉGIQUE POUR UNE CROISSANCE DURABLE
-            </h2>
-  <p className="font-bold text-teal-600 text-base sm:text-lg">
-    Chers Clients, Chers Partenaires,
-  </p>
+           
     <p className="text-gray-800 ">
-    Au nom de toute l&apos;équipe DATA FC, je vous remercie de votre confiance et vous 
-    souhaite la bienvenue sur notre plateforme.<br/> 
+   
     Dans un environnement économique en 
     constante évolution, la différenciation passe par l&apos;agilité, l&apos;innovation et l&apos;optimisation 
     des compétences – des défis que nous transformons en leviers de performance pour 
     votre organisation.<br/>Notre mission ? Vous offrir une alliance unique d’expertises synergiques : de l’ingénierie de formation sur-mesure qui anticipe les besoins métiers, au recrutement stratégique de profils à haute valeur ajoutée ; de l’externalisation intelligente qui simplifie vos opérations, à la domiciliation professionnelle qui valorise votre image. Une approche intégrée où chaque solution concourt à un même objectif : libérer votre potentiel.
+    
+  </p>
+  <p className='text-gray-800'>
+     Ce qui nous distingue ? Une culture du sur-mesure alliant vision sectorielle et
+exécution pragmatique. Start-up agiles, PME en croissance ou grands groupes :
+nous adaptons notre écosystème (savoir-faire, réseaux, technologies) à vos enjeux
+spécifiques, avec une exigence commune – créer de la valeur tangible.
   </p>
             </div>
           </div>
@@ -89,12 +90,6 @@ export default function Home() {
         
         {/* Bottom Content with larger text */}
         <div className="space-y-3 sm:space-y-4 text-gray-700 leading-relaxed mt-3 sm:mt-4">
-  <p className='text-gray-800 text-sm sm:text-base leading-relaxed'>
-  Ce qui nous distingue ? Une culture du sur-mesure alliant vision sectorielle et
-exécution pragmatique. Start-up agiles, PME en croissance ou grands groupes :
-nous adaptons notre écosystème (savoir-faire, réseaux, technologies) à vos enjeux
-spécifiques, avec une exigence commune – créer de la valeur tangible.
-  </p>
   <p className='text-gray-800 text-sm sm:text-base leading-relaxed'>
     Au-delà des services, nous cultivons une philosophie partenariale : écoute active,
 transparence opérationnelle et engagement mutuel. Car le Maroc, terre
