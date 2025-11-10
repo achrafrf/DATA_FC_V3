@@ -173,7 +173,7 @@ const [formations, setFormations] = useState<Item[]>([])
                   <li className="border-b-1 border-teal-600"><Link  href="/NosServices/Ingenierie_formation" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Ingenierie de formation</Link></li>
                   <li className="border-b-1 border-teal-600"><Link href="/NosServices/Formation" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Formation continue: Formation qualifiante</Link></li>
                   <li className="border-b-1 border-teal-600"><Link href="/NosServices/conseil_recrutement" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Assistance conseil en recrutement</Link></li>
-                  <li className="border-b-1 border-teal-600"><Link href="/NosServices/EtudesConseil;" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Études & Conseil</Link></li>
+                  <li className="border-b-1 border-teal-600"><Link href="/NosServices/EtudesConseil" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Études & Conseil</Link></li>
                   <li className="border-b-1 border-teal-600"><Link href="/NosServices/EXTERNALISATION" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Placement/externalisation RH</Link></li>
                   <li className="border-b-1 border-teal-600"><Link href="/NosServices/Prestations_informatique" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Prestations informatique</Link></li>
                   <li className="border-b-1 border-teal-600"><Link href="/NosServices/interim_entreprise" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Fourniture de personnel intérimaire</Link></li>
