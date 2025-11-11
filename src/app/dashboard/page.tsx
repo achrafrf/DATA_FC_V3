@@ -17,7 +17,7 @@
   import TextType from "./TextType";
   import Image from 'next/image'
   import { useCallback } from "react";
-  import RichTextEditor, { RichTextEditorHandle } from "@/app/Formations/RichTextEditor";
+  import RichTextEditor, { RichTextEditorHandle } from "@/app/dashboard/RichTextEditor";
   import { useRef } from "react";
 
 
