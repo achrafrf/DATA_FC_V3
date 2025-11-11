@@ -1,7 +1,7 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 const isProtectedRoute = createRouteMatcher([
-  "/Formations(.*)", // ✅ نحمي فقط مسار Formations وكل ما تحته
+  "/dashboard(.*)", // ✅ نحمي فقط مسار dashboard وكل ما تحته
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
@@ -15,6 +15,6 @@ export default clerkMiddleware(async (auth, req) => {
 // ✅ لا نطبّق middleware إلا على هذه المسارات
 export const config = {
   matcher: [
-    "/Formations(.*)", // فقط لوحة التحكم
+    "/dashboard(.*)", // فقط لوحة التحكم
   ],
 };
