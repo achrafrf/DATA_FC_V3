@@ -214,10 +214,10 @@ référence.
       </div>
 
       {/* Desktop Logos */}
-      <div className="hidden md:flex flex-col space-y-4 mt-2">
+      <div className="hidden md:flex flex-col space-y-8 mt-2">
         
         {/* Ligne 1 */}
-        <div className="flex items-center justify-between space-x-3 lg:space-x-6">
+        <div className="flex items-center justify-between space-x-3 lg:space-x-8">
           <Image
             className="h-14 lg:h-16 w-auto object-contain"
             src="/Marsa-Maroc.webp"
@@ -249,10 +249,18 @@ référence.
             width={120}
             height={45}
           />
+           <div className="border-l border-gray-300 h-8" />
+           <Image
+            className="h-14 lg:h-16 w-auto object-contain"
+            src="/sahel.png"
+            alt="APME"
+            width={120}
+            height={45}
+          />
         </div>
         
         {/* Ligne 2 */}
-        <div className="flex items-center justify-between space-x-3 lg:space-x-6">
+        <div className="flex items-center justify-between space-x-3 lg:space-x-4">
           <Image
             className="h-14 lg:h-16 w-auto object-contain"
             src="/safirem.png"
@@ -280,6 +288,13 @@ référence.
           <Image
             className="h-14 lg:h-16 w-auto object-contain"
             src="/anda.png"
+            alt="Anda"
+            width={80}
+            height={45}
+          /> <div className="border-l border-gray-300 h-8" />
+          <Image
+            className="h-14 lg:h-16 w-auto object-contain"
+            src="/averda.jpg"
             alt="Anda"
             width={120}
             height={45}
@@ -321,6 +336,7 @@ référence.
             width={120}
             height={45}
           />
+         
         </div>
       </div>
       </div>
